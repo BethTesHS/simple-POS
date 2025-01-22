@@ -11,6 +11,9 @@ Route::get('/', function () {
 Route::get('/pos', function () {
     return view('pos');
 });
+Route::get('/calc', function () {
+    return view('calc');
+});
 
 
 
