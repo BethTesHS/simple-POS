@@ -66,7 +66,7 @@ a{
 }
 
 /* --------- LEFT SECTION --------- */
-.left-view{    
+.left-view{
     background-color: #c0b3a0;
     position: fixed;
     display: flex;
@@ -175,6 +175,7 @@ a{
     margin: 0px 15px 0 0;
     border-radius: 0px 10px 10px 0px;
     padding: 5px;
+    background-color: buttonface;
     border: 1px solid rgba(0, 0, 0, 0.5);
     outline: none;
 }
@@ -259,7 +260,7 @@ a{
     border: solid 1px gray;
 }
 
-/* 
+/*
 header h1 {
     font-size: 36px;
     color: var(--BlueGray);
