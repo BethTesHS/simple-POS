@@ -20,6 +20,14 @@ class ProductController extends Controller
         return response()->json($products); // Pass the data to the view
     }
 
+    public function showProduct(Request $request) {
+        $productId = $request->input('id');
+        
+        // $product = Product::find($productId);
+        $product = Product::where('id', $productId)->get();
+        return response()->json($product);
+    }
+
     public function filterProduct(Request $request)
     {
         $categoryId = $request->input('category_id');

@@ -21,6 +21,7 @@ Route::get('calc', function () {
 Route::get('pos', [PosController::class, 'index'])->name('pos');
 
 Route::get('products', [ProductController::class, 'show'])->name('products.all');
+Route::get('product', [ProductController::class, 'showProduct'])->name('products.showProduct');
 Route::get('filter-products', [ProductController::class, 'filterProduct'])->name('products.filter');
 Route::post('products', [ProductController::class, 'store'])->name('products.store');
 Route::put('products', [ProductController::class, 'update'])->name('products.update');

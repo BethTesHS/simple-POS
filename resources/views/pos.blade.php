@@ -23,9 +23,48 @@
 </head>
 <body>
 
+    
+
     <script>
         $(document).ready(function () {
-            $('#category').change(function () {
+            $('.click').change(function () {
+                var productId = $(this).val();                
+                $.ajax({
+                    url: '{{ route("products.showProduct") }}',
+                    method: 'GET',
+                    data: { id: productId },
+                    success: function (data) {
+                        var html = '';
+                        if (data.length > 0) {
+                            data.forEach(function (product) {
+                                // html += `<div class="items">
+                                //             <div class="items-pics"></div>
+                                //             <text class="item-text">` + product.productName + `</text>
+                                //         </div>`;
+                                html += `<tr>
+                                            <td> Dummy </td>
+                                            <td> 2 </td>
+                                            <td> 100 ksh </td>
+                                            <td> 200 ksh </td>
+                                            
+                                            <td style="padding: 3px; width: 60px;">
+                                                <button class="removeButton">
+                                                    <i style="padding: 0 10px" class='fa fa-trash-o'></i> Remove
+                                                </button>
+                                            </td>
+                                        </tr>`;
+                            });
+                        } else {
+                            html = '<p>No Items.</p>';
+                        }
+                        $('#items-view').html(html);
+                    },
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $('.category').change(function () {
                 var categoryId = $(this).val();
                 var url_query = '';
                 if (categoryId) {
@@ -66,8 +105,9 @@
         
         <div class="left-view">
             <div class="control">
-                <div class="search"> </div>
-                <div class="date"> </div>
+                <button class="click">CLICK HERE</button>
+                {{-- <div class="search"> </div>
+                <div class="date"> </div> --}}
             </div>
             <div class="items-price"> 
                 <table>
@@ -80,7 +120,7 @@
                         <th></th>
                     </tr>
                     </thead>
-                    <tbody id="tableSales">
+                    <tbody class="tableSales">
                         <tr>
                             <td> Dummy </td>
                             <td> 2 </td>
@@ -129,7 +169,7 @@
                         <i class='fa fa-plus-square-o'></i>
                     </text>
                 </button>
-                <select id="category" name="category_id" class="dropdown" >
+                <select id="category" name="category_id" class="dropdown category" >
                     <option value="0">All</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -155,10 +195,10 @@
                         </button>
                     @endforeach
                 @endif
-                <button class="items" id="items-button-test" value="1"> 
+                {{-- <button class="items" id="items-button-test" value="1"> 
                     <div class="items-pics"></div>
                     <text class="item-text"> Coca Cola </text>
-                </button>
+                </button> --}}
                 
             </div>
             {{-- <div class="payment"> </div> --}}
