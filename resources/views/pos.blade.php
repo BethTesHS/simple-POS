@@ -73,7 +73,7 @@
     
 
     <div class="navbar">
-        <h2>Dashboard</h2>
+        <h2>Simple POS</h2>
     </div>
 
     <div class="wrapper">
@@ -140,8 +140,7 @@
 
         
         <div class="right-view">
-            <div style="display: flex; flex-direction: row;">
-
+            <div class="control2">
                 <button id='popupButton2' class="popupButton2">
                     <text class='i'>
                         <i class='fa fa-plus-square-o'></i>
@@ -153,13 +152,12 @@
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
-
                 <button id='popupButton' class="popupButton">
                     <text class='i'>
                         <i class='fa fa-plus-square-o'></i> 
                     </text>
                     Add new product 
-                </button>  
+                </button> 
             </div>
 
             <div class="items-view" id="items-view">
@@ -176,6 +174,7 @@
                 @endif
                 
             </div>
+            {{-- <div class="payment"> </div> --}}
         </div>
     </div>
 
