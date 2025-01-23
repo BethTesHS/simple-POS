@@ -18,24 +18,10 @@
 
     <?php
         use App\Models\Product;
-        use Illuminate\Http\Request;
+        $products = Product::all();
     ?>
 </head>
 <body>
-
-    
-    
-    
-    <div id="categoryListID">
-        <?php $products = Product::all(); ?>
-        {{-- <text>$products</text> --}}
-    </div>
-    
-    <?php $items = [];
-        foreach ($products as $product){
-            $items[] = "$product->productName";
-        }
-    ?>
 
     <script>
         $(document).ready(function () {
@@ -94,12 +80,12 @@
                         <th></th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tableSales">
                         <tr>
-                            <td> Hello </td>
-                            <td> Hello </td>
-                            <td> Hello </td>
-                            <td> Hello </td>
+                            <td> Dummy </td>
+                            <td> 2 </td>
+                            <td> 100 ksh </td>
+                            <td> 200 ksh </td>
                             
                             <td style="padding: 3px; width: 60px;">
                                 <button class="removeButton">
@@ -108,10 +94,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td> Goodbye </td>
-                            <td> Goodbye </td>
-                            <td> Goodbye </td>
-                            <td> Goodbye </td>
+                            <td> Data </td>
+                            <td> 1 </td>
+                            <td> 1100 ksh </td>
+                            <td> 1100 ksh </td>
                             
                             
                             <td style="padding: 3px; width: 60px;">
@@ -127,11 +113,8 @@
             <div class="total-price"> 
                 <table>
                     <tr>
-                        <th style="width: 160px"></th>
-                        <th style="width: 140px"></th>
-                        <th style="width: 140px"></th>
-                        <th style="width: 140px"></th>
-                        <th></th>
+                        <th> Items: 3</th>
+                        <th> Total: 1300 ksh </th>
                     </tr>
                 </table>
             </div>
@@ -162,16 +145,20 @@
 
             <div class="items-view" id="items-view">
                 {{-- JS CONNECTED HERE --}}
-                @if ($items == null)
+                @if ($products == null)
                     <text> No Item </text>
                 @else
-                    @foreach($items as $item)
-                        <div class="items" id="items"> 
+                    @foreach($products as $product)
+                        <button class="items" id="items-button" value="{{$product->id}}"> 
                             <div class="items-pics"></div>
-                            <text class="item-text"> {{ $item }} </text>
-                        </div>
+                            <text class="item-text"> {{ $product->productName }} </text>
+                        </button>
                     @endforeach
                 @endif
+                <button class="items" id="items-button-test" value="1"> 
+                    <div class="items-pics"></div>
+                    <text class="item-text"> Coca Cola </text>
+                </button>
                 
             </div>
             {{-- <div class="payment"> </div> --}}
