@@ -51,14 +51,7 @@
     /* margin-left: 3px; */
 }
 
-.dropdown {
-    height: 30px;
-    /* width: 350px; */
-    padding-left: 5px;
-    border-radius: 3px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    outline: none;
-}
+
 
 .textButton{
     background-color: rgb(17, 70, 216);
@@ -77,4 +70,18 @@
     transition: 0.2s;
     background-color: rgb(17, 113, 216);
     /* margin-left: 7%; */
+}
+
+.dropdown2 {
+    margin: 0px 15px 0 0;
+    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+.dropdown2:hover{
+    transition: 0.2s;
+    cursor: pointer;
+    background-color: #ffffff50;
 }

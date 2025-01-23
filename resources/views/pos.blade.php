@@ -8,6 +8,7 @@
 
     @vite(['resources/css/style.css'])
     @vite(['resources/css/popup.css'])
+    @vite(['resources/css/table.css'])
 
     @vite(['resources/js/popup.js'])
 
@@ -86,10 +87,10 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Price inc. tax</th>
-                        <th>Subtotal</th>
+                        <th style="width: 160px">Product</th>
+                        <th style="width: 140px">Quantity</th>
+                        <th style="width: 140px">Price</th>
+                        <th style="width: 140px">Subtotal</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -101,8 +102,8 @@
                             <td> Hello </td>
                             
                             <td style="padding: 3px; width: 60px;">
-                                <button class="deleteMember">
-                                    <i style="width: 0px" class='fa fa-trash-o'></i> Remove
+                                <button class="removeButton">
+                                    <i style="padding: 0 10px" class='fa fa-trash-o'></i> Remove
                                 </button>
                             </td>
                         </tr>
@@ -114,8 +115,8 @@
                             
                             
                             <td style="padding: 3px; width: 60px;">
-                                <button class="deleteMember">
-                                    <i style="width: 0px" class='fa fa-trash-o'></i> Remove
+                                <button class="removeButton">
+                                    <i style="padding: 0 10px" class='fa fa-trash-o'></i> Remove
                                 </button>
                             </td>
                         </tr>
@@ -123,7 +124,17 @@
                 </table>
                 
             </div>
-            <div class="total-price"> </div>
+            <div class="total-price"> 
+                <table>
+                    <tr>
+                        <th style="width: 160px"></th>
+                        <th style="width: 140px"></th>
+                        <th style="width: 140px"></th>
+                        <th style="width: 140px"></th>
+                        <th></th>
+                    </tr>
+                </table>
+            </div>
             <div class="payment"> </div>
         </div>
 
@@ -131,18 +142,22 @@
         <div class="right-view">
             <div style="display: flex; flex-direction: row;">
 
-                <button id='popupButton2' style="text-align:center">
-                    <i class='fa fa-plus-square-o'></i>
+                <button id='popupButton2' class="popupButton2">
+                    <text class='i'>
+                        <i class='fa fa-plus-square-o'></i>
+                    </text>
                 </button>
                 <select id="category" name="category_id" class="dropdown" >
-                    <option value="0">All Categories</option>
+                    <option value="0">All</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
 
-                <button id='popupButton'>
-                    <i class='fa fa-plus-square-o'></i> 
+                <button id='popupButton' class="popupButton">
+                    <text class='i'>
+                        <i class='fa fa-plus-square-o'></i> 
+                    </text>
                     Add new product 
                 </button>  
             </div>
@@ -183,8 +198,8 @@
                 <input class="textArea" name="price" type="number" maxlength="10"> <br>
 
                 <label> Category </label> <br>
-                <select id="category" name="category_id" class="dropdown" >
-                    <option value="">--Select Category--</option>
+                <select id="category" name="category_id" class="dropdown2" >
+                    <option value=""> -- Select Category -- </option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
