@@ -8,9 +8,28 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
 
+    // public function show()
+    // {
+    //     $products = Product::all();
+    //     return response()->json($products);
+    // }
+
     public function show()
     {
         $products = Product::all();
+        return response()->json($products); // Pass the data to the view
+    }
+
+    public function filterProduct(Request $request)
+    {
+        $categoryId = $request->input('category_id');
+        
+        if($categoryId == 0){
+            $products = Product::all();
+        } else {
+            $products = Product::where('category_id', $categoryId)->get();
+        }
+
         return response()->json($products);
     }
 
@@ -19,16 +38,16 @@ class ProductController extends Controller
         $validated = $request->validate([
             'productName' => 'required|string|max:255',
             'price' => 'required|decimal:0,0',
-            'productType' => 'required|string|max:255',
-            'productBrand' => 'required|string|max:255',
+            'category_id' => 'required|integer|max:10',
+            // 'brand_id' => 'required|integer|max:255',
         ]);
 
         $product = new Product();
 
         $product->productName = $validated['productName'];
         $product->price = $validated['price'];
-        $product->productType = $validated['productType'];
-        $product->productBrand = $validated['productBrand'];
+        $product->category_id = $validated['category_id'];
+        // $product->brand_id = $validated['brand_id'];
         
         $product->save();
 
@@ -42,16 +61,16 @@ class ProductController extends Controller
         $validated = $request->validate([
             'productName' => 'required|string|max:255',
             'price' => 'required|decimal:0,0',
-            'productType' => 'required|string|max:255',
-            'productBrand' => 'required|string|max:255',
+            'productType' => 'required|integer|max:255',
+            // 'productBrand' => 'required|integer|max:255',
         ]);
 
         $product = Product::findOrFail( $validated['id']);
         
         $product->productName = $validated['productName'];
         $product->price = $validated['price'];
-        $product->productType = $validated['productType'];
-        $product->productBrand = $validated['productBrand'];
+        $product->category_id = $validated['productType'];
+        // $product->brand_id = $validated['productBrand'];
         
         
         $product->save(); // Save to the database

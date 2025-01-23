@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('productName');
             $table->decimal('price', 8, 2);
-            $table->string('productType');
-            $table->string('productBrand');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            // $table->string('brand_id');
             $table->timestamps();
         });
     }
