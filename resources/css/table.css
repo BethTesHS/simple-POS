@@ -3,41 +3,38 @@
 
 /* General table styles */
 table {
-    width: 100%;
+    /* width: 100%; */
     /* min-width: 600px; */
     border-collapse: collapse;
     border: 1px solid black;
     border-radius: 10px;
     overflow: hidden;
+    /* font-family: 'Courier New', sans-serif; */
+
 }
 
 th, td {
+    /* font-family: 'Courier New', sans-serif; */
     background-color: transparent;
-    padding: 10px 15px;
+    padding: 5px 15px;
     width: 150px;
     text-align: left;
-    height: 50px;
+    height: 40px;
     border-bottom: 1px solid #00000060;
     border-left: 1px solid #00000040;
     }
 
-td.fixed-column {
-    width: 150px;  /* Fixed width */
-}
 
 .quantity {
-    /* display:inline-block; */
-    justify-content: center;
+    text-align: center;
     flex-direction: row;
     width: 25px;
-
-    /* height: 71px; */
 }
 
 .quantity input{
     display: inline-block;
-    /* text-align: center; */
-    width: 15px;
+    text-align: center;
+    width: 40px;
     
     background-color: transparent;
     border-color: transparent;
@@ -57,29 +54,35 @@ td.fixed-column {
 }
 
 .subTotal {
-    /* display: inline-block; */
-    /* justify-content: center; */
+    text-align: right;
     flex-direction: row;
-    width: 55px;
+    width: 70%;
     font-size: 15.5px;
     background-color: transparent;
     border-color: transparent;
+    color: #000000cc;
 }
 
-/* Optional: Style for when there's no data */
-.no-data {
-    text-align: center;
-    font-style: italic;
-    color: gray;
+.price {
+    text-align: right;
+    flex-direction: row;
+    width: 0px;
+    font-size: 15.5px;
+    background-color: transparent;
+    color: #000000cc;
 }
+
+/* .product{
+    width: 500px;
+} */
 
 .removeButton{
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: transparent;
-    margin-left: 10px;
-    width: 35px;
+    margin-left: 5px;
+    width: 30px;
     color: darkslategrey;
     border: transparent;
 }

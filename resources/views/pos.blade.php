@@ -12,6 +12,8 @@
 
     @vite(['resources/js/popup.js'])
 
+    {{-- @vite(['resources/js/script.js']) --}}
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -23,47 +25,59 @@
 </head>
 <body>
 
-    
-
     <script>
-        function add(price, id) {
+        function add(price, ids) {
             let currentValue = parseInt(ids.value);
             ids.value = currentValue + 1;
-            // subTot = "sub"+${product['id']};
+            let subTot = ids.closest('tr').querySelector('.subTotal');
             subTot.value = (price * (currentValue + 1)).toFixed(2);
         }
-
-        function sub(price, id) {
+        function sub(price, ids) {
             let currentValue = parseInt(ids.value)
-            if(currentValue>1){
+            if(currentValue > 1) {
                 ids.value = currentValue - 1;
-                // subTot = "sub"+${product['id']};
+                let subTot = ids.closest('tr').querySelector('.subTotal');
                 subTot.value = (price * (currentValue - 1)).toFixed(2);
             }
         }
+        function change(price, ids){
+            let currentValue = parseInt(ids.value)
+            if(currentValue < 1 || !currentValue){
+                currentValue = 1;
+            }
+            ids.value = currentValue
+            let subTot = ids.closest('tr').querySelector('.subTotal');
+            subTot.value = (price * currentValue).toFixed(2);
+            
+        }
         
-        let count = 0;
+
         function addRow(productDetail) {
-            count++;
+
             const table  = document.getElementById('tableBody');
             const newRow = document.createElement('tr');
 
             product = productDetail;
 
-            newRow.innerHTML = `<td>`+ product['productName'] +`</td>
-                                <td class="quantity">
-                                    <button onclick="sub(${product['price']}, ${product['id']})" class="button"> - </button>
-                                    <input type="text" class="display" id="ids" value="1" readonly>
-                                    <button onclick="add(${product['price']}, ${product['id']})" class="button"> + </button>
-                                </td>
-                                <td>`+ product['price'] +` ksh</td>
-                                <td><input id="subTot" class="subTotal" value="`+product['price']+`"> ksh</td>
-                                <td>
-                                    <button class="removeButton" onclick="removeRow(this)">
-                                        <i style="padding: 0 10px" class="fa fa-trash-o"></i> Remove
-                                    </button>
-                                </td>`;
-
+            newRow.innerHTML = `
+                <td class="product"> ${product['productName']} </td>
+                
+                <td class="quantity">
+                    <button onclick="sub(${product['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> - </button>
+                    <input oninput="change(${product['price']}, this.closest('tr').querySelector('.quantity input'))" type="text" class="display" value="1">
+                    <button onclick="add(${product['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> + </button>
+                </td>
+                
+                <td class="price"> ${product['price']} ksh</td>
+                
+                <td><input id="subTot" class="subTotal" value=" ${product['price']}" readonly> ksh</td>
+                
+                <td style="width:20px">
+                    <button class="removeButton" onclick="removeRow(this)">
+                        <i style="padding: 0 10px" class="fa fa-trash-o"></i> Remove
+                    </button>
+                </td>
+            `;
             table.appendChild(newRow);
         }
 
@@ -89,11 +103,12 @@
                         var html = '';
                         if (data.length > 0) {
                             data.forEach(function (product) {
-                                html += `<button onclick='addRow(`+JSON.stringify(product)+`)' class="items" id="items-button" value="` + product.id + `"> 
-                                            <div class="items-pics"></div>
-                                            <text class="item-text">` + product.productName + `</text>
-                                        </button>`;
-                                            
+                                html += `
+                                    <button onclick='addRow(${JSON.stringify(product)})' class="items" id="items-button" value="${product.id}"> 
+                                        <div class="items-pics"></div>
+                                        <text class="item-text"> ${product.productName} </text>
+                                    </button>
+                                `;     
                             });
                         } else {
                             html = '<p>No Items.</p>';
@@ -109,25 +124,24 @@
 
     <div class="navbar">
         <h2>Simple POS</h2>
-        <button class="click" onclick="addRow()">CLICK HERE</button>
     </div>
 
     <div class="wrapper">
         
         <div class="left-view">
             <div class="control">
-                {{-- <div class="search"> </div>
-                <div class="date"> </div> --}}
+                <div class="search"> </div>
+                <div class="date"> </div>
             </div>
             <div class="items-price"> 
                 <table>
                     <thead>
                     <tr>
-                        <th>Product</th>
+                        <th style="width:30%">Product</th>
                         <th>Quantity</th>
-                        <th>Price</th>
+                        <th style="width:19%">Price</th>
                         <th>Subtotal</th>
-                        <th></th>
+                        <th style="width:11%"></th>
                     </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -156,7 +170,7 @@
                     </text>
                 </button>
                 <select id="category" name="category_id" class="dropdown category" >
-                    <option value="0">All</option>
+                    <option value="0">All Categories</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
