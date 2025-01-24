@@ -219,18 +219,6 @@ a{
 }
 
 
-.popupButton2{
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: 10px 0px 0px 10px;
-}
-
-.popupButton2:hover{
-    transition: 0.2s;
-    cursor: pointer;
-    background-color: #ffffff50;
-}
-
-
 .i{
     font-size: 15px;
     padding: 0px 8px;
