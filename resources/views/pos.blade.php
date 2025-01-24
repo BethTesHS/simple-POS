@@ -171,6 +171,7 @@
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
+
                 <button id='popupButton' class="popupButton">
                     <text class='i'>
                         <i class='fa fa-plus-square-o'></i>
@@ -215,20 +216,23 @@
                 <input class="textArea" name="price" type="number" step="any" maxlength="10"> <br>
 
                 <label> Category </label> <br>
-                <div class="control3">
-                    <button id='popupButton2' class="popupButton2">
+
+                <div class="categoryPopup">
+                    <button id='popupButton2' class="popupButton2" type="button">
                         <text class='i'>
                             <i class='fa fa-plus-square-o'></i>
                         </text>
                     </button>
+
                     <select id="category" name="category_id" class="dropdown2" >
                         <option value=""> -- Select Category -- </option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
-                        {{-- <option><button>-- Add New Category --</button></option> --}}
                     </select> <br>
                 </div>
+
+
 
                 <input class="textButton" name="addProduct" type="submit" value="Add Product"> <br>
             </form>

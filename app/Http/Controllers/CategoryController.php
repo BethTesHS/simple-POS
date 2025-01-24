@@ -22,6 +22,10 @@ class CategoryController extends Controller
         $categories = new Category();
         $categories->name = $validated['name'];
         $categories->save();
+        
+        // echo `<script>
+        //     document.getElementById('popupMessage2').style.display = 'flex';
+        //     </script>`;
 
         return redirect()->route('pos')->with('success', 'Product added successfully!');
     }

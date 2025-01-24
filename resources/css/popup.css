@@ -2,7 +2,7 @@
 
 
 .productPopup {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -48,7 +48,6 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-    /* margin-left: 3px; */
 }
 
 
@@ -63,17 +62,14 @@
     margin-top: 30px;
     margin-bottom: 10px;
     cursor: pointer;
-    /* margin-left: 7%; */
 }
 
 .textButton:hover{
     transition: 0.2s;
     background-color: rgb(17, 113, 216);
-    /* margin-left: 7%; */
 }
 
 .dropdown2 {
-    margin: 0px 15px 0 0;
     border-radius: 0 10px 10px 0;
     padding: 5px;
     border: 1px solid rgba(0, 0, 0, 0.5);
@@ -95,13 +91,11 @@
 .popupButton2:hover{
     transition: 0.2s;
     cursor: pointer;
-    /* background-color: #ffffff50; */
 }
 
-.control3{
+.categoryPopup{
     display: flex;
     flex-direction: row;
-    /* background-color: #ece9e2; */
     border: solid 1px transparent;
     border-radius: 10px;
     display: flex;
