@@ -26,42 +26,51 @@
     
 
     <script>
-        $(document).ready(function () {
-            $('.click').change(function () {
-                var productId = $(this).val();                
-                $.ajax({
-                    url: '{{ route("products.showProduct") }}',
-                    method: 'GET',
-                    data: { id: productId },
-                    success: function (data) {
-                        var html = '';
-                        if (data.length > 0) {
-                            data.forEach(function (product) {
-                                // html += `<div class="items">
-                                //             <div class="items-pics"></div>
-                                //             <text class="item-text">` + product.productName + `</text>
-                                //         </div>`;
-                                html += `<tr>
-                                            <td> Dummy </td>
-                                            <td> 2 </td>
-                                            <td> 100 ksh </td>
-                                            <td> 200 ksh </td>
-                                            
-                                            <td style="padding: 3px; width: 60px;">
-                                                <button class="removeButton">
-                                                    <i style="padding: 0 10px" class='fa fa-trash-o'></i> Remove
-                                                </button>
-                                            </td>
-                                        </tr>`;
-                            });
-                        } else {
-                            html = '<p>No Items.</p>';
-                        }
-                        $('#items-view').html(html);
-                    },
-                });
-            });
-        });
+        function add(price, id) {
+            let currentValue = parseInt(ids.value);
+            ids.value = currentValue + 1;
+            // subTot = "sub"+${product['id']};
+            subTot.value = (price * (currentValue + 1)).toFixed(2);
+        }
+
+        function sub(price, id) {
+            let currentValue = parseInt(ids.value)
+            if(currentValue>1){
+                ids.value = currentValue - 1;
+                // subTot = "sub"+${product['id']};
+                subTot.value = (price * (currentValue - 1)).toFixed(2);
+            }
+        }
+        
+        let count = 0;
+        function addRow(productDetail) {
+            count++;
+            const table  = document.getElementById('tableBody');
+            const newRow = document.createElement('tr');
+
+            product = productDetail;
+
+            newRow.innerHTML = `<td>`+ product['productName'] +`</td>
+                                <td class="quantity">
+                                    <button onclick="sub(${product['price']}, ${product['id']})" class="button"> - </button>
+                                    <input type="text" class="display" id="ids" value="1" readonly>
+                                    <button onclick="add(${product['price']}, ${product['id']})" class="button"> + </button>
+                                </td>
+                                <td>`+ product['price'] +` ksh</td>
+                                <td><input id="subTot" class="subTotal" value="`+product['price']+`"> ksh</td>
+                                <td>
+                                    <button class="removeButton" onclick="removeRow(this)">
+                                        <i style="padding: 0 10px" class="fa fa-trash-o"></i> Remove
+                                    </button>
+                                </td>`;
+
+            table.appendChild(newRow);
+        }
+
+        function removeRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
 
         $(document).ready(function () {
             $('.category').change(function () {
@@ -80,10 +89,11 @@
                         var html = '';
                         if (data.length > 0) {
                             data.forEach(function (product) {
-                                html += `<div class="items">
+                                html += `<button onclick='addRow(`+JSON.stringify(product)+`)' class="items" id="items-button" value="` + product.id + `"> 
                                             <div class="items-pics"></div>
                                             <text class="item-text">` + product.productName + `</text>
-                                        </div>`;
+                                        </button>`;
+                                            
                             });
                         } else {
                             html = '<p>No Items.</p>';
@@ -99,13 +109,13 @@
 
     <div class="navbar">
         <h2>Simple POS</h2>
+        <button class="click" onclick="addRow()">CLICK HERE</button>
     </div>
 
     <div class="wrapper">
         
         <div class="left-view">
             <div class="control">
-                <button class="click">CLICK HERE</button>
                 {{-- <div class="search"> </div>
                 <div class="date"> </div> --}}
             </div>
@@ -113,39 +123,15 @@
                 <table>
                     <thead>
                     <tr>
-                        <th style="width: 160px">Product</th>
-                        <th style="width: 140px">Quantity</th>
-                        <th style="width: 140px">Price</th>
-                        <th style="width: 140px">Subtotal</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
                         <th></th>
                     </tr>
                     </thead>
-                    <tbody class="tableSales">
-                        <tr>
-                            <td> Dummy </td>
-                            <td> 2 </td>
-                            <td> 100 ksh </td>
-                            <td> 200 ksh </td>
-                            
-                            <td style="padding: 3px; width: 60px;">
-                                <button class="removeButton">
-                                    <i style="padding: 0 10px" class='fa fa-trash-o'></i> Remove
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> Data </td>
-                            <td> 1 </td>
-                            <td> 1100 ksh </td>
-                            <td> 1100 ksh </td>
-                            
-                            
-                            <td style="padding: 3px; width: 60px;">
-                                <button class="removeButton">
-                                    <i style="padding: 0 10px" class='fa fa-trash-o'></i> Remove
-                                </button>
-                            </td>
-                        </tr>
+                    <tbody id="tableBody">
+                        {{-- Rows will be formed here --}}
                     </tbody>
                 </table>
                 
@@ -189,19 +175,14 @@
                     <text> No Item </text>
                 @else
                     @foreach($products as $product)
-                        <button class="items" id="items-button" value="{{$product->id}}"> 
+                        <button onclick="addRow({{$product}})" class="items" id="items-button" value="{{$product->id}}"> 
                             <div class="items-pics"></div>
                             <text class="item-text"> {{ $product->productName }} </text>
                         </button>
                     @endforeach
                 @endif
-                {{-- <button class="items" id="items-button-test" value="1"> 
-                    <div class="items-pics"></div>
-                    <text class="item-text"> Coca Cola </text>
-                </button> --}}
                 
             </div>
-            {{-- <div class="payment"> </div> --}}
         </div>
     </div>
 
@@ -221,7 +202,7 @@
                 <input class="textArea" name="productName" type="text"> <br>
 
                 <label> Price </label> <br>
-                <input class="textArea" name="price" type="number" maxlength="10"> <br>
+                <input class="textArea" name="price" type="number" step="any" maxlength="10"> <br>
 
                 <label> Category </label> <br>
                 <select id="category" name="category_id" class="dropdown2" >
@@ -267,8 +248,6 @@
             </div>                        
         </div>
     @endif
-
-
-
+                                  
 </body>
 </html>

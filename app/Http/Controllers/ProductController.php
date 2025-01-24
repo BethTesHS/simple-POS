@@ -45,7 +45,7 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'productName' => 'required|string|max:255',
-            'price' => 'required|decimal:0,0',
+            'price' => 'required|decimal:0,2',
             'category_id' => 'required|integer|max:10',
             // 'brand_id' => 'required|integer|max:255',
         ]);
