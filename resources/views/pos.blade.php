@@ -217,6 +217,7 @@
 
                 <label> Category </label> <br>
 
+                {{-- CATEGORY BUTTON --}}
                 <div class="categoryPopup">
                     <button id='popupButton2' class="popupButton2" type="button">
                         <text class='i'>
@@ -254,7 +255,7 @@
                 <label> Category Name </label> <br>
                 <input class="textArea" name="name" type="text"> <br>
 
-                <input class="textButton" name="addCatgory" type="submit" value="Add Category"> <br>
+                <input id="createCategory" class="textButton" name="addCatgory" type="submit" value="Add Category"> <br>
             </form>
 
         </div>

@@ -14,3 +14,8 @@ document.getElementById('closePopup').addEventListener('click', function() {
 document.getElementById('closePopup2').addEventListener('click', function() {
     document.getElementById('popupMessage2').style.display = 'none'; // Hide the popup
 });
+
+
+// document.getElementById('createCategory').addEventListener('click', function() {
+//     document.getElementById('popupMessage').style.display = 'flex'; // Show the popup
+// });
