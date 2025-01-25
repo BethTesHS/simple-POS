@@ -116,11 +116,6 @@ a{
     background-color: #ece9e2;
     border: solid 1px transparent;
     border-radius: 0 0 10px 10px;
-    display: flex;
-    flex-direction: column;
-    /* min-width: 670px; */
-    /* padding-left: 2.5%; */
-    /* right: 15px; */
     height: 60px;
     width: 100%;
     margin-bottom: 5px;
@@ -133,7 +128,7 @@ a{
     display: flex;
     flex-direction: column;
     right: 15px;
-    height: 50px;
+    /* height: 50px; */
     width: 100%;
     padding: 10px;
 }
@@ -165,14 +160,71 @@ a{
     background-color: #ece9e2;
     border: solid 1px transparent;
     border-radius: 10px;
-    display: flex;
-    flex-direction: row;
     height: 50px;
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
 }
 
+.payment{
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+}
+
+.pay-method{
+    margin: 0px 15px 0 0;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: buttonface;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    outline: none;
+    height: 30px;
+    width: 125px;
+}
+
+.pay{
+    display: flex;
+    flex-direction: row;
+}
+
+.cancel-pay{
+    margin-right: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 5px;
+    height: 40px;
+    background-color: rgba(238, 37, 37, 0.744);
+    color: #ffffff;
+    font-size: 15px;
+    /* font-weight: bold; */
+}
+
+.cancel-pay:hover{
+    transition: 0.2s;
+    cursor: pointer;
+    background-color: rgb(238, 37, 37);
+    /* font-weight: bold; */
+}
+
+.complete-pay{
+    margin-right: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 5px;
+    height: 40px;
+    background-color: rgba(33, 125, 25, 0.744);
+    color: #ffffff;
+    font-size: 15px;
+    /* font-weight: bold; */
+}
+
+.complete-pay:hover{
+    transition: 0.2s;
+    cursor: pointer;
+    background-color: rgb(33, 125, 25);
+    /* font-weight: bold; */
+}
 
 .items-view{
     background-color: #ece9e2;
@@ -199,12 +251,13 @@ a{
     background-color: buttonface;
     border: 1px solid rgba(0, 0, 0, 0.5);
     outline: none;
+    width: 125px;
 }
 
 .dropdown:hover{
     transition: 0.2s;
     cursor: pointer;
-    background-color: #ffffff50;
+    background-color: #e6dcdc;
 }
 
 
@@ -218,7 +271,7 @@ a{
 .popupButton:hover{
     transition: 0.2s;
     cursor: pointer;
-    background-color: #ffffff50;
+    background-color: #e6dcdc;
 }
 
 

@@ -1,0 +1,17 @@
+1. Setup a new Project to create a simple POS use the same laravel setup :- reason for advicing you on laravel is for usability, and predifined libraries assit on time taken 
+keep me updated incase ur stuck .
+2. the POS has stock management 
+
+use this demo account 
+
+https://erp.riseterp.com/home
+username: bethel-01
+pwd: b1212
+
+
+setup am intrstested on how ur interface shall look ..after this based on how you shall do it we shall now be able to give task and we look forward in compesating you given you understand the flow .
+
+is there any question 
+
+I shall look at the demo page you gave me and if i have any issues or questions i will let you know
+

@@ -6,14 +6,10 @@
 
     <title>Document</title>
 
-    @vite(['resources/css/style.css'])
-    @vite(['resources/css/popup.css'])
-    @vite(['resources/css/table.css'])
-
+    @vite(['resources/css/all.css'])
     @vite(['resources/js/popup.js'])
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
     <?php
@@ -173,7 +169,18 @@
                     </tr>
                 </table>
             </div>
-            <div class="payment"> </div>
+            <div class="payment">
+                <select  class="pay-method">
+                    <option> 1 </option>
+                    <option> 1 </option>
+                    <option> 1 </option>
+                    <option> 1 </option>
+                </select>
+                <div class="pay">
+                    <button class="cancel-pay"> Cancel Payment </button>
+                    <button class="complete-pay"> Complete Payment </button>
+                </div>
+            </div>
         </div>
 
         <div class="right-view">
