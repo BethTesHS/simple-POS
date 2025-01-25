@@ -180,7 +180,13 @@ a{
     border: 1px solid rgba(0, 0, 0, 0.5);
     outline: none;
     height: 30px;
-    width: 125px;
+    min-width: 125px;
+}
+
+.pay-method:hover{
+    transition: 0.2s;
+    cursor: pointer;
+    background-color: #e6dcdc;
 }
 
 .pay{
@@ -314,14 +320,16 @@ a{
 
 .items-pics{
     background-color: rgba(255, 255, 255, 0.37);
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-content: flex-start;
     height: 80%;
     width: 90%;
     margin: 5px;
     border: solid 1px gray;
+}
+
+.image{
+    object-fit:cover;
+    height: 100%;
+    width: 100%;
 }
 
 /*

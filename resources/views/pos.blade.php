@@ -64,34 +64,40 @@
         }
 
         function addRow(productDetail) {
+            const table = document.getElementById('tableBody');
 
-            const table  = document.getElementById('tableBody');
+            // Check if the product already exists in the table
+            const existingRow = Array.from(table.children).find(row => row.dataset.productId == productDetail.id);
+            if (!existingRow) {
+                // alert('This product is already in the table.');
+                // return;
+
             const newRow = document.createElement('tr');
-
-            product = productDetail;
+            newRow.dataset.productId = productDetail.id; // Add a custom attribute to track the product ID
 
             newRow.innerHTML = `
-                <td class="product"> ${product['productName']} </td>
+                <td class="product"> ${productDetail['productName']} </td>
 
                 <td class="quantity">
-                    <button onclick="sub(${product['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> - </button>
-                    <input oninput="change(${product['price']}, this.closest('tr').querySelector('.quantity input'))" type="text" class="display" value="1">
-                    <button onclick="add(${product['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> + </button>
+                    <button onclick="sub(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> - </button>
+                    <input oninput="change(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" type="text" class="display" value="1">
+                    <button onclick="add(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> + </button>
                 </td>
 
-                <td class="price"> ${product['price']} ksh</td>
+                <td class="price"> ${productDetail['price']} ksh</td>
 
-                <td><input id="subTot" class="subTotal" value=" ${product['price']}" readonly> ksh</td>
+                <td><input id="subTot" class="subTotal" value="${productDetail['price']}" readonly> ksh</td>
 
                 <td style="width:20px">
                     <button class="removeButton" onclick="removeRow(this)">
                         <i style="padding: 0 10px" class="fa fa-trash-o"></i> Remove
                     </button>
-                </td>
-            `;
-            table.appendChild(newRow);
-            updateTotals();
+                </td>`;
+                table.appendChild(newRow);
+                updateTotals();
+            }
         }
+
         function removeRow(button) {
             const row = button.closest('tr');
             row.remove();
@@ -133,7 +139,6 @@
 
     </script>
 
-
     <div class="navbar">
         <h2>Simple POS</h2>
     </div>
@@ -170,11 +175,11 @@
                 </table>
             </div>
             <div class="payment">
-                <select  class="pay-method">
-                    <option> 1 </option>
-                    <option> 1 </option>
-                    <option> 1 </option>
-                    <option> 1 </option>
+                <select class="pay-method">
+                    <option> -- Payment Method -- </option>
+                    <option> ... </option>
+                    <option> ... </option>
+                    <option> ... </option>
                 </select>
                 <div class="pay">
                     <button class="cancel-pay"> Cancel Payment </button>
@@ -207,7 +212,7 @@
                 @else
                     @foreach($products as $product)
                         <button onclick="addRow({{$product}})" class="items" id="items-button" value="{{$product->id}}">
-                            <div class="items-pics"></div>
+                            <div class="items-pics"><img class="image" src="{{asset('default.png')}}"></div>
                             <text class="item-text"> {{ $product->productName }} </text>
                         </button>
                     @endforeach
