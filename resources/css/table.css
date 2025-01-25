@@ -92,3 +92,8 @@ th, td {
     color: red;
     cursor: pointer;
 }
+
+.total-items{
+    width: 30%;
+    min-width: 200px;
+}

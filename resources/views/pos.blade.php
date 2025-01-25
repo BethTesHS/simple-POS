@@ -12,8 +12,6 @@
 
     @vite(['resources/js/popup.js'])
 
-    {{-- @vite(['resources/js/script.js']) --}}
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -26,11 +24,28 @@
 <body>
 
     <script>
+        function updateTotals() {
+            let totalQuantity = 0;
+            let totalAmount = 0;
+
+            document.querySelectorAll('#tableBody tr').forEach(row => {
+                const quantity = parseInt(row.querySelector('.quantity input').value);
+                const subtotal = parseFloat(row.querySelector('.subTotal').value);
+
+                totalQuantity += quantity;
+                totalAmount += subtotal;
+            });
+
+            document.querySelector('.total-items').textContent = `Items: ${totalQuantity}`;
+            document.querySelector('.total-amount').textContent = `Total: ${totalAmount.toFixed(2)} ksh`;
+        }
+
         function add(price, ids) {
             let currentValue = parseInt(ids.value);
             ids.value = currentValue + 1;
             let subTot = ids.closest('tr').querySelector('.subTotal');
             subTot.value = (price * (currentValue + 1)).toFixed(2);
+            updateTotals();
         }
         function sub(price, ids) {
             let currentValue = parseInt(ids.value)
@@ -38,6 +53,7 @@
                 ids.value = currentValue - 1;
                 let subTot = ids.closest('tr').querySelector('.subTotal');
                 subTot.value = (price * (currentValue - 1)).toFixed(2);
+                updateTotals();
             }
         }
         function change(price, ids){
@@ -48,7 +64,7 @@
             ids.value = currentValue
             let subTot = ids.closest('tr').querySelector('.subTotal');
             subTot.value = (price * currentValue).toFixed(2);
-
+            updateTotals();
         }
 
         function addRow(productDetail) {
@@ -78,10 +94,12 @@
                 </td>
             `;
             table.appendChild(newRow);
+            updateTotals();
         }
         function removeRow(button) {
             const row = button.closest('tr');
             row.remove();
+            updateTotals();
         }
 
         $(document).ready(function () {
@@ -150,8 +168,8 @@
             <div class="total-price">
                 <table>
                     <tr>
-                        <th style="width: 30%; min-width: 200px"> Items: 3</th>
-                        <th> Total: 1300 ksh </th>
+                        <th class="total-items"> Items: 0</th>
+                        <th class="total-amount"> Total: 0.00 ksh </th>
                     </tr>
                 </table>
             </div>
