@@ -51,7 +51,6 @@
 
         }
 
-
         function addRow(productDetail) {
 
             const table  = document.getElementById('tableBody');
@@ -80,7 +79,6 @@
             `;
             table.appendChild(newRow);
         }
-
         function removeRow(button) {
             const row = button.closest('tr');
             row.remove();
@@ -127,7 +125,6 @@
     </div>
 
     <div class="wrapper">
-
         <div class="left-view">
             <div class="control">
                 <div class="search"> </div>
@@ -153,7 +150,7 @@
             <div class="total-price">
                 <table>
                     <tr>
-                        <th> Items: 3</th>
+                        <th style="width: 30%; min-width: 200px"> Items: 3</th>
                         <th> Total: 1300 ksh </th>
                     </tr>
                 </table>
@@ -161,10 +158,8 @@
             <div class="payment"> </div>
         </div>
 
-
         <div class="right-view">
             <div class="control2">
-
                 <select id="category" name="category_id" class="dropdown category" >
                     <option value="0">All Categories</option>
                     @foreach($categories as $category)
