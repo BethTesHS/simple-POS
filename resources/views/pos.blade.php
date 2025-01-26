@@ -20,6 +20,15 @@
 <body>
 
     <script>
+
+        function calcOpenPopup() {
+            calcPopup.style.display = (calcPopup.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function calcClosePopup(){
+            calcPopup.style.display = 'none';
+        }
+
         function updateTotals() {
             let totalQuantity = 0;
             let totalAmount = 0;
@@ -141,7 +150,17 @@
 
     <div class="navbar">
         <h2>Simple POS</h2>
+        <div style="display: flex; flex-direction: column;">
+            <button id="calcDisplay" class="calc-btn" onclick="calcOpenPopup()">
+                <i class="fa fa-calculator"></i>
+            </button>
+            <div id="calcPopup" >
+                @include('calc')
+            </div>
+        </div>
     </div>
+
+
 
     <div class="wrapper">
         <div class="left-view">

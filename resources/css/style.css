@@ -38,7 +38,8 @@ button{
     right: 0;
     left: 0;
     z-index: 1000;
-    padding: 13px 10px;
+    height: 46px;
+    /* padding: 13px 10px; */
     padding-left: 30px;
     width: 100%;
 }
