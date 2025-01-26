@@ -7,7 +7,10 @@
     <title>Document</title>
 
     @vite(['resources/css/all.css'])
-    @vite(['resources/js/popup.js'])
+
+    {{-- <script src="{{asset('js/categoryFilter.js')}}"> </script> --}}
+    <script src="{{asset('js/popup.js')}}"> </script>
+    <script src="{{asset('js/script.js')}}"> </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -21,131 +24,58 @@
 
     <script>
 
-        function calcOpenPopup() {
-            calcPopup.style.display = (calcPopup.style.display === 'block') ? 'none' : 'block';
-        }
+        // Function to fetch products based on category
+        function fetchProductsByCategory(categoryId) {
+            var urlQuery = '';
 
-        function calcClosePopup(){
-            calcPopup.style.display = 'none';
-        }
+            if (categoryId) {
+                urlQuery = '{{ route("products.filter") }}';
+            } else if (categoryId == 0) {
+                urlQuery = '{{ route("products.all") }}';
+            }
 
-        function updateTotals() {
-            let totalQuantity = 0;
-            let totalAmount = 0;
-
-            document.querySelectorAll('#tableBody tr').forEach(row => {
-                const quantity = parseInt(row.querySelector('.quantity input').value);
-                const subtotal = parseFloat(row.querySelector('.subTotal').value);
-
-                totalQuantity += quantity;
-                totalAmount += subtotal;
+            $.ajax({
+                url: urlQuery,
+                method: 'GET',
+                data: { category_id: categoryId },
+                success: function (data) {
+                    updateItemsView(data);
+                },
             });
-
-            document.querySelector('.total-items').textContent = `Items: ${totalQuantity}`;
-            document.querySelector('.total-amount').textContent = `Total: ${totalAmount.toFixed(2)} ksh`;
         }
 
-        function add(price, ids) {
-            let currentValue = parseInt(ids.value);
-            ids.value = currentValue + 1;
-            let subTot = ids.closest('tr').querySelector('.subTotal');
-            subTot.value = (price * (currentValue + 1)).toFixed(2);
-            updateTotals();
-        }
-        function sub(price, ids) {
-            let currentValue = parseInt(ids.value)
-            if(currentValue > 1) {
-                ids.value = currentValue - 1;
-                let subTot = ids.closest('tr').querySelector('.subTotal');
-                subTot.value = (price * (currentValue - 1)).toFixed(2);
-                updateTotals();
+        // Function to update items view dynamically
+        function updateItemsView(data) {
+            var html = '';
+
+            if (data.length > 0) {
+                data.forEach(function (product) {
+                    html += `
+                        <button onclick='addRow(${JSON.stringify(product)})' class="items" id="items-button" value="${product.id}">
+                            <div class="items-pics"></div>
+                            <text class="item-text"> ${product.productName} </text>
+                        </button>
+                    `;
+                });
+            } else {
+                html = '<p>No Items.</p>';
             }
-        }
-        function change(price, ids){
-            let currentValue = parseInt(ids.value)
-            if(currentValue < 1 || !currentValue){
-                currentValue = 1;
-            }
-            ids.value = currentValue
-            let subTot = ids.closest('tr').querySelector('.subTotal');
-            subTot.value = (price * currentValue).toFixed(2);
-            updateTotals();
+
+            $('#items-view').html(html);
         }
 
-        function addRow(productDetail) {
-            const table = document.getElementById('tableBody');
-
-            // Check if the product already exists in the table
-            const existingRow = Array.from(table.children).find(row => row.dataset.productId == productDetail.id);
-            if (!existingRow) {
-                // alert('This product is already in the table.');
-                // return;
-
-            const newRow = document.createElement('tr');
-            newRow.dataset.productId = productDetail.id; // Add a custom attribute to track the product ID
-
-            newRow.innerHTML = `
-                <td class="product"> ${productDetail['productName']} </td>
-
-                <td class="quantity">
-                    <button onclick="sub(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> - </button>
-                    <input oninput="change(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" type="text" class="display" value="1">
-                    <button onclick="add(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> + </button>
-                </td>
-
-                <td class="price"> ${productDetail['price']} ksh</td>
-
-                <td><input id="subTot" class="subTotal" value="${productDetail['price']}" readonly> ksh</td>
-
-                <td style="width:20px">
-                    <button class="removeButton" onclick="removeRow(this)">
-                        <i style="padding: 0 10px" class="fa fa-trash-o"></i> Remove
-                    </button>
-                </td>`;
-                table.appendChild(newRow);
-                updateTotals();
-            }
-        }
-
-        function removeRow(button) {
-            const row = button.closest('tr');
-            row.remove();
-            updateTotals();
-        }
-
-        $(document).ready(function () {
+        // Function to initialize event listeners
+        function initializeEventListeners() {
             $('.category').change(function () {
                 var categoryId = $(this).val();
-                var url_query = '';
-                if (categoryId) {
-                    url_query = '{{ route("products.filter") }}';
-                } else if (categoryId == 0){
-                    url_query = '{{ route("products.all") }}';
-                }
-                $.ajax({
-                    url: url_query,
-                    method: 'GET',
-                    data: { category_id: categoryId },
-                    success: function (data) {
-                        var html = '';
-                        if (data.length > 0) {
-                            data.forEach(function (product) {
-                                html += `
-                                    <button onclick='addRow(${JSON.stringify(product)})' class="items" id="items-button" value="${product.id}">
-                                        <div class="items-pics"></div>
-                                        <text class="item-text"> ${product.productName} </text>
-                                    </button>
-                                `;
-                            });
-                        } else {
-                            html = '<p>No Items.</p>';
-                        }
-                        $('#items-view').html(html);
-                    },
-                });
+                fetchProductsByCategory(categoryId);
             });
-        });
+        }
 
+        // Document ready initialization
+        $(document).ready(function () {
+            initializeEventListeners();
+        });
     </script>
 
     <div class="navbar">
@@ -155,12 +85,10 @@
                 <i class="fa fa-calculator"></i>
             </button>
             <div id="calcPopup" >
-                @include('calc')
+                @include('popups/calc')
             </div>
         </div>
     </div>
-
-
 
     <div class="wrapper">
         <div class="left-view">
@@ -216,7 +144,7 @@
                     @endforeach
                 </select>
 
-                <button id='popupButton' class="popupButton">
+                <button id='popupButton' class="popupButton" onclick="addProduct()">
                     <text class='i'>
                         <i class='fa fa-plus-square-o'></i>
                     </text>
@@ -243,66 +171,11 @@
 
     {{-- -----------  POP UPS ----------- --}}
     <div id="popupMessage" class="productPopup">
-        <div class="productPopup-content">
-
-            <span class="close-btn" id="closePopup">&times;</span>
-            <div style="padding: 20px 0px">
-                <h2> Add New Product </h2>
-            </div>
-
-            <form action="{{ route('products.store') }}" autocomplete="off" method="POST">
-                @csrf
-
-                <label> Product Name</label> <br>
-                <input class="textArea" name="productName" type="text"> <br>
-
-                <label> Price </label> <br>
-                <input class="textArea" name="price" type="number" step="any" maxlength="10"> <br>
-
-                <label> Category </label> <br>
-
-                {{-- CATEGORY BUTTON --}}
-                <div class="categoryPopup">
-                    <button id='popupButton2' class="popupButton2" type="button">
-                        <text class='i'>
-                            <i class='fa fa-plus-square-o'></i>
-                        </text>
-                    </button>
-
-                    <select id="category" name="category_id" class="dropdown2" >
-                        <option value=""> -- Select Category -- </option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select> <br>
-                </div>
-
-
-
-                <input class="textButton" name="addProduct" type="submit" value="Add Product"> <br>
-            </form>
-
-        </div>
+        @include('popups.addProduct')
     </div>
 
     <div id="popupMessage2" class="productPopup">
-        <div class="productPopup-content">
-
-            <span class="close-btn" id="closePopup2">&times;</span>
-            <div style="padding: 20px 0px">
-                <h2> Create Category </h2>
-            </div>
-
-            <form action="{{ route('categories.store') }}" autocomplete="off" method="POST">
-                @csrf
-
-                <label> Category Name </label> <br>
-                <input class="textArea" name="name" type="text"> <br>
-
-                <input id="createCategory" class="textButton" name="addCatgory" type="submit" value="Add Category"> <br>
-            </form>
-
-        </div>
+        @include('popups.addCategory')
     </div>
 
     @if($errors->any())
