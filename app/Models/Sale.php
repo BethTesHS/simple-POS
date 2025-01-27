@@ -12,8 +12,8 @@ class Sale extends Model
 
     protected $table = "sales";
 
-    // public function category()
-    // {
-    //     return $this->belongsTo(Category::class);
-    // }
+    public function salesDetail()
+    {
+        return $this->hasMany(SaleDetail::class);
+    }
 }

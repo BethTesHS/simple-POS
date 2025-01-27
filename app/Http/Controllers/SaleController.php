@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sale;
+use App\Models\SaleDetail;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -22,6 +23,16 @@ class SaleController extends Controller
         $sale->payMethod = $validated['payMethod'];
         
         $sale->save();
+        
+        foreach ($request->products as $productId => $product) {
+            saleDetail::insert([
+                'sale_id' => $sale->id,
+                'product_id' => $productId,
+                'productName' => $product['productName'],
+                'price' => $product['price'],
+                'quantity' => $product['quantity'],
+            ]);
+        }
 
         return redirect()->route('pos')->with('success', 'Product added successfully!');
     }

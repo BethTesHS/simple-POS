@@ -85,17 +85,25 @@
             newRow.dataset.productId = productDetail.id; // Add a custom attribute to track the product ID
 
             newRow.innerHTML = `
-                <td class="product"> ${productDetail['productName']} </td>
-
-                <td class="quantity">
-                    <button onclick="sub(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> - </button>
-                    <input oninput="change(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" type="text" class="display" value="1">
-                    <button onclick="add(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> + </button>
+                <td class="product"> 
+                    ${productDetail['productName']} 
+                    <input type="hidden" name="products[${productDetail['id']}][productName]" value="${productDetail['productName']}">
                 </td>
 
-                <td class="price"> ${productDetail['price']} ksh</td>
+                <td class="quantity">
+                    <button type="button" onclick="sub(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> - </button>
+                    <input oninput="change(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" type="text" class="display" value="1" name="products[${productDetail['id']}][quantity]">
+                    <button type="button" onclick="add(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> + </button>
+                </td>
 
-                <td><input id="subTot" class="subTotal" value="${productDetail['price']}" readonly> ksh</td>
+                <td class="price"> 
+                    ${productDetail['price']} ksh
+                    <input type="hidden" name="products[${productDetail['id']}][price]" value="${productDetail['price']}">
+                </td>
+
+                <td>
+                    <input id="subTot" class="subTotal" value="${productDetail['price']}" readonly name="products[${productDetail['id']}][subtotal]"> ksh
+                </td>
 
                 <td style="width:20px">
                     <button class="removeButton" onclick="removeRow(this)">
@@ -163,6 +171,8 @@
 
 
     <div class="wrapper">
+        <form action="{{ route('sales.storeSale') }}" method="POST">
+            @csrf
         <div class="left-view">
             <div class="control">
                 <div class="search"> </div>
@@ -185,8 +195,6 @@
                 </table>
             </div>
             
-            <form action="{{ route('sales.storeSale') }}" method="POST">
-                @csrf
                 <div class="total-price">
                     <table>
                         <tr>
@@ -208,8 +216,8 @@
                         <button type="submit" class="complete-pay"> Complete Payment </button>
                     </div>
                 </div>
-            </form>
             </div>
+        </form>
 
         <div class="right-view">
             <div class="control2">

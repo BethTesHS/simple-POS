@@ -22,6 +22,7 @@ Route::get('calc', function () {
 Route::get('pos', [PosController::class, 'index'])->name('pos');
 
 Route::post('storeSale', [SaleController::class, 'storeSale'])->name('sales.storeSale');
+Route::post('storeSaleDetail', [SaleController::class, 'storeSaleDetail'])->name('sales.storeSaleDetail');
 
 Route::get('products', [ProductController::class, 'show'])->name('products.all');
 Route::get('product', [ProductController::class, 'showProduct'])->name('products.showProduct');
@@ -29,10 +30,4 @@ Route::get('filter-products', [ProductController::class, 'filterProduct'])->name
 Route::post('products', [ProductController::class, 'store'])->name('products.store');
 Route::put('products', [ProductController::class, 'update'])->name('products.update');
 Route::delete('products', [ProductController::class, 'delete'])->name('products.delete');
-
 Route::post('categories', [CategoryController::class, 'store'])->name('categories.store');
-
-
-// TODO
-Route::get('filter-posts', [TestPostController::class, 'filterPosts'])->name('filter.posts');
-Route::get('testPosts', [TestPostController::class, 'show'])->name('testPosts');
