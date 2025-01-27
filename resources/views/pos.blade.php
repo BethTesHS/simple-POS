@@ -41,7 +41,7 @@
                 totalAmount += subtotal;
             });
 
-            document.querySelector('.total-items').innerHTML = `<input type="hidden" name="itemNo" value="${totalQuantity}"> Items: ${totalQuantity}`;
+            document.querySelector('.total-items').innerHTML = `<input type="hidden" name="totalQuantity" value="${totalQuantity}"> Items: ${totalQuantity}`;
             document.querySelector('.total-amount').innerHTML = `<input type="hidden" name="totalPrice" value="${totalAmount.toFixed(2)}"> Total: ${totalAmount.toFixed(2)} ksh`;
         }
 
@@ -171,45 +171,45 @@
             <div class="items-price">
                 <table>
                     <thead>
-                    <tr>
-                        <th style="width:30%">Product</th>
-                        <th>Quantity</th>
-                        <th style="width:19%">Price</th>
-                        <th>Subtotal</th>
-                        <th style="width:11%"></th>
-                    </tr>
+                        <tr>
+                            <th style="width:30%">Product</th>
+                            <th>Quantity</th>
+                            <th style="width:19%">Price</th>
+                            <th>Subtotal</th>
+                            <th style="width:11%"></th>
+                        </tr>
                     </thead>
                     <tbody id="tableBody">
                         {{-- Rows will be formed here --}}
                     </tbody>
                 </table>
-
             </div>
+            
             <form action="{{ route('sales.storeSale') }}" method="POST">
-            <div class="total-price">
                 @csrf
-                <table>
-                    <tr>
-                        <th class="total-items"><input type="hidden" name="itemNo" value="0"> Items: 0</th>
-                        <th class="total-amount"><input type="hidden" name="totalPrice" value="0"> Total: 0.00 ksh </th>
-                    </tr>
-                </table>
-            </div>
-            <div class="payment">
-                <select name="payMethod" class="pay-method">
-                    <option value=""> -- Payment Method -- </option>
-                    <option value="Cash"> Cash </option>
-                    <option value="Debit or Credit"> Debit or Credit </option>
-                    <option value="M-PESA"> M-PESA </option>
-                    <option value="Others"> Others </option>
-                </select>
-                <div class="pay">
-                    <button class="cancel-pay"> Cancel Payment </button>
-                    <button type="submit" class="complete-pay"> Complete Payment </button>
+                <div class="total-price">
+                    <table>
+                        <tr>
+                            <th class="total-items"><input type="hidden" name="totalQuantity" value="0"> Items: 0</th>
+                            <th class="total-amount"><input type="hidden" name="totalPrice" value="0"> Total: 0.00 ksh </th>
+                        </tr>
+                    </table>
                 </div>
-            </div>
+                <div class="payment">
+                    <select name="payMethod" class="pay-method">
+                        <option value=""> -- Payment Method -- </option>
+                        <option value="Cash"> Cash </option>
+                        <option value="Debit or Credit"> Debit or Credit </option>
+                        <option value="M-PESA"> M-PESA </option>
+                        <option value="Others"> Others </option>
+                    </select>
+                    <div class="pay">
+                        <button class="cancel-pay"> Cancel Payment </button>
+                        <button type="submit" class="complete-pay"> Complete Payment </button>
+                    </div>
+                </div>
             </form>
-        </div>
+            </div>
 
         <div class="right-view">
             <div class="control2">

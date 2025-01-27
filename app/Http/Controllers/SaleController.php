@@ -10,14 +10,14 @@ class SaleController extends Controller
     public function storeSale(Request $request)
     {
         $validated = $request->validate([
-            'itemNo' => 'required|integer',
+            'totalQuantity' => 'required|integer',
             'totalPrice' => 'required|decimal:0,2',
             'payMethod' => 'required|string',
         ]);
 
         $sale = new Sale();
 
-        $sale->itemNo = $validated['itemNo'];
+        $sale->totalQuantity = $validated['totalQuantity'];
         $sale->totalPrice = $validated['totalPrice'];
         $sale->payMethod = $validated['payMethod'];
         
