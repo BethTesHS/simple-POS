@@ -18,23 +18,23 @@
             <button class="calc-button" onclick="clearAll()">AC</button>
             <button class="calc-button" onclick="appendBracket('(')">(</button>
             <button class="calc-button" onclick="appendBracket(')')">)</button>
-            <button class="calc-button" onclick="appendOperator('%')">%</button>
+            <button class="calc-button" onclick="appendOperator('/')">/</button>
             <button class="calc-num" onclick="appendNumber(7)">7</button>
             <button class="calc-num" onclick="appendNumber(8)">8</button>
             <button class="calc-num" onclick="appendNumber(9)">9</button>
-            <button class="calc-button" onclick="appendOperator('/')">/</button>
+            <button class="calc-button" onclick="appendOperator('*')">x</button>
             <button class="calc-num" onclick="appendNumber(4)">4</button>
             <button class="calc-num" onclick="appendNumber(5)">5</button>
             <button class="calc-num" onclick="appendNumber(6)">6</button>
-            <button class="calc-button" onclick="appendOperator('*')">x</button>
+            <button class="calc-button" onclick="appendOperator('-')">-</button>
             <button class="calc-num" onclick="appendNumber(1)">1</button>
             <button class="calc-num" onclick="appendNumber(2)">2</button>
             <button class="calc-num" onclick="appendNumber(3)">3</button>
-            <button class="calc-button" onclick="appendOperator('-')">-</button>
+            <button class="calc-button" onclick="appendOperator('+')">+</button>
             <button class="calc-num" onclick="appendNumber(0)">0</button>
             <button class="calc-button" onclick="appendDot()">.</button>
+            <button class="calc-button" onclick="appendOperator('%')">%</button>
             <button class="calc-button" onclick="calculateResult()">=</button>
-            <button class="calc-button" onclick="appendOperator('+')">+</button>
         </div>
     </div>
 
