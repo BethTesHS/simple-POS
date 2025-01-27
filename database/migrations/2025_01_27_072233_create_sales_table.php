@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('itemNo');
             $table->decimal('totalPrice', 8, 2);
+            $table->string('payMethod');
             $table->timestamps();
         });
     }

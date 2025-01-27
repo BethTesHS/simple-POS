@@ -196,11 +196,12 @@
                 </table>
             </div>
             <div class="payment">
-                <select class="pay-method">
-                    <option> -- Payment Method -- </option>
-                    <option> ... </option>
-                    <option> ... </option>
-                    <option> ... </option>
+                <select name="payMethod" class="pay-method">
+                    <option value=""> -- Payment Method -- </option>
+                    <option value="Cash"> Cash </option>
+                    <option value="Debit or Credit"> Debit or Credit </option>
+                    <option value="M-PESA"> M-PESA </option>
+                    <option value="Others"> Others </option>
                 </select>
                 <div class="pay">
                     <button class="cancel-pay"> Cancel Payment </button>

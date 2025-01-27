@@ -12,12 +12,14 @@ class SaleController extends Controller
         $validated = $request->validate([
             'itemNo' => 'required|integer',
             'totalPrice' => 'required|decimal:0,2',
+            'payMethod' => 'required|string',
         ]);
 
         $sale = new Sale();
 
         $sale->itemNo = $validated['itemNo'];
         $sale->totalPrice = $validated['totalPrice'];
+        $sale->payMethod = $validated['payMethod'];
         
         $sale->save();
 
