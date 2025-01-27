@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\TestPostController;
+use App\Http\Controllers\SaleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +20,8 @@ Route::get('calc', function () {
 // Route::resource('pos', ProductController::class);
 
 Route::get('pos', [PosController::class, 'index'])->name('pos');
+
+Route::post('storeSale', [SaleController::class, 'storeSale'])->name('sales.storeSale');
 
 Route::get('products', [ProductController::class, 'show'])->name('products.all');
 Route::get('product', [ProductController::class, 'showProduct'])->name('products.showProduct');

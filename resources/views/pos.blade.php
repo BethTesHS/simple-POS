@@ -41,8 +41,8 @@
                 totalAmount += subtotal;
             });
 
-            document.querySelector('.total-items').textContent = `Items: ${totalQuantity}`;
-            document.querySelector('.total-amount').textContent = `Total: ${totalAmount.toFixed(2)} ksh`;
+            document.querySelector('.total-items').innerHTML = `<input type="hidden" name="itemNo" value="${totalQuantity}"> Items: ${totalQuantity}`;
+            document.querySelector('.total-amount').innerHTML = `<input type="hidden" name="totalPrice" value="${totalAmount.toFixed(2)}"> Total: ${totalAmount.toFixed(2)} ksh`;
         }
 
         function add(price, ids) {
@@ -185,11 +185,13 @@
                 </table>
 
             </div>
+            <form action="{{ route('sales.storeSale') }}" method="POST">
             <div class="total-price">
+                @csrf
                 <table>
                     <tr>
-                        <th class="total-items"> Items: 0</th>
-                        <th class="total-amount"> Total: 0.00 ksh </th>
+                        <th class="total-items"><input type="hidden" name="itemNo" value="0"> Items: 0</th>
+                        <th class="total-amount"><input type="hidden" name="totalPrice" value="0"> Total: 0.00 ksh </th>
                     </tr>
                 </table>
             </div>
@@ -202,9 +204,10 @@
                 </select>
                 <div class="pay">
                     <button class="cancel-pay"> Cancel Payment </button>
-                    <button class="complete-pay"> Complete Payment </button>
+                    <button type="submit" class="complete-pay"> Complete Payment </button>
                 </div>
             </div>
+            </form>
         </div>
 
         <div class="right-view">
