@@ -20,11 +20,13 @@ Route::get('calc', function () {
 // Route::resource('pos', ProductController::class);
 
 Route::get('pos', [PosController::class, 'index'])->name('pos');
+Route::get('sales', [PosController::class, 'sales'])->name('sales');
+Route::get('products', [PosController::class, 'products'])->name('products');
 
 Route::post('storeSale', [SaleController::class, 'storeSale'])->name('sales.storeSale');
 Route::post('storeSaleDetail', [SaleController::class, 'storeSaleDetail'])->name('sales.storeSaleDetail');
 
-Route::get('products', [ProductController::class, 'show'])->name('products.all');
+Route::get('productShow', [ProductController::class, 'show'])->name('products.all');
 Route::get('product', [ProductController::class, 'showProduct'])->name('products.showProduct');
 Route::get('filter-products', [ProductController::class, 'filterProduct'])->name('products.filter');
 Route::post('products', [ProductController::class, 'store'])->name('products.store');

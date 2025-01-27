@@ -167,8 +167,17 @@
     </script>
 
     <div class="navbar">
-        <h2>Simple POS</h2>
-        <div style="display: flex; flex-direction: column;">
+        <a href="\pos"><h2>Simple POS</h2></a>
+        <div style="display: flex; flex-direction: row;">
+            {{-- <button id="sales-btn" class="sales-btn">
+                Sales
+            </button> --}}
+            <a href="\sales" id="sales-btn" class="sales-btn">
+                Sales
+            </a>
+            <a href="\products" id="sales-btn" class="sales-btn">
+                Products
+            </a>
             <button id="calcDisplay" class="calc-btn" onclick="calcOpenPopup()">
                 <i class="fa fa-calculator"></i>
             </button>

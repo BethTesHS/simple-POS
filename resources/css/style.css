@@ -48,6 +48,19 @@ a{
     color: white;
     text-decoration: none;
 }
+a:hover{
+    transition: 0.2s;
+    color: rgb(255, 231, 175);
+    text-decoration: none;
+}
+
+.sales-btn{
+    margin-top: 8px;
+    margin-right: 40px;
+    font-size: larger;
+
+}
+
 
 .navbar h2 {
     font-size: 24px;
