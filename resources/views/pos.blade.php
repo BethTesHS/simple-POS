@@ -121,6 +121,16 @@
             updateTotals();
         }
 
+        function cancelPayment() {
+        // Clear all rows in the table
+        const table = document.getElementById('tableBody');
+        table.innerHTML = ''; // Remove all rows
+
+        // Reset totals
+        document.querySelector('.total-items').innerHTML = `<input type="hidden" name="totalQuantity" value="0"> Items: 0`;
+        document.querySelector('.total-amount').innerHTML = `<input type="hidden" name="totalPrice" value="0"> Total: 0.00 ksh`;
+    }
+
         $(document).ready(function () {
             $('.category').change(function () {
                 var categoryId = $(this).val();
@@ -212,7 +222,7 @@
                         <option value="Others"> Others </option>
                     </select>
                     <div class="pay">
-                        <button class="cancel-pay"> Cancel Payment </button>
+                        <button type="button" class="cancel-pay" onclick="cancelPayment()"> Cancel </button>
                         <button type="submit" class="complete-pay"> Complete Payment </button>
                     </div>
                 </div>
