@@ -85,8 +85,8 @@
             newRow.dataset.productId = productDetail.id; // Add a custom attribute to track the product ID
 
             newRow.innerHTML = `
-                <td class="product"> 
-                    ${productDetail['productName']} 
+                <td class="product">
+                    ${productDetail['productName']}
                     <input type="hidden" name="products[${productDetail['id']}][productName]" value="${productDetail['productName']}">
                 </td>
 
@@ -96,7 +96,7 @@
                     <button type="button" onclick="add(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> + </button>
                 </td>
 
-                <td class="price"> 
+                <td class="price">
                     ${productDetail['price']} ksh
                     <input type="hidden" name="products[${productDetail['id']}][price]" value="${productDetail['price']}">
                 </td>
@@ -150,7 +150,7 @@
                             data.forEach(function (product) {
                                 html += `
                                     <button onclick='addRow(${JSON.stringify(product)})' class="items" id="items-button" value="${product.id}">
-                                        <div class="items-pics"></div>
+                                        <div class="items-pics"><img class="image" src="{{asset('default.png')}}"></div>
                                         <text class="item-text"> ${product.productName} </text>
                                     </button>
                                 `;
@@ -213,7 +213,7 @@
                     </tbody>
                 </table>
             </div>
-            
+
                 <div class="total-price">
                     <table>
                         <tr>

@@ -336,12 +336,12 @@ a:hover{
     background-color: rgba(255, 255, 255, 0.37);
     height: 80%;
     width: 90%;
-    margin: 5px;
+    margin: 0px;
     border: solid 1px gray;
 }
 
 .image{
-    object-fit:cover;
+    object-fit:fill;
     height: 100%;
     width: 100%;
 }
