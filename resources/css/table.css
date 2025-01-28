@@ -2,16 +2,11 @@
 
 
 /* General table styles */
-table {
-    /* width: 100%; */
-    /* min-width: 600px; */
-    min-width: 632px;
+table{
     border-collapse: collapse;
     border: 1px solid black;
     border-radius: 10px;
     overflow: hidden;
-    /* font-family: 'Courier New', sans-serif; */
-
 }
 
 th, td {
@@ -22,7 +17,7 @@ th, td {
     text-align: left;
     height: 40px;
     border-bottom: 1px solid #00000060;
-    border-left: 1px solid #00000040;
+    border-left: 1px solid #00000060;
     }
 
 

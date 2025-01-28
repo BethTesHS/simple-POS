@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PosController;
-use App\Http\Controllers\TestPostController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SaleDetailController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +18,8 @@ Route::get('calc', function () {
 
 
 // Route::resource('pos', ProductController::class);
+
+Route::get('get-sale-details', [SaleDetailController::class, 'showSaleDetail'])->name('salesDetail');
 
 Route::get('pos', [PosController::class, 'index'])->name('pos');
 Route::get('sales', [PosController::class, 'sales'])->name('sales');

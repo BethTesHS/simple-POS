@@ -33,8 +33,57 @@
             document.querySelectorAll('.detailView-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     const sales = JSON.parse(button.getAttribute('data-id'));
-                    const id = document.getElementById('con_id');
-                    id.value = sales['id'];
+
+                    $.ajax({
+                        url: '{{ route("salesDetail") }}',
+                        method: 'GET',
+                        data: { sale_id: sales['id'] },
+                        success: function (data) {
+                            var html = '';
+                            var table = '';
+                            if (data.length > 0) {
+                                data.forEach(function (salesDetail) {
+                                    table += `
+                                        <tr>
+                                            <td style="width: 50%"> ${salesDetail.productName} </td>
+                                            <td> ${salesDetail.price} ksh</td>
+                                            <td> ${salesDetail.quantity} </td>
+                                        </tr>
+                                    `;
+                                });
+                            } else {
+                                html = '<p>No Items.</p>';
+                            }
+
+                            const receiptNumber = String(sales['id']).padStart(10, '0');
+                            const date = sales['created_at'].split('T')[0];
+                            const time = sales['created_at'].split('T')[1].split(':').slice(0, 2).join(':');
+
+                            html = `    <div id="salesTable">
+                                        <text style="margin-bottom: 50px"><b>Reciept Number:</b> ${receiptNumber} </text>
+                                        <br>
+                                        <text style="margin-bottom: 50px"><b>Date:</b> ${date} </text>
+                                        <br>
+                                        <text style="margin-bottom: 50px"><b>Time:</b> ${time} </text>
+                                        <table class="salesDetailTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                </tr>  
+                                            </thead>
+                                            <tbody>
+                                                ${table}
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                    `;
+                            $('#salesTable').html(html);
+                        },
+                    });
+                    // End of AJAX
+
                     document.getElementById('salesDetailPopup').style.display = 'flex';
                 });
             });
@@ -102,7 +151,7 @@
                         @foreach ($sales as $sale)
                             <tr>
                                 <td> {{ sprintf("%010d", $sale->id) }} </td>
-                                <td> {{ $sale->created_at }} </td>
+                                <td> {{ $sale->created_at->toDateString() }} </td>
                                 <td> {{ $sale->totalQuantity }} </td>
                                 <td> {{ $sale->totalPrice }} </td>
                                 <td> {{ $sale->payMethod }} </td>
@@ -132,20 +181,15 @@
 
 
             <div id="salesDetailPopup" class="salesDetail">
-                <div class="salesDetail-content">
+                <div class="salesDetail-content" id="salesDetail-content">
                     <span class="close-btn" onclick="closeSalesPopupBtn()">&times;</span>
                     <div style="padding: 20px 0px">
                         <h3> Sales Detail </h3>
                     </div>
-
-                    {{-- <form action="{{ route('contribution.update') }}" autocomplete="off" method="POST">
-                        @csrf
-                        @method('PUT') --}}
-
-                        <input type="text" id="con_id" class="textArea" name="id" type="text" value="" readonly>
-
-                        <input class="textButton" name="editMember" type="submit" value="Update Detail"> <br>
-                    {{-- </form> --}}
+                    
+                    <div id="salesTable">
+                        {{-- Table is generated here --}}
+                    </div>
                 </div>
             </div>
 
