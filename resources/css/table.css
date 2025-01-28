@@ -19,10 +19,11 @@ th, td {
     height: 40px;
     border-bottom: 1px solid #00000060;
     border-left: 1px solid #00000060;
-    }
+}
 
 
 .quantity {
+    padding: 0;
     text-align: center;
     flex-direction: row;
     width: 25px;
@@ -52,7 +53,7 @@ th, td {
 .subTotal {
     text-align: right;
     flex-direction: row;
-    width: 70%;
+    width: 80px;
     font-size: 15.5px;
     background-color: transparent;
     border-color: transparent;
@@ -61,8 +62,9 @@ th, td {
 
 .price {
     text-align: right;
+    padding-left: 0px;
     flex-direction: row;
-    width: 0px;
+    width: 30%;
     font-size: 15.5px;
     background-color: transparent;
     color: #000000cc;

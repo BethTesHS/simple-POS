@@ -20,6 +20,25 @@
 <body>
 
     <script>
+        function adjustWidth(input) {
+            // Create a temporary span element
+            const span = document.createElement("span");
+            span.style.visibility = "hidden"; // Hide the span
+            span.style.position = "absolute"; // Remove from flow
+            span.style.font = getComputedStyle(input).font; // Match input's font
+            span.textContent = input.value || input.placeholder; // Set span text to match input
+
+            document.body.appendChild(span); // Add span to the document to measure
+            input.style.width = span.offsetWidth + "px"; // Set input width to span width
+            document.body.removeChild(span); // Clean up by removing the span
+        }
+
+        const input = document.getElementById("subTot");
+
+        // Adjust the width on page load
+        window.onload = () => adjustWidth(input);
+
+        // ---------------- //
 
         function calcOpenPopup() {
             calcPopup.style.display = (calcPopup.style.display === 'block') ? 'none' : 'block';
@@ -100,8 +119,9 @@
                     ${productDetail['price']} ksh
                     <input type="hidden" name="products[${productDetail['id']}][price]" value="${productDetail['price']}">
                 </td>
+                </td>
 
-                <td>
+                <td class="price">
                     <input id="subTot" class="subTotal" value="${productDetail['price']}" readonly name="products[${productDetail['id']}][subtotal]"> ksh
                 </td>
 
@@ -172,12 +192,12 @@
             {{-- <button id="sales-btn" class="sales-btn">
                 Sales
             </button> --}}
-            <a href="\sales" id="sales-btn" class="sales-btn">
+            {{-- <a href="\sales" id="sales-btn" class="sales-btn">
                 Sales
             </a>
             <a href="\products" id="sales-btn" class="sales-btn">
                 Products
-            </a>
+            </a> --}}
             <button id="calcDisplay" class="calc-btn" onclick="calcOpenPopup()">
                 <i class="fa fa-calculator"></i>
             </button>
@@ -190,9 +210,51 @@
 
 
     <div class="wrapper">
+        <div class="sidebar">
+            <ul>
+                <li> <a href="\pos"> <button class= "listButton"> <i class="i fa fa-desktop"></i> POS </button> </a> </li>
+                <li> <a href="\products"> <button class= "listButton" > <i class="i fa fa-shopping-basket"></i> Product </button> </a> </li>
+                <li> <a href="\sales"> <button class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
+            </ul>
+        </div>
+        <div class="main-pos">
+
+        <div class="right-view">
+            <div class="control2">
+                <select id="category" name="category_id" class="dropdown category" >
+                    <option value="0">All Categories</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+
+                <button id='popupButton' class="popupButton">
+                    <text class='i'>
+                        <i class='fa fa-plus-square-o'></i>
+                    </text>
+                    Add new product
+                </button>
+            </div>
+
+            <div class="items-view" id="items-view">
+                {{-- JS CONNECTED HERE --}}
+                @if ($products == null)
+                    <text> No Item </text>
+                @else
+                    @foreach($products as $product)
+                        <button onclick="addRow({{$product}})" class="items" id="items-button" value="{{$product->id}}">
+                            <div class="items-pics"><img class="image" src="{{asset('default.png')}}"></div>
+                            <text class="item-text"> {{ $product->productName }} </text>
+                        </button>
+                    @endforeach
+                @endif
+
+            </div>
+        </div>
+
         <form action="{{ route('sales.storeSale') }}" method="POST">
             @csrf
-        <div class="left-view">
+            <div class="left-view">
             <div class="control">
                 <div class="search"> </div>
                 <div class="date"> </div>
@@ -237,39 +299,8 @@
                 </div>
             </div>
         </form>
+    </div>
 
-        <div class="right-view">
-            <div class="control2">
-                <select id="category" name="category_id" class="dropdown category" >
-                    <option value="0">All Categories</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-
-                <button id='popupButton' class="popupButton">
-                    <text class='i'>
-                        <i class='fa fa-plus-square-o'></i>
-                    </text>
-                    Add new product
-                </button>
-            </div>
-
-            <div class="items-view" id="items-view">
-                {{-- JS CONNECTED HERE --}}
-                @if ($products == null)
-                    <text> No Item </text>
-                @else
-                    @foreach($products as $product)
-                        <button onclick="addRow({{$product}})" class="items" id="items-button" value="{{$product->id}}">
-                            <div class="items-pics"><img class="image" src="{{asset('default.png')}}"></div>
-                            <text class="item-text"> {{ $product->productName }} </text>
-                        </button>
-                    @endforeach
-                @endif
-
-            </div>
-        </div>
     </div>
 
     {{-- -----------  POP UPS ----------- --}}

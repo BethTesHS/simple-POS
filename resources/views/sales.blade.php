@@ -109,12 +109,12 @@
             {{-- <button id="sales-btn" class="sales-btn">
                 Sales
             </button> --}}
-            <a href="\sales" id="sales-btn" class="sales-btn">
+            {{-- <a href="\sales" id="sales-btn" class="sales-btn">
                 Sales
             </a>
             <a href="\products" id="sales-btn" class="sales-btn">
                 Products
-            </a>
+            </a> --}}
             <button id="calcDisplay" class="calc-btn" onclick="calcOpenPopup()">
                 <i class="fa fa-calculator"></i>
             </button>
@@ -127,8 +127,9 @@
     <div class="wrapper">
         <div class="sidebar">
             <ul>
-                <li> <a href="\sales"> <button class= "listButton"> <i class="i fa fa-handshake-o"></i> Sales </button> </a> </li>
-                <li> <a href="\salesAnalysis"> <button class= "listButton" > <i class="i fa fa-line-chart"></i> Analysis </button> </a> </li>
+                <li> <a href="\pos"> <button class= "listButton"> <i class="i fa fa-desktop"></i> POS </button> </a> </li>
+                <li> <a href="\products"> <button class= "listButton" > <i class="i fa fa-shopping-basket"></i> Product </button> </a> </li>
+                <li> <a href="\sales"> <button class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
             </ul>
         </div>
 

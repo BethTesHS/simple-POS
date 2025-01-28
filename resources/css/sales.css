@@ -70,17 +70,14 @@
 
 .listButton:hover{
     transition: 0.2s;
-    /* background: linear-gradient(180deg, #ffffff7a, #ffffff8a); */
     color: white;
     background-color: var(--TranslucentWhite2);
-    /* color: #1d1d1d; */
 
 }
 
 .mainviews{
     flex-grow: 1;
     padding: 40px;
-    padding-left: 100px;
     margin-left: 200px;
     background: linear-gradient(135deg, transparent, #5a463054);
 }

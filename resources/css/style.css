@@ -27,6 +27,7 @@ button{
     align-items: center;
 }
 
+
 .navbar{
     display: flex;
     justify-content: space-between;
@@ -81,7 +82,11 @@ a:hover{
 }
 
 /* } */
-
+.main-pos{
+    position: fixed;
+    right: 0;
+    width: 80%;
+}
 /* --------- LEFT SECTION --------- */
 .left-view{
     background-color: #c0b3a0;
@@ -89,10 +94,11 @@ a:hover{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    left: 15px;
+    left: 220px;
     height: 70%;
     /* min-height: 525px; */
-    width: 55%;
+    width: 48%;
+    min-width: 395px;
     margin-top: 10px;
     padding: 10px;
     border-radius: 15px 0px 0px 15px;
@@ -160,8 +166,8 @@ a:hover{
     justify-content: space-between;
     right: 15px;
     height: 70%;
-    width: 42%;
-    min-width: 330px;
+    width: 33.5%;
+    min-width: 415px;
     margin-top: 10px;
     padding: 10px;
     box-shadow: 0 10px 20px #0000001a;
