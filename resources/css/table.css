@@ -3,6 +3,7 @@
 
 /* General table styles */
 table{
+    /* font-family: 'Courier New', sans-serif; */
     border-collapse: collapse;
     border: 1px solid black;
     border-radius: 10px;

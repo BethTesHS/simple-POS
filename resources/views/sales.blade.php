@@ -47,6 +47,7 @@
                                             <td style="width: 50%"> ${salesDetail.productName} </td>
                                             <td> ${salesDetail.price} ksh</td>
                                             <td> ${salesDetail.quantity} </td>
+                                            <td> ${((salesDetail.quantity)*(salesDetail.price)).toFixed(2)} ksh</td>
                                         </tr>
                                     `;
                                 });
@@ -55,11 +56,12 @@
                             }
 
                             const receiptNumber = String(sales['id']).padStart(10, '0');
+
                             const date = sales['created_at'].split('T')[0];
                             const time = sales['created_at'].split('T')[1].split(':').slice(0, 2).join(':');
 
                             html = `    <div id="salesTable">
-                                        <text style="margin-bottom: 50px"><b>Reciept Number:</b> ${receiptNumber} </text>
+                                        <text style="margin-bottom: 50px"><b>Receipt Number:</b> ${receiptNumber} </text>
                                         <br>
                                         <text style="margin-bottom: 50px"><b>Date:</b> ${date} </text>
                                         <br>
@@ -70,11 +72,17 @@
                                                     <th>Product</th>
                                                     <th>Price</th>
                                                     <th>Quantity</th>
-                                                </tr>  
+                                                    <th>Subtotal</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
                                                 ${table}
                                             </tbody>
+                                            <thead>
+                                                <th colspan='2'>Total</th>
+                                                <th>${sales['totalQuantity']}</th>
+                                                <th>${sales['totalPrice']} ksh</th>
+                                            </thead>
                                         </table>
                                         </div>
                                     `;
@@ -141,7 +149,7 @@
                         <th>Date</th>
                         <th>Total Quantity</th>
                         <th>Total Price</th>
-                        <th>Payment Detail</th>
+                        <th>Payment Method</th>
                         <th style="width: 10%"></th>
                         {{-- <th colspan='2'></th> --}}
                     </tr>
@@ -171,7 +179,7 @@
                             @foreach($errors->all() as $error)
                             <br> <p>{{ $error }}</p>
                             @endforeach
-                        </div>                        
+                        </div>
                     </div>
                 @endif
             {{-- </div> --}}
@@ -183,10 +191,10 @@
             <div id="salesDetailPopup" class="salesDetail">
                 <div class="salesDetail-content" id="salesDetail-content">
                     <span class="close-btn" onclick="closeSalesPopupBtn()">&times;</span>
-                    <div style="padding: 20px 0px">
+                    {{-- <div style="padding: 20px 0px">
                         <h3> Sales Detail </h3>
-                    </div>
-                    
+                    </div> --}}
+
                     <div id="salesTable">
                         {{-- Table is generated here --}}
                     </div>
