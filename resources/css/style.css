@@ -15,7 +15,7 @@
 
 body{
     color: #333;
-    background-color: 0000001a;
+    background-color: 0000001;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -69,7 +69,7 @@ a:hover{
 
 .wrapper {
     display: flex;
-    padding-top: 55px;
+    padding-top: 45px;
     flex-grow: 1;
 }
 

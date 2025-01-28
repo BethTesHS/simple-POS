@@ -1,0 +1,155 @@
+.sidebar{
+    position: absolute;
+    width: 20%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    top: 45px;
+    bottom: 0px;
+}
+
+.sidebar{
+    position:fixed;
+    display:flex;
+    left: 0;
+    height:100vh;
+    min-width: 200px;
+    background: linear-gradient(135deg, #8b4a00, #bb9413);
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin: 20px 0;
+}
+
+.sidebar-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-link:hover {
+    transform: scale(1.1);
+    color: var(--LightBlue);
+}
+
+.listButton{
+    justify-content: flex-start;
+    list-style-type: none;
+    text-align: left;
+    color: var(--TranslucentWhite1);
+    width: 90%;
+    height: 50px;
+    margin-top: 3px;
+    margin-left: 10px;
+    padding-left: 10px;
+    font-size: medium;
+    border: transparent;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.i{
+    padding-right: 10px;
+}
+
+.listButton:hover{
+    transition: 0.2s;
+    /* background: linear-gradient(180deg, #ffffff7a, #ffffff8a); */
+    color: white;
+    background-color: var(--TranslucentWhite2);
+    /* color: #1d1d1d; */
+
+}
+
+.mainviews{
+    flex-grow: 1;
+    padding: 40px;
+    padding-left: 100px;
+    margin-left: 200px;
+    background: linear-gradient(135deg, transparent, var(--TranslucentDarkBlue));
+}
+
+.detailView-btn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    margin-left: 15px;
+    /* width: 40px; */
+    padding: 0 10px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.479);
+    border: transparent;
+}
+
+.detailView-btn:hover{
+    transition: 0.2s;
+    color: #0099ff;
+    cursor: pointer;
+}
+
+/* POP UP */
+#salesDetailPopup {
+    display: none; /* Initially hidden */
+}
+
+.salesDetail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensures the popup is on top */
+}
+
+.salesDetail-content {
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    width: 400px;
+    /* height: 500px; */
+    /* text-align: center; */
+}
+
+/* Style for the close button */
+.close-btn {
+    font-size: 30px;
+    font-weight: bold;
+    color: gray;
+    justify-content:end;
+    padding-top: 15px;
+    padding-left: 97%;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: black;
+}
