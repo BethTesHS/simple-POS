@@ -1,11 +1,4 @@
-.sidebar{
-    position: absolute;
-    width: 20%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    top: 45px;
-    bottom: 0px;
-}
+
 
 .sidebar{
     position:fixed;
@@ -15,7 +8,7 @@
     min-width: 200px;
     background: linear-gradient(135deg, #8b4a00, #bb9413);
     color: white;
-    padding-top: 10px;
+    padding-top: 50px;
     padding-bottom: 10px;
     display: flex;
     flex-direction: column;
@@ -89,7 +82,7 @@
     padding: 40px;
     padding-left: 100px;
     margin-left: 200px;
-    background: linear-gradient(135deg, transparent, var(--TranslucentDarkBlue));
+    background: linear-gradient(135deg, transparent, #5a463054);
 }
 
 .detailView-btn{
@@ -107,7 +100,7 @@
 
 .detailView-btn:hover{
     transition: 0.2s;
-    color: #0099ff;
+    color: #bb9413;
     cursor: pointer;
 }
 

@@ -18,7 +18,6 @@
     ?>
 </head>
 <body>
-
     <script>
 
         function calcOpenPopup() {
@@ -90,6 +89,7 @@
         });
 
         function closeSalesPopupBtn() {
+            $('#salesTable').html('');
             document.getElementById('salesDetailPopup').style.display = 'none'; // Hide the popup
         }
 
@@ -119,7 +119,7 @@
     <div class="wrapper">
         <div class="sidebar">
             <ul>
-                <li> <a href="\salesDetail"> <button class= "listButton"> <i class="i fa fa-handshake-o"></i> Sales </button> </a> </li>
+                <li> <a href="\sales"> <button class= "listButton"> <i class="i fa fa-handshake-o"></i> Sales </button> </a> </li>
                 <li> <a href="\salesAnalysis"> <button class= "listButton" > <i class="i fa fa-line-chart"></i> Analysis </button> </a> </li>
             </ul>
         </div>
