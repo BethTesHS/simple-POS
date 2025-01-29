@@ -210,87 +210,89 @@
         </div>
         <div class="main-pos">
 
-        <div class="right-view">
-            <div class="control2">
-                <select id="category" name="category_id" class="dropdown category" >
-                    <option value="0">All Categories</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-
-                {{-- <button id='popupButton' class="popupButton">
-                    <text class='i'>
-                        <i class='fa fa-plus-square-o'></i>
-                    </text>
-                    Add new product
-                </button> --}}
-            </div>
-
-            <div class="items-view" id="items-view">
-                {{-- JS CONNECTED HERE --}}
-                @if ($products == null)
-                    <text> No Item </text>
-                @else
-                    @foreach($products as $product)
-                        <button onclick="addRow({{$product}})" class="items" id="items-button" value="{{$product->id}}">
-                            <div class="items-pics"><img class="image" src="{{asset('default.png')}}"></div>
-                            <text class="item-text"> {{ $product->productName }} </text>
-                        </button>
-                    @endforeach
-                @endif
-
-            </div>
-        </div>
-
-        <form action="{{ route('sales.storeSale') }}" method="POST">
-            @csrf
-            <div class="left-view">
-            <div class="control">
-                <div class="search"> </div>
-                <div class="date"> </div>
-            </div>
-            <div class="items-price">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th class="thd" style="width:25%">Product</th>
-                            <th class="thd" style="width:10%">Quantity</th>
-                            <th class="thd" style="width:20%">Price</th>
-                            <th class="thd" style="width:25%">Subtotal</th>
-                            <th class="thd"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        {{-- Rows will be formed here --}}
-                    </tbody>
-                </table>
-            </div>
-
-                <div class="total-price">
-                    <table>
-                        <tr>
-                            <th class="total-items"><input type="hidden" name="totalQuantity" value="0"> Items: 0</th>
-                            <th class="total-amount"><input type="hidden" name="totalPrice" value="0"> Total: 0.00 ksh </th>
-                        </tr>
-                    </table>
-                </div>
-                <div class="payment">
-                    <select name="payMethod" class="pay-method">
-                        <option value=""> -- Payment Method -- </option>
-                        <option value="Cash"> Cash </option>
-                        <option value="Debit or Credit"> Debit or Credit </option>
-                        <option value="M-PESA"> M-PESA </option>
-                        <option value="Others"> Others </option>
+            <div class="right-view">
+                <div class="control2">
+                    <select id="category" name="category_id" class="dropdown category" >
+                        <option value="0">All Categories</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
                     </select>
-                    <div class="pay">
-                        <button type="button" class="cancel-pay" onclick="cancelPayment()"> Cancel </button>
-                        <button type="submit" class="complete-pay"> Complete Payment </button>
+
+                    {{-- <button id='popupButton' class="popupButton">
+                        <text class='i'>
+                            <i class='fa fa-plus-square-o'></i>
+                        </text>
+                        Add new product
+                    </button> --}}
+                </div>
+
+                <div class="items-view" id="items-view">
+                    {{-- JS CONNECTED HERE --}}
+                    @if ($products == null)
+                        <text> No Item </text>
+                    @else
+                        @foreach($products as $product)
+                            <button onclick="addRow({{$product}})" class="items" id="items-button" value="{{$product->id}}">
+                                <div class="items-pics"><img class="image" src="{{asset('default.png')}}"></div>
+                                <text class="item-text"> {{ $product->productName }} </text>
+                            </button>
+                        @endforeach
+                    @endif
+
+                </div>
+            </div>
+
+            <form action="{{ route('sales.storeSale') }}" method="POST">
+                @csrf
+                <div class="left-view">
+                <div class="control">
+                    <div class="search"> </div>
+                    <div class="date"> 
+                        <?php echo date("F j, Y"); ?>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
+                <div class="items-price">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="thd" style="width:25%">Product</th>
+                                <th class="thd" style="width:10%">Quantity</th>
+                                <th class="thd" style="width:20%">Price</th>
+                                <th class="thd" style="width:25%">Subtotal</th>
+                                <th class="thd"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            {{-- Rows will be formed here --}}
+                        </tbody>
+                    </table>
+                </div>
+
+                    <div class="total-price">
+                        <table>
+                            <tr>
+                                <th class="total-items"><input type="hidden" name="totalQuantity" value="0"> Items: 0</th>
+                                <th class="total-amount"><input type="hidden" name="totalPrice" value="0"> Total: 0.00 ksh </th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="payment">
+                        <select name="payMethod" class="pay-method">
+                            <option value=""> -- Payment Method -- </option>
+                            <option value="Cash"> Cash </option>
+                            <option value="Debit or Credit"> Debit or Credit </option>
+                            <option value="M-PESA"> M-PESA </option>
+                            <option value="Others"> Others </option>
+                        </select>
+                        <div class="pay">
+                            <button type="button" class="cancel-pay" onclick="cancelPayment()"> Cancel </button>
+                            <button type="submit" class="complete-pay"> Complete Payment </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
 
     </div>
 
@@ -357,6 +359,7 @@
 
         </div>
     </div>
+
 
     @if($errors->any())
         <div class="alert alert-danger" style="color:red; padding-left: 20px;">

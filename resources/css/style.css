@@ -111,8 +111,18 @@ a:hover{
     flex-direction: row;
     height: 60px;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     margin-bottom: 10px;
+}
+
+.date{
+    background-color: #c0b3a0;
+    border: solid 1px rgba(0, 0, 0, 0.192);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 150px;
+    padding: 5px;
 }
 
 .items-price{
