@@ -27,7 +27,7 @@ class CategoryController extends Controller
         //     document.getElementById('popupMessage2').style.display = 'flex';
         //     </script>`;
 
-        return redirect()->route('pos')->with('success', 'Product added successfully!');
+        return redirect()->route('products')->with('success', 'Product added successfully!');
     }
 
 }

@@ -1,9 +1,7 @@
 
-/* General table styles */
-.table-sales {
+.table-sp {
     width: 100%;
     min-width: 600px;
-    /* margin: 20px auto; */
     border-collapse: collapse;
     font-family: Arial, sans-serif;
     box-shadow: 0 10px 20px #0000001a;
@@ -13,10 +11,8 @@
     overflow: hidden;
 }
 
-/* Table header styles */
-.th-sales {
+.th-sp {
     background-color: #c5b598;
-    /* background: linear-gradient(180deg, var(--GrayBlue), var(--GrayBlue)); */
     color: black;
     padding: 12px 15px;
     text-align: left;
@@ -25,13 +21,46 @@
     border-left: 1px solid #724b1f33;
 }
 
-/* Table data cell styles */
-.td-sales {
+.td-sp {
     background-color: #e6dbd5;
     padding: 10px 15px;
     text-align: left;
     border-bottom: 1px solid #c0b1a0;
     border-left: 1px solid #c0b1a0;
+}
+
+.editProduct {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    margin-left: 15px;
+    width: 30px;
+    color: darkslategrey;
+    border: transparent;
+}
+
+.editProduct:hover {
+    transition: 0.2s;
+    color: #0099ff;
+    cursor: pointer;
+}
+
+.deleteProduct {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    margin-left: 10px;
+    width: 30px;
+    color: darkslategrey;
+    border: transparent;
+}
+
+.deleteProduct:hover {
+    transition: 0.2s;
+    color: red;
+    cursor: pointer;
 }
 
 .sidebar{
@@ -121,17 +150,15 @@
     flex-direction: column;
     align-items: center;
     background-color: transparent;
-    margin-left: 15px;
-    /* width: 40px; */
-    padding: 0 10px;
+    padding: 0 20px;
     font-size: 16px;
-    color: rgba(0, 0, 0, 0.479);
+    color: rgba(0, 0, 0, 0.623);
     border: transparent;
 }
 
 .detailView-btn:hover{
     transition: 0.2s;
-    color: #bb9413;
+    color: #ac5a0f;
     cursor: pointer;
 }
 
@@ -178,6 +205,67 @@
     margin-top: 10px;
 }
 
+.align {
+    display: flex;
+    justify-content: space-between;
+}
+
+.addNewButton {
+    background-color: #8b4a00;
+    color: white;
+    padding-right: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 10px;
+    height: 35px;
+    margin-top: 20px;
+}
+
+.addNewButton:hover {
+    transition: 0.3s;
+    background-color: #a05a09;
+    cursor: pointer;
+}
+
+.dropdown3 {
+    border-radius: 0 10px 10px 0;
+    padding: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    height: 35px;
+    margin-top: 20px;
+    margin-right: 10px;
+    background-color: #8b4a00;
+    color: white;
+}
+
+.dropdown3:hover{
+    transition: 0.2s;
+    cursor: pointer;
+    background-color: #a05a09;
+}
+
+.popupButton2{
+    border: transparent;
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px 0px 0px 10px;
+    background-color: #8b4a00;
+    color: white;
+    height: 35px;
+    margin-top: 20px;
+}
+
+.popupButton2:hover{
+    transition: 0.2s;
+    cursor: pointer;
+    background-color: #a05a09;
+}
+
+/* option:hover{
+    background-color: #8b4a00;
+} */
 /* Style for the close button */
 .close-btn {
     font-size: 30px;

@@ -219,12 +219,12 @@
                     @endforeach
                 </select>
 
-                <button id='popupButton' class="popupButton">
+                {{-- <button id='popupButton' class="popupButton">
                     <text class='i'>
                         <i class='fa fa-plus-square-o'></i>
                     </text>
                     Add new product
-                </button>
+                </button> --}}
             </div>
 
             <div class="items-view" id="items-view">

@@ -134,15 +134,15 @@
                     {{-- <button class="addNewButton" id='addMember'><i class='fa fa-plus-square-o'></i> Add new member </button> --}}
                 </div>
 
-                <table class="table-sales">
+                <table class="table-sp">
                     <thead>
                     <tr>
-                        <th class="th-sales">Reciept ID</th>
-                        <th class="th-sales">Date</th>
-                        <th class="th-sales">Total Quantity</th>
-                        <th class="th-sales">Total Price</th>
-                        <th class="th-sales">Payment Method</th>
-                        <th class="th-sales" style="width: 10%"></th>
+                        <th class="th-sp">Reciept ID</th>
+                        <th class="th-sp">Date</th>
+                        <th class="th-sp">Total Quantity</th>
+                        <th class="th-sp">Total Price</th>
+                        <th class="th-sp">Payment Method</th>
+                        <th class="th-sp" style="width: 10%"></th>
                         {{-- <th colspan='2'></th> --}}
                     </tr>
                     </thead>
@@ -150,14 +150,14 @@
 
                         @foreach ($sales as $sale)
                             <tr>
-                                <td class="td-sales"> {{ sprintf("%010d", $sale->id) }} </td>
-                                <td class="td-sales"> {{ $sale->created_at->toDateString() }} </td>
-                                <td class="td-sales"> {{ $sale->totalQuantity }} </td>
-                                <td class="td-sales"> {{ $sale->totalPrice }} </td>
-                                <td class="td-sales"> {{ $sale->payMethod }} </td>
-                                <td class="td-sales" style="padding: 0px; width: 60px;">
+                                <td class="td-sp"> {{ sprintf("%010d", $sale->id) }} </td>
+                                <td class="td-sp"> {{ $sale->created_at->toDateString() }} </td>
+                                <td class="td-sp"> {{ $sale->totalQuantity }} </td>
+                                <td class="td-sp"> {{ $sale->totalPrice }} ksh</td>
+                                <td class="td-sp"> {{ $sale->payMethod }} </td>
+                                <td class="td-sp" style="padding: 0px; width: 60px;">
                                     <button class="detailView-btn" data-id="{{ $sale }}">
-                                        {{-- <i style="width: 0px" class='fa fa-eye'></i>  --}}
+                                        {{-- <i style="width: 15px" class='fa fa-eye'></i>  --}}
                                         View
                                     </button>
                                 </td>

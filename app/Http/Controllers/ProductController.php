@@ -33,9 +33,9 @@ class ProductController extends Controller
         $categoryId = $request->input('category_id');
         
         if($categoryId == 0){
-            $products = Product::all();
+            $products = Product::with('category')->get();
         } else {
-            $products = Product::where('category_id', $categoryId)->get();
+            $products = Product::where('category_id', $categoryId)->with('category')->get();
         }
 
         return response()->json($products);
@@ -61,7 +61,7 @@ class ProductController extends Controller
 
         // echo '<text> productName: '. $validated['productName'] .'<br> price: '. $validated['price'] .'<br> productType: '. $validated['productType'] .'</text>';
         
-        return redirect()->route('pos')->with('success', 'Product added successfully!');
+        return redirect()->route('products')->with('success', 'Product added successfully!');
     }
 
     public function update(Request $request) {
