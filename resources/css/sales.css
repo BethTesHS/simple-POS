@@ -1,4 +1,38 @@
 
+/* General table styles */
+.table-sales {
+    width: 100%;
+    min-width: 600px;
+    /* margin: 20px auto; */
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 10px 20px #0000001a;
+
+    border: 1px solid black;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* Table header styles */
+.th-sales {
+    background-color: #c5b598;
+    /* background: linear-gradient(180deg, var(--GrayBlue), var(--GrayBlue)); */
+    color: black;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 1px solid #724b1f33;
+    border-left: 1px solid #724b1f33;
+}
+
+/* Table data cell styles */
+.td-sales {
+    background-color: #e6dbd5;
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #c0b1a0;
+    border-left: 1px solid #c0b1a0;
+}
 
 .sidebar{
     position:fixed;

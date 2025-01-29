@@ -2,7 +2,7 @@
 
 
 /* General table styles */
-table{
+.table{
     /* font-family: 'Courier New', sans-serif; */
     border-collapse: collapse;
     border: 1px solid black;
@@ -10,7 +10,7 @@ table{
     overflow: hidden;
 }
 
-th, td {
+.thd{
     /* font-family: 'Courier New', sans-serif; */
     background-color: transparent;
     padding: 5px 15px;
@@ -23,16 +23,15 @@ th, td {
 
 
 .quantity {
-    padding: 0;
+    padding: 3px;
     text-align: center;
     flex-direction: row;
-    width: 25px;
 }
 
 .quantity input{
     display: inline-block;
     text-align: center;
-    width: 40px;
+    width: 37px;
     background-color: transparent;
     border-color: transparent;
     font-size: 15px;
@@ -64,15 +63,11 @@ th, td {
     text-align: right;
     padding-left: 0px;
     flex-direction: row;
-    width: 30%;
+    /* width: 220px; */
     font-size: 15.5px;
     background-color: transparent;
     color: #000000cc;
 }
-
-/* .product{
-    width: 500px;
-} */
 
 .removeButton{
     display: flex;
@@ -93,5 +88,14 @@ th, td {
 
 .total-items{
     width: 30%;
+    height: 40px;
+    border-right: 1px solid #00000060;
     min-width: 200px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.total-amount{
+    padding-left: 20px;
+    text-align: left;
 }

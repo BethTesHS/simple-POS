@@ -44,10 +44,10 @@
                                 data.forEach(function (salesDetail) {
                                     table += `
                                         <tr>
-                                            <td style="width: 50%"> ${salesDetail.productName} </td>
-                                            <td> ${salesDetail.price} ksh</td>
-                                            <td> ${salesDetail.quantity} </td>
-                                            <td> ${((salesDetail.quantity)*(salesDetail.price)).toFixed(2)} ksh</td>
+                                            <td class="thd" style="width: 50%"> ${salesDetail.productName} </td>
+                                            <td class="thd"> ${salesDetail.price} ksh</td>
+                                            <td class="thd"> ${salesDetail.quantity} </td>
+                                            <td class="thd"> ${((salesDetail.quantity)*(salesDetail.price)).toFixed(2)} ksh</td>
                                         </tr>
                                     `;
                                 });
@@ -66,22 +66,22 @@
                                         <text style="margin-bottom: 50px"><b>Date:</b> ${date} </text>
                                         <br>
                                         <text style="margin-bottom: 50px"><b>Time:</b> ${time} </text>
-                                        <table class="salesDetailTable">
+                                        <table class="table salesDetailTable">
                                             <thead>
                                                 <tr>
-                                                    <th>Product</th>
-                                                    <th>Price</th>
-                                                    <th>Quantity</th>
-                                                    <th>Subtotal</th>
+                                                    <th class="thd">Product</th>
+                                                    <th class="thd">Price</th>
+                                                    <th class="thd">Quantity</th>
+                                                    <th class="thd">Subtotal</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 ${table}
                                             </tbody>
                                             <thead>
-                                                <th colspan='2'>Total</th>
-                                                <th>${sales['totalQuantity']}</th>
-                                                <th>${sales['totalPrice']} ksh</th>
+                                                <th class="thd" colspan='2'>Total</th>
+                                                <th class="thd">${sales['totalQuantity']}</th>
+                                                <th class="thd">${sales['totalPrice']} ksh</th>
                                             </thead>
                                         </table>
                                         </div>
@@ -106,15 +106,6 @@
     <div class="navbar">
         <a href="\pos"><h2>Simple POS</h2></a>
         <div style="display: flex; flex-direction: row;">
-            {{-- <button id="sales-btn" class="sales-btn">
-                Sales
-            </button> --}}
-            {{-- <a href="\sales" id="sales-btn" class="sales-btn">
-                Sales
-            </a>
-            <a href="\products" id="sales-btn" class="sales-btn">
-                Products
-            </a> --}}
             <button id="calcDisplay" class="calc-btn" onclick="calcOpenPopup()">
                 <i class="fa fa-calculator"></i>
             </button>
@@ -143,15 +134,15 @@
                     {{-- <button class="addNewButton" id='addMember'><i class='fa fa-plus-square-o'></i> Add new member </button> --}}
                 </div>
 
-                <table>
+                <table class="table-sales">
                     <thead>
                     <tr>
-                        <th>Reciept ID</th>
-                        <th>Date</th>
-                        <th>Total Quantity</th>
-                        <th>Total Price</th>
-                        <th>Payment Method</th>
-                        <th style="width: 10%"></th>
+                        <th class="th-sales">Reciept ID</th>
+                        <th class="th-sales">Date</th>
+                        <th class="th-sales">Total Quantity</th>
+                        <th class="th-sales">Total Price</th>
+                        <th class="th-sales">Payment Method</th>
+                        <th class="th-sales" style="width: 10%"></th>
                         {{-- <th colspan='2'></th> --}}
                     </tr>
                     </thead>
@@ -159,12 +150,12 @@
 
                         @foreach ($sales as $sale)
                             <tr>
-                                <td> {{ sprintf("%010d", $sale->id) }} </td>
-                                <td> {{ $sale->created_at->toDateString() }} </td>
-                                <td> {{ $sale->totalQuantity }} </td>
-                                <td> {{ $sale->totalPrice }} </td>
-                                <td> {{ $sale->payMethod }} </td>
-                                <td style="padding: 0px; width: 60px;">
+                                <td class="td-sales"> {{ sprintf("%010d", $sale->id) }} </td>
+                                <td class="td-sales"> {{ $sale->created_at->toDateString() }} </td>
+                                <td class="td-sales"> {{ $sale->totalQuantity }} </td>
+                                <td class="td-sales"> {{ $sale->totalPrice }} </td>
+                                <td class="td-sales"> {{ $sale->payMethod }} </td>
+                                <td class="td-sales" style="padding: 0px; width: 60px;">
                                     <button class="detailView-btn" data-id="{{ $sale }}">
                                         {{-- <i style="width: 0px" class='fa fa-eye'></i>  --}}
                                         View

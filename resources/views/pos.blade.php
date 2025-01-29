@@ -104,28 +104,28 @@
             newRow.dataset.productId = productDetail.id; // Add a custom attribute to track the product ID
 
             newRow.innerHTML = `
-                <td class="product">
+                <td class="thd">
                     ${productDetail['productName']}
                     <input type="hidden" name="products[${productDetail['id']}][productName]" value="${productDetail['productName']}">
                 </td>
 
-                <td class="quantity">
+                <td class="thd quantity">
                     <button type="button" onclick="sub(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> - </button>
                     <input oninput="change(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" type="text" class="display" value="1" name="products[${productDetail['id']}][quantity]">
                     <button type="button" onclick="add(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> + </button>
                 </td>
 
-                <td class="price">
+                <td class="thd price">
                     ${productDetail['price']} ksh
                     <input type="hidden" name="products[${productDetail['id']}][price]" value="${productDetail['price']}">
                 </td>
                 </td>
 
-                <td class="price">
+                <td class="thd price">
                     <input id="subTot" class="subTotal" value="${productDetail['price']}" readonly name="products[${productDetail['id']}][subtotal]"> ksh
                 </td>
 
-                <td style="width:20px">
+                <td class="thd" style="width:20px">
                     <button class="removeButton" onclick="removeRow(this)">
                         <i style="padding: 0 10px" class="fa fa-trash-o"></i> Remove
                     </button>
@@ -189,15 +189,6 @@
     <div class="navbar">
         <a href="\pos"><h2>Simple POS</h2></a>
         <div style="display: flex; flex-direction: row;">
-            {{-- <button id="sales-btn" class="sales-btn">
-                Sales
-            </button> --}}
-            {{-- <a href="\sales" id="sales-btn" class="sales-btn">
-                Sales
-            </a>
-            <a href="\products" id="sales-btn" class="sales-btn">
-                Products
-            </a> --}}
             <button id="calcDisplay" class="calc-btn" onclick="calcOpenPopup()">
                 <i class="fa fa-calculator"></i>
             </button>
@@ -260,14 +251,14 @@
                 <div class="date"> </div>
             </div>
             <div class="items-price">
-                <table>
+                <table class="table">
                     <thead>
                         <tr>
-                            <th style="width:30%">Product</th>
-                            <th>Quantity</th>
-                            <th style="width:19%">Price</th>
-                            <th>Subtotal</th>
-                            <th style="width:11%"></th>
+                            <th class="thd" style="width:25%">Product</th>
+                            <th class="thd" style="width:10%">Quantity</th>
+                            <th class="thd" style="width:20%">Price</th>
+                            <th class="thd" style="width:25%">Subtotal</th>
+                            <th class="thd"></th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
