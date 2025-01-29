@@ -1,7 +1,7 @@
 @import url("colors.css");
 
 
-.productPopup {
+.productPopup, .productPopup2, .productPopup3 {
     display: none;
     position: fixed;
     top: 0;
@@ -14,7 +14,7 @@
     z-index: 1000;
 }
 
-.productPopup-content {
+.productPopup-content, .productPopup2-content, .productPopup3-content {
     background-color: white;
     padding-left: 20px;
     padding-right: 20px;

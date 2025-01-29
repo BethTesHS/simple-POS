@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
 
-    // public function show()
-    // {
-    //     $products = Product::all();
-    //     return response()->json($products);
-    // }
-
     public function show()
     {
         $products = Product::all();
@@ -23,7 +17,6 @@ class ProductController extends Controller
     public function showProduct(Request $request) {
         $productId = $request->input('id');
         
-        // $product = Product::find($productId);
         $product = Product::where('id', $productId)->get();
         return response()->json($product);
     }
@@ -47,7 +40,6 @@ class ProductController extends Controller
             'productName' => 'required|string|max:255',
             'price' => 'required|decimal:0,2',
             'category_id' => 'required|integer|max:10',
-            // 'brand_id' => 'required|integer|max:255',
         ]);
 
         $product = new Product();
@@ -55,11 +47,9 @@ class ProductController extends Controller
         $product->productName = $validated['productName'];
         $product->price = $validated['price'];
         $product->category_id = $validated['category_id'];
-        // $product->brand_id = $validated['brand_id'];
         
         $product->save();
 
-        // echo '<text> productName: '. $validated['productName'] .'<br> price: '. $validated['price'] .'<br> productType: '. $validated['productType'] .'</text>';
         
         return redirect()->route('products')->with('success', 'Product added successfully!');
     }
@@ -67,23 +57,21 @@ class ProductController extends Controller
     public function update(Request $request) {
 
         $validated = $request->validate([
+            'id' => 'required|string:',
             'productName' => 'required|string|max:255',
-            'price' => 'required|decimal:0,0',
-            'productType' => 'required|integer|max:255',
-            // 'productBrand' => 'required|integer|max:255',
+            'price' => 'required|decimal:0,2',
+            'category_id' => 'required|integer|max:10',
         ]);
 
         $product = Product::findOrFail( $validated['id']);
         
         $product->productName = $validated['productName'];
         $product->price = $validated['price'];
-        $product->category_id = $validated['productType'];
-        // $product->brand_id = $validated['productBrand'];
-        
-        
-        $product->save(); // Save to the database
+        $product->category_id = $validated['category_id'];
 
-        return redirect()->route('members')->with('success', 'Member added successfully!');
+        $product->save();
+
+        return redirect()->route('products')->with('success', 'Success!');
     }
 
     public function delete(Request $request) {
@@ -95,6 +83,6 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('members')->with('success', 'Member deleted successfully');
+        return redirect()->route('products')->with('success', 'Success!');
     }
 }

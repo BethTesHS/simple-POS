@@ -236,48 +236,49 @@
         </div>
     </div>
 
-    {{-- <div id="editMemberPopup" class="memberPopup">
-        <div class="memberPopup-content">
+    <div id="editPopupMessage" class="productPopup2">
+        <div class="productPopup2-content">
             <span class="close-btn" id="closeEditPopupBtn">&times;</span>
             <div style="padding: 20px 0px">
-                <h3> Edit Member </h3>
+                <h3> Edit Product </h3>
             </div>
 
-            <form action="{{ route('members.update') }}" autocomplete="off" method="POST">
+            <form action="{{ route('products.update') }}" autocomplete="off" method="POST">
                 @csrf
                 @method('PUT')
 
                 <label> ID </label> <br>
-                <input style="color:gray" id="id"class="textArea" name="id" type="text" value="" readonly> <br>
+                <input style="color:gray" id="id" class="textArea" name="id" type="text" value="" readonly> <br>
 
-                <label> First Name</label> <br>
-                <input id="fn" class="textArea" name="firstName" type="text" value=""> <br>
+                <label> Product Name</label> <br>
+                <input class="textArea" id="pn" name="productName" type="text"> <br>
 
-                <label> Last Name</label> <br>
-                <input id="ln" class="textArea" name="lastName" type="text" value=""> <br>
+                <label> Price </label> <br>
+                <input class="textArea" id="pr" name="price" type="number" step="any" maxlength="10"> <br>
 
-                <label> Age</label> <br>
-                <input id="age" class="textArea" name="age" type="number" value=""> <br>
+                <label> Category </label> <br>
 
-                <label> Location</label> <br>
-                <input id="loc" class="textArea" name="location" type="text" value=""> <br>
+                {{-- CATEGORY BUTTON --}}
+                <select id="cid" name="category_id" class="dropdown2 category" >
+                    <option value=""> -- Select Category -- </option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select> <br>
 
-                <label> Telephone</label> <br>
-                <text style="font-size: 15px">+254 </text><input id="tel" size="9" style="width: 88%" class="textArea" name="telNo" type="tel" value=""> <br>
-
-                <input class="textButton" name="editMember" type="submit" value="Update Member"> <br>
+                <input class="textButton" name="editProduct" type="submit" value="Update Member"> <br>
             </form>
 
         </div>
     </div>
 
-    <div id="deleteMemberPopup" class="memberPopup">
-        <div class="memberPopup-content">
+    <div id="deletePopupMessage" class="productPopup3">
+        <div class="productPopup3-content">
             <span class="close-btn" id="closeDeletePopupBtn">&times;</span>
             <div style="padding: 20px 0px">
-                <h3> Delete Member </h3>
+                <h3> Delete Product </h3>
             </div>
-            <form action="{{ route('members.delete') }}" autocomplete="off" method="POST">
+            <form action="{{ route('products.delete') }}" autocomplete="off" method="POST">
                 @csrf
                 @method('DELETE')
 
@@ -285,16 +286,15 @@
 
                 <div>
                     <text> Are you sure you want to remove </text> <br>
-                    <output id="d_fn" name="firstName" type="text" value=""> </output>
-                    <output id="d_ln" name="lastName" type="text" value=""> </output>
+                    <b><output id="d_pn" name="productName" type="text" value=""> </output></b>
                     <text> from the system?</text>
                 </div>
 
-                <input class="textButton" name="deleteMember" type="submit" value="Remove Member">
+                <input class="textButton" name="deleteProduct" type="submit" value="Remove Member">
             </form>
 
         </div>
-    </div> --}}
+    </div>
 
 
     @if($errors->any())
