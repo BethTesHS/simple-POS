@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class CategoryController extends Controller
 {
@@ -15,6 +16,7 @@ class CategoryController extends Controller
     }
     public function store(Request $request)
     {
+        try {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
         ]);
@@ -23,11 +25,14 @@ class CategoryController extends Controller
         $categories->name = $validated['name'];
         $categories->save();
         
-        // echo `<script>
-        //     document.getElementById('popupMessage2').style.display = 'flex';
-        //     </script>`;
 
         return redirect()->route('products')->with('success', 'Product added successfully!');
+    
+        } catch (ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->validator) // Store validation errors
+                ->with('error_alert', true); // Store session flag for alert
+        }
     }
 
 }

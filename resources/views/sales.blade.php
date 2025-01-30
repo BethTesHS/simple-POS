@@ -118,7 +118,7 @@
 
         <div class="mainviews" id="mainviews">
 
-            {{-- <div class="mainpage"> --}}
+            <div class="mainpage">
                 <div class="align">
                     <header>
                         <h1>Sales</h1>
@@ -157,16 +157,8 @@
                         @endforeach
                     </tbody>
                 </table>
-                @if($errors->any())
-                    <div class="alert alert-danger" style="color:red; padding-left: 20px;">
-                        <div>
-                            @foreach($errors->all() as $error)
-                            <br> <p>{{ $error }}</p>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-            {{-- </div> --}}
+            
+            </div>
 
 
             {{-------------- // EDIT // --------------}}
@@ -189,14 +181,16 @@
     </div>
 
 
-    @if($errors->any())
-        <div class="alert alert-danger" style="color:red; padding-left: 20px;">
-            <div>
+    @if(session('error_alert') && $errors->any())
+        <script>
+            window.onload = function() {
+                let errorMessage = "";
                 @foreach($errors->all() as $error)
-                <br> <p>{{ $error }}</p>
+                    errorMessage += "{{ $error }}\n";
                 @endforeach
-            </div>
-        </div>
+                alert(errorMessage);
+            };
+        </script>
     @endif
 
 </body>

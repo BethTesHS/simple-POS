@@ -290,14 +290,16 @@
     </div>
 
     {{-- -----------  POP UPS ----------- --}}
-    @if($errors->any())
-        <div class="alert alert-danger" style="color:red; padding-left: 220px;">
-            <div>
+    @if(session('error_alert') && $errors->any())
+        <script>
+            window.onload = function() {
+                let errorMessage = "";
                 @foreach($errors->all() as $error)
-                <br> <p>{{ $error }}</p>
+                    errorMessage += "{{ $error }}\n";
                 @endforeach
-            </div>
-        </div>
+                alert(errorMessage);
+            };
+        </script>
     @endif
 
 </body>

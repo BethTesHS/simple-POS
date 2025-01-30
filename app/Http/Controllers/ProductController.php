@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\ValidationException;
 class ProductController extends Controller
 {
 
@@ -36,53 +36,71 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'productName' => 'required|string|max:255',
-            'price' => 'required|decimal:0,2',
-            'category_id' => 'required|integer|max:10',
-        ]);
+        try{
+            $validated = $request->validate([
+                'productName' => 'required|string|max:255',
+                'price' => 'required|decimal:0,2',
+                'category_id' => 'required|integer|max:10',
+            ]);
 
-        $product = new Product();
+            $product = new Product();
 
-        $product->productName = $validated['productName'];
-        $product->price = $validated['price'];
-        $product->category_id = $validated['category_id'];
+            $product->productName = $validated['productName'];
+            $product->price = $validated['price'];
+            $product->category_id = $validated['category_id'];
+            
+            $product->save();
+
         
-        $product->save();
-
-        
-        return redirect()->route('products')->with('success', 'Product added successfully!');
+            return redirect()->route('products')->with('success', 'Product added successfully!');
+        } catch (ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->validator) // Store validation errors
+                ->with('error_alert', true); // Store session flag for alert
+        }
     }
 
     public function update(Request $request) {
 
-        $validated = $request->validate([
-            'id' => 'required|string:',
-            'productName' => 'required|string|max:255',
-            'price' => 'required|decimal:0,2',
-            'category_id' => 'required|integer|max:10',
-        ]);
+        try{
+            $validated = $request->validate([
+                'id' => 'required|string:',
+                'productName' => 'required|string|max:255',
+                'price' => 'required|decimal:0,2',
+                'category_id' => 'required|integer|max:10',
+            ]);
 
-        $product = Product::findOrFail( $validated['id']);
-        
-        $product->productName = $validated['productName'];
-        $product->price = $validated['price'];
-        $product->category_id = $validated['category_id'];
+            $product = Product::findOrFail( $validated['id']);
+            
+            $product->productName = $validated['productName'];
+            $product->price = $validated['price'];
+            $product->category_id = $validated['category_id'];
 
-        $product->save();
+            $product->save();
 
-        return redirect()->route('products')->with('success', 'Success!');
+            return redirect()->route('products')->with('success', 'Success!');
+        } catch (ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->validator) // Store validation errors
+                ->with('error_alert', true); // Store session flag for alert
+        }
     }
 
     public function delete(Request $request) {
-        $validated = $request->validate([
-            'id' => 'required|string|max:10',
-        ]);
+        try{
+            $validated = $request->validate([
+                'id' => 'required|string|max:10',
+            ]);
 
-        $product = Product::findOrFail( $validated['id']);
+            $product = Product::findOrFail( $validated['id']);
 
-        $product->delete();
+            $product->delete();
 
-        return redirect()->route('products')->with('success', 'Success!');
+            return redirect()->route('products')->with('success', 'Success!');
+        } catch (ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->validator) // Store validation errors
+                ->with('error_alert', true); // Store session flag for alert
+        }
     }
 }
