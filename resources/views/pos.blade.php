@@ -14,10 +14,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
-    <?php
-        use App\Models\Product;
-        $products = Product::all();
-    ?>
 </head>
 <body>
     <script>
@@ -207,7 +203,7 @@
                 <div class="control2">
                     <div class="search"> 
                         <i class='fa fa-search'></i>
-                        <input placeholder="">
+                        <input>
                     </div>
                     <select id="category" name="category_id" class="dropdown category" >
                         <option value="0">All Categories</option>

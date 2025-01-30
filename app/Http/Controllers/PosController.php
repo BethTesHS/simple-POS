@@ -9,24 +9,33 @@ use Illuminate\Http\Request;
 
 class PosController extends Controller
 {
+    
 
-    public function index()
+    public function index(Request $request)
     {
-        // $products = Product::all();
+
+        $products = Product::all();
+        $sales = Sale::all();
         $categories = Category::all();
 
-        return view('pos', compact('categories'),);  // Pass the data to the view
+        return view('pos', compact('products', 'sales', 'categories'),);  // Pass the data to the view
     }
 
     public function sales()
     {
+        $products = Product::all();
         $sales = Sale::all();
-        return view('sales', compact('sales'),);  // Pass the data to the view
+        $categories = Category::all();
+
+        return view('sales', compact('products', 'sales', 'categories'),);  // Pass the data to the view
     }
 
     public function products()
     {
         $products = Product::all();
-        return view('products', compact('products'),);  // Pass the data to the view
+        $sales = Sale::all();
+        $categories = Category::all();
+        
+        return view('products', compact('products', 'sales', 'categories'),);  // Pass the data to the view
     }
 }

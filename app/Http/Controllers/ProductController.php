@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 class ProductController extends Controller
 {
-
-    public function show()
+    
+    public function showProducts()
     {
         $products = Product::all();
         return response()->json($products); // Pass the data to the view
