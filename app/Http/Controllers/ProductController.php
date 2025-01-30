@@ -13,6 +13,17 @@ class ProductController extends Controller
         $products = Product::all();
         return response()->json($products); // Pass the data to the view
     }
+    
+    public function searchProducts(Request $request)
+    {
+        $query = $request->get('search');
+
+        $items = Product::when($query, function ($queryBuilder) use ($query) {
+            return $queryBuilder->where('productName', 'like', '%' . $query . '%');
+        })->get();
+
+        return view('search', compact('items', 'query'));
+    }
 
     public function showProduct(Request $request) {
         $productId = $request->input('id');
