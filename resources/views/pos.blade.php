@@ -201,10 +201,12 @@
 
             <div class="right-view">
                 <div class="control2">
-                    <div class="search"> 
-                        <i class='fa fa-search'></i>
-                        <input>
-                    </div>
+                    <form method="GET" action="{{ route('products.search') }}">
+                        <div class="search"> 
+                                <i class='fa fa-search'></i>
+                                <input type="text" name="search" value="" placeholder="Search for an item...">
+                        </div>
+                    </form>    
                     <select id="category" name="category_id" class="dropdown category" >
                         <option value="0">All Categories</option>
                         @foreach($categories as $category)
