@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Document</title>
+    <title>Simple POS</title>
 
     @vite(['resources/css/all.css'])
     @vite(['resources/js/popup.js'])

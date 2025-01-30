@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
     @vite(['resources/css/all.css'])
 
-</head> --}}
+</head>
 <body>
     <div class="triangle">
     </div>
