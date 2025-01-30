@@ -173,6 +173,39 @@
             });
         });
 
+        $(document).ready(function () {
+            $('.query').change(function () {
+                var query = $(this).val();
+                var url_query = '';
+                if (query) {
+                    url_query = '{{ route("products.search") }}';
+                } else if (query == 0){
+                    url_query = '{{ route("products.all") }}';
+                }
+                $.ajax({
+                    url: url_query,
+                    method: 'GET',
+                    data: { search_query: query },
+                    success: function (data) {
+                        var html = '';
+                        if (data.length > 0) {
+                            data.forEach(function (product) {
+                                html += `
+                                    <button onclick='addRow(${JSON.stringify(product)})' class="items" id="items-button" value="${product.id}">
+                                        <div class="items-pics"><img class="image" src="{{asset('default.png')}}"></div>
+                                        <text class="item-text"> ${product.productName} </text>
+                                    </button>
+                                `;
+                            });
+                        } else {
+                            html = '<p>No Items.</p>';
+                        }
+                        $('#items-view').html(html);
+                    },
+                });
+            });
+        });
+
     </script>
 
     <div class="navbar">
@@ -201,12 +234,10 @@
 
             <div class="right-view">
                 <div class="control2">
-                    <form method="GET" action="{{ route('products.search') }}">
-                        <div class="search"> 
-                                <i class='fa fa-search'></i>
-                                <input type="text" name="search" value="" placeholder="Search for an item...">
-                        </div>
-                    </form>    
+                    <div class="search"> 
+                        <i class='fa fa-search'></i>
+                        <input class="query" type="text" name="search_query" value="" placeholder="Search for an item...">
+                    </div>
                     <select id="category" name="category_id" class="dropdown category" >
                         <option value="0">All Categories</option>
                         @foreach($categories as $category)

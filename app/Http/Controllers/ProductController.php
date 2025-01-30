@@ -14,15 +14,26 @@ class ProductController extends Controller
         return response()->json($products); // Pass the data to the view
     }
     
-    public function searchProducts(Request $request)
+    public function searchTest(Request $request)
     {
         $query = $request->get('search');
 
-        $items = Product::when($query, function ($queryBuilder) use ($query) {
+        $products = Product::when($query, function ($queryBuilder) use ($query) {
             return $queryBuilder->where('productName', 'like', '%' . $query . '%');
         })->get();
 
-        return view('search', compact('items', 'query'));
+        return view('search', compact('products', 'query'));
+    }
+
+    public function searchProducts(Request $request)
+    {
+        $query = $request->input('search_query');
+
+        $products = Product::when($query, function ($queryBuilder) use ($query) {
+            return $queryBuilder->where('productName', 'like', '%' . $query . '%');
+        })->get();
+
+        return response()->json($products);
     }
 
     public function showProduct(Request $request) {

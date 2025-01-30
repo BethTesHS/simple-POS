@@ -10,15 +10,15 @@
 <h1>Item List</h1>
 
 <!-- Search Form -->
-<form method="GET" action="{{ route('products.search') }}">
+<form method="GET" action="{{ route('test.search') }}">
     <input type="text" name="search" value="{{ $query }}" placeholder="Search for an item...">
     <button type="submit">Search</button>
 </form>
 
 <!-- Display the filtered list -->
 <ul>
-    @foreach ($items as $item)
-        <li>{{ $item->productName }}</li>
+    @foreach ($products as $product)
+        <li>{{ $product->productName }}</li>
     @endforeach
 </ul>
 

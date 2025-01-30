@@ -37,3 +37,5 @@ Route::put('products', [ProductController::class, 'update'])->name('products.upd
 Route::delete('products', [ProductController::class, 'delete'])->name('products.delete');
 
 Route::post('categories', [CategoryController::class, 'store'])->name('categories.store');
+
+Route::get('testSearch', [ProductController::class, 'searchTest'])->name('test.search');
