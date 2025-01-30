@@ -23,14 +23,6 @@
 <body>
     <script>
 
-        function calcOpenPopup() {
-            calcPopup.style.display = (calcPopup.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function calcClosePopup(){
-            calcPopup.style.display = 'none';
-        }
-
         $(document).ready(function () {
             $('.category2').change(function () {
                 var categoryId = $(this).val();

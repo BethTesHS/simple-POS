@@ -1,3 +1,10 @@
+window.calcOpenPopup = function() {
+    calcPopup.style.display = (calcPopup.style.display === 'block') ? 'none' : 'block';
+};
+
+window.calcClosePopup = function() {
+    calcPopup.style.display = 'none';
+};
 
 document.getElementById('popupButton').addEventListener('click', function() {
     document.getElementById('popupMessage').style.display = 'flex'; // Show the popup
@@ -14,7 +21,6 @@ document.getElementById('popupButton2').addEventListener('click', function() {
 document.getElementById('closePopup2').addEventListener('click', function() {
     document.getElementById('popupMessage2').style.display = 'none'; // Hide the popup
 });
-
 
 
 document.querySelectorAll('.editProduct').forEach(button => {

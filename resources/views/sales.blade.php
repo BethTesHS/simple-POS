@@ -20,14 +20,6 @@
 <body>
     <script>
 
-        function calcOpenPopup() {
-            calcPopup.style.display = (calcPopup.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function calcClosePopup(){
-            calcPopup.style.display = 'none';
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.detailView-btn').forEach(button => {
                 button.addEventListener('click', function() {
