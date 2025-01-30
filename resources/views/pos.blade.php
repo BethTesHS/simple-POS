@@ -169,6 +169,81 @@
             });
         });
 
+        // document.addEventListener('DOMContentLoaded', () => {
+            // document.querySelectorAll('.detailView-btn').forEach(button => {
+            //     button.addEventListener('click', function() {
+            //         const sales = JSON.parse(button.getAttribute('data-id'));
+            // $(document).ready(function () {
+            //     $('.query, .category').change(
+                function receipt() {
+                    $.ajax({
+                        url: '{{ route("salesDetail") }}',
+                        method: 'GET',
+                        data: { sale_id: sales['id'] },
+                        success: function (data) {
+                            var html = '';
+                            var table = '';
+                            if (data.length > 0) {
+                                data.forEach(function (salesDetail) {
+                                    table += `
+                                        <tr>
+                                            <td class="thd" style="width: 50%"> ${salesDetail.productName} </td>
+                                            <td class="thd"> ${salesDetail.price} ksh</td>
+                                            <td class="thd"> ${salesDetail.quantity} </td>
+                                            <td class="thd"> ${((salesDetail.quantity)*(salesDetail.price)).toFixed(2)} ksh</td>
+                                        </tr>
+                                    `;
+                                });
+                            } else {
+                                html = '<p>No Items.</p>';
+                            }
+
+                            const receiptNumber = String(sales['id']).padStart(10, '0');
+
+                            const date = sales['created_at'].split('T')[0];
+                            const time = sales['created_at'].split('T')[1].split(':').slice(0, 2).join(':');
+
+                            html = `    <div id="salesTable">
+                                        <text style="margin-bottom: 50px"><b>Receipt Number:</b> ${receiptNumber} </text>
+                                        <br>
+                                        <text style="margin-bottom: 50px"><b>Date:</b> ${date} </text>
+                                        <br>
+                                        <text style="margin-bottom: 50px"><b>Time:</b> ${time} </text>
+                                        <table class="table salesDetailTable">
+                                            <thead>
+                                                <tr>
+                                                    <th class="thd">Product</th>
+                                                    <th class="thd">Price</th>
+                                                    <th class="thd">Quantity</th>
+                                                    <th class="thd">Subtotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                ${table}
+                                            </tbody>
+                                            <thead>
+                                                <th class="thd" colspan='2'>Total</th>
+                                                <th class="thd">${sales['totalQuantity']}</th>
+                                                <th class="thd">${sales['totalPrice']} ksh</th>
+                                            </thead>
+                                        </table>
+                                        </div>
+                                    `;
+                            $('#salesTable').html(html);
+                        },
+                    });
+                    // End of AJAX
+
+                    document.getElementById('salesDetailPopup').style.display = 'flex';
+                }
+            // );
+            // });
+        // });
+
+        function closeSalesPopupBtn() {
+            $('#salesTable').html('');
+            document.getElementById('salesDetailPopup').style.display = 'none'; // Hide the popup
+        }
     </script>
 
     <div class="navbar">
@@ -199,7 +274,7 @@
                 <div class="control2">
                     <div class="search"> 
                         <i class='fa fa-search'></i>
-                        <input class="query" type="text" name="search_query" value="" placeholder="Search for an item...">
+                        <input autocomplete="off" class="query" type="text" name="search_query" value="" placeholder="Search for an item...">
                     </div>
                     <select id="category" name="category_id" class="dropdown category" >
                         <option value="0">All Categories</option>
