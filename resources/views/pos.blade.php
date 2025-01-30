@@ -205,19 +205,16 @@
 
             <div class="right-view">
                 <div class="control2">
+                    <div class="search"> 
+                        <i class='fa fa-search'></i>
+                        <input placeholder="">
+                    </div>
                     <select id="category" name="category_id" class="dropdown category" >
                         <option value="0">All Categories</option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
-
-                    {{-- <button id='popupButton' class="popupButton">
-                        <text class='i'>
-                            <i class='fa fa-plus-square-o'></i>
-                        </text>
-                        Add new product
-                    </button> --}}
                 </div>
 
                 <div class="items-view" id="items-view">
@@ -240,7 +237,6 @@
                 @csrf
                 <div class="left-view">
                 <div class="control">
-                    <div class="search"> </div>
                     <div class="date"> 
                         <?php echo date("F j, Y"); ?>
                     </div>
