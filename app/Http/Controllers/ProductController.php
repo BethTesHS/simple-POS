@@ -24,23 +24,28 @@ class ProductController extends Controller
 
         return view('search', compact('products', 'query'));
     }
-
-    public function searchProducts(Request $request)
-    {
-        $query = $request->input('search_query');
-
-        $products = Product::when($query, function ($queryBuilder) use ($query) {
-            return $queryBuilder->where('productName', 'like', '%' . $query . '%');
-        })->get();
-
-        return response()->json($products);
-    }
-
+    
     public function showProduct(Request $request) {
         $productId = $request->input('id');
         
         $product = Product::where('id', $productId)->get();
         return response()->json($product);
+    }
+
+    public function searchProducts(Request $request)
+    {
+        $query = $request->input('search_query');
+        $categoryId = $request->input('category_id');
+        
+        if($categoryId == 0){
+            $products = Product::where('productName', 'like', '%' . $query . '%')
+                                ->get();
+        } else {
+            $products = Product::where('productName', 'like', '%' . $query . '%')
+                                ->where('category_id', $categoryId)->get();
+        }
+        
+        return response()->json($products);
     }
 
     public function filterProduct(Request $request)

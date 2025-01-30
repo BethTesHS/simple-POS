@@ -141,51 +141,14 @@
         }
 
         $(document).ready(function () {
-            $('.category').change(function () {
-                var categoryId = $(this).val();
-                var url_query = '';
-                if (categoryId) {
-                    url_query = '{{ route("products.filter") }}';
-                } else if (categoryId == 0){
-                    url_query = '{{ route("products.all") }}';
-                }
+            $('.query, .category').change(function () {
                 $.ajax({
-                    url: url_query,
+                    url: '{{ route("products.search") }}',
                     method: 'GET',
-                    data: { category_id: categoryId },
-                    success: function (data) {
-                        var html = '';
-                        if (data.length > 0) {
-                            data.forEach(function (product) {
-                                html += `
-                                    <button onclick='addRow(${JSON.stringify(product)})' class="items" id="items-button" value="${product.id}">
-                                        <div class="items-pics"><img class="image" src="{{asset('default.png')}}"></div>
-                                        <text class="item-text"> ${product.productName} </text>
-                                    </button>
-                                `;
-                            });
-                        } else {
-                            html = '<p>No Items.</p>';
-                        }
-                        $('#items-view').html(html);
+                    data: { 
+                        search_query: $('.query').val(), 
+                        category_id: $('.category').val() 
                     },
-                });
-            });
-        });
-
-        $(document).ready(function () {
-            $('.query').change(function () {
-                var query = $(this).val();
-                var url_query = '';
-                if (query) {
-                    url_query = '{{ route("products.search") }}';
-                } else if (query == 0){
-                    url_query = '{{ route("products.all") }}';
-                }
-                $.ajax({
-                    url: url_query,
-                    method: 'GET',
-                    data: { search_query: query },
                     success: function (data) {
                         var html = '';
                         if (data.length > 0) {
