@@ -51,6 +51,8 @@
                             html = `    <div id="salesTable">
                                         <text style="margin-bottom: 50px"><b>Receipt Number:</b> ${receiptNumber} </text>
                                         <br>
+                                        <text style="margin-bottom: 50px"><b>Payment Method:</b> ${sales['payMethod']} </text>
+                                        <br>
                                         <text style="margin-bottom: 50px"><b>Date:</b> ${date} </text>
                                         <br>
                                         <text style="margin-bottom: 50px"><b>Time:</b> ${time} </text>

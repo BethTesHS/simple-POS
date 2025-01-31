@@ -16,11 +16,11 @@ class PosController extends Controller
     {
 
         $products = Product::all();
-        $saleDetail = SaleDetail::orderBy('id', 'desc')->first();;
         $sale = Sale::orderBy('id', 'desc')->first();
+        $saleDetails = SaleDetail::where('sale_id', $sale->id)->get();
         $categories = Category::all();
 
-        return view('pos', compact('products', 'sale', 'saleDetail', 'categories'),);  // Pass the data to the view
+        return view('pos', compact('products', 'sale', 'saleDetails', 'categories'),);  // Pass the data to the view
     }
 
     public function sales()

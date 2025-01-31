@@ -178,6 +178,7 @@
         };
     </script>
 
+    {{-- -----------  NAVIGATION BAR ----------- --}}
     <div class="navbar">
         <a href="\pos"><h2>Simple POS</h2></a>
         <div style="display: flex; flex-direction: row;">
@@ -191,8 +192,9 @@
     </div>
 
 
-
     <div class="wrapper">
+
+        {{-- -----------  SIDE BAR ----------- --}}
         <div class="sidebar">
             <ul>
                 <li> <a href="\pos"> <button style="color: white" class= "listButton"> <i class="i fa fa-desktop"></i> POS </button> </a> </li>
@@ -200,8 +202,9 @@
                 <li> <a href="\sales"> <button class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
             </ul>
         </div>
-        <div class="main-pos">
 
+        {{-- -----------  MAIN VIEW ----------- --}}
+        <div class="main-pos">
             <div class="right-view">
                 <div class="control2">
                     <div class="search"> 
@@ -217,7 +220,7 @@
                 </div>
 
                 <div class="items-view" id="items-view">
-                    {{-- JS CONNECTED HERE --}}
+                    {{-- items will be generated here --}}
                     @if ($products == null)
                         <text> No Item </text>
                     @else
@@ -289,9 +292,12 @@
     <div id="popupReceipt" class="salesDetail">
         <div class="salesDetail-content" id="salesDetail-content">
             <span class="close-btn" onclick="closeReceiptPopupBtn()">&times;</span>
-
+            <h3>Payment Complete!</h3>
+            <br>
             <div id="salesTable">
                 <text style="margin-bottom: 50px"><b> Receipt Number: </b> {{sprintf("%010d",$sale->id)}} </text>
+                <br>
+                <text style="margin-bottom: 50px"><b>Payment Method:</b> {{$sale->payMethod}} </text>
                 <br>
                 <text style="margin-bottom: 50px"><b> Date: </b> {{date('Y-m-d', strtotime($sale->created_at))}} </text>
                 <br>
@@ -306,12 +312,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="thd" style="width: 50%"> {{$saleDetail->productName}} </td>
-                            <td class="thd"> {{$saleDetail->price}} ksh</td>
-                            <td class="thd"> {{$saleDetail->quantity}} </td>
-                            <td class="thd"> {{number_format(($saleDetail->quantity)*($saleDetail->price), 2)}} ksh</td>
-                        </tr>
+                        @foreach($saleDetails as $saleDetail)
+                            <tr>
+                                <td class="thd" style="width: 50%"> {{$saleDetail->productName}} </td>
+                                <td class="thd"> {{$saleDetail->price}} ksh</td>
+                                <td class="thd"> {{$saleDetail->quantity}} </td>
+                                <td class="thd"> {{number_format(($saleDetail->quantity)*($saleDetail->price), 2)}} ksh</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                     <thead>
                         <th class="thd" colspan='2'>Total</th>
