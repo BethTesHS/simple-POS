@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sale;
+use App\Models\SaleDetail;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -15,10 +16,11 @@ class PosController extends Controller
     {
 
         $products = Product::all();
-        $sales = Sale::all();
+        $saleDetail = SaleDetail::orderBy('id', 'desc')->first();;
+        $sale = Sale::orderBy('id', 'desc')->first();
         $categories = Category::all();
 
-        return view('pos', compact('products', 'sales', 'categories'),);  // Pass the data to the view
+        return view('pos', compact('products', 'sale', 'saleDetail', 'categories'),);  // Pass the data to the view
     }
 
     public function sales()

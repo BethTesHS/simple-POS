@@ -30,10 +30,10 @@
             document.body.removeChild(span); // Clean up by removing the span
         }
 
-        const input = document.getElementById("subTot");
+            const input = document.getElementById("subTot");
 
-        // Adjust the width on page load
-        window.onload = () => adjustWidth(input);
+            // Adjust the width on page load
+            window.onload = () => adjustWidth(input);
 
         // ---------------- //
 
@@ -169,81 +169,13 @@
             });
         });
 
-        // document.addEventListener('DOMContentLoaded', () => {
-            // document.querySelectorAll('.detailView-btn').forEach(button => {
-            //     button.addEventListener('click', function() {
-            //         const sales = JSON.parse(button.getAttribute('data-id'));
-            // $(document).ready(function () {
-            //     $('.query, .category').change(
-                function receipt() {
-                    $.ajax({
-                        url: '{{ route("salesDetail") }}',
-                        method: 'GET',
-                        data: { sale_id: sales['id'] },
-                        success: function (data) {
-                            var html = '';
-                            var table = '';
-                            if (data.length > 0) {
-                                data.forEach(function (salesDetail) {
-                                    table += `
-                                        <tr>
-                                            <td class="thd" style="width: 50%"> ${salesDetail.productName} </td>
-                                            <td class="thd"> ${salesDetail.price} ksh</td>
-                                            <td class="thd"> ${salesDetail.quantity} </td>
-                                            <td class="thd"> ${((salesDetail.quantity)*(salesDetail.price)).toFixed(2)} ksh</td>
-                                        </tr>
-                                    `;
-                                });
-                            } else {
-                                html = '<p>No Items.</p>';
-                            }
+        function openReceiptPopupBtn() {
+            document.getElementById('popupReceipt').style.display = 'flex'; // Show the popup
+        };
 
-                            const receiptNumber = String(sales['id']).padStart(10, '0');
-
-                            const date = sales['created_at'].split('T')[0];
-                            const time = sales['created_at'].split('T')[1].split(':').slice(0, 2).join(':');
-
-                            html = `    <div id="salesTable">
-                                        <text style="margin-bottom: 50px"><b>Receipt Number:</b> ${receiptNumber} </text>
-                                        <br>
-                                        <text style="margin-bottom: 50px"><b>Date:</b> ${date} </text>
-                                        <br>
-                                        <text style="margin-bottom: 50px"><b>Time:</b> ${time} </text>
-                                        <table class="table salesDetailTable">
-                                            <thead>
-                                                <tr>
-                                                    <th class="thd">Product</th>
-                                                    <th class="thd">Price</th>
-                                                    <th class="thd">Quantity</th>
-                                                    <th class="thd">Subtotal</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                ${table}
-                                            </tbody>
-                                            <thead>
-                                                <th class="thd" colspan='2'>Total</th>
-                                                <th class="thd">${sales['totalQuantity']}</th>
-                                                <th class="thd">${sales['totalPrice']} ksh</th>
-                                            </thead>
-                                        </table>
-                                        </div>
-                                    `;
-                            $('#salesTable').html(html);
-                        },
-                    });
-                    // End of AJAX
-
-                    document.getElementById('salesDetailPopup').style.display = 'flex';
-                }
-            // );
-            // });
-        // });
-
-        function closeSalesPopupBtn() {
-            $('#salesTable').html('');
-            document.getElementById('salesDetailPopup').style.display = 'none'; // Hide the popup
-        }
+        function closeReceiptPopupBtn() {
+            document.getElementById('popupReceipt').style.display = 'none'; // Hide the popup
+        };
     </script>
 
     <div class="navbar">
@@ -353,6 +285,50 @@
     </div>
 
     {{-- -----------  POP UPS ----------- --}}
+
+    <div id="popupReceipt" class="salesDetail">
+        <div class="salesDetail-content" id="salesDetail-content">
+            <span class="close-btn" onclick="closeReceiptPopupBtn()">&times;</span>
+
+            <div id="salesTable">
+                <text style="margin-bottom: 50px"><b> Receipt Number: </b> {{sprintf("%010d",$sale->id)}} </text>
+                <br>
+                <text style="margin-bottom: 50px"><b> Date: </b> {{date('Y-m-d', strtotime($sale->created_at))}} </text>
+                <br>
+                <text style="margin-bottom: 50px"><b> Time: </b> {{date('H:i:s', strtotime($sale->created_at))}} </text>
+                <table class="table salesDetailTable">
+                    <thead>
+                        <tr>
+                            <th class="thd">Product</th>
+                            <th class="thd">Price</th>
+                            <th class="thd">Quantity</th>
+                            <th class="thd">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="thd" style="width: 50%"> {{$saleDetail->productName}} </td>
+                            <td class="thd"> {{$saleDetail->price}} ksh</td>
+                            <td class="thd"> {{$saleDetail->quantity}} </td>
+                            <td class="thd"> {{number_format(($saleDetail->quantity)*($saleDetail->price), 2)}} ksh</td>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <th class="thd" colspan='2'>Total</th>
+                        <th class="thd">{{$sale->totalQuantity}}</th>
+                        <th class="thd">{{$sale->totalPrice}} ksh</th>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @if (session('success'))
+        <script>
+            openReceiptPopupBtn();
+        </script>
+    @endif
+
     @if(session('error_alert') && $errors->any())
         <script>
             window.onload = function() {

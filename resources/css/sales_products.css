@@ -167,6 +167,10 @@
     display: none; /* Initially hidden */
 }
 
+#popupReceipt{
+    display: none;
+}
+
 .salesDetail {
     position: fixed;
     top: 0;
