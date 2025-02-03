@@ -210,6 +210,121 @@
     margin-top: 10px;
 }
 
+.pagination-container{
+    display: flex;
+    flex-direction: row;
+    margin: 15px;
+}
+
+.pagination-container input{
+    border: transparent;
+    background-color: transparent;
+    /* border: solid 1px #695b40; */
+    /* outline: none; */
+    border-radius: 5px;
+    font-size: 16px;
+    width: 17px;
+    text-align: right;
+
+}
+
+.pagination-container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    font-size: 18px;
+    
+    border-radius: 6px;
+
+    background-color: #c5b598;
+    color: rgb(0, 0, 0);
+
+    border: transparent;
+    width: 30px;
+    height: 30px;
+}
+
+.pagination-container button:hover {
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: #af9b76;
+    color: black;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.inputChange {
+    padding: 5px 15px;
+}
+
+/* 
+.pagination-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 5px;
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+.pagination a,
+.pagination span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    background-color: #c5b598;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+    min-width: 35px;
+    height: 35px;
+}
+
+.pagination a:hover {
+    background-color: #af9b76;
+    color: black;
+    transform: translateY(-2px);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.pagination .active span {
+    background-color: #a77d31;
+    color: black;
+    font-weight: bold;
+    cursor: default;
+    pointer-events: none;
+}
+
+.pagination .disabled span {
+    background-color: #bdbdbd;
+    color: rgb(94, 94, 94);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.pagination .prev-next {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+    border: 1px solid #ccc;
+}
+
+.pagination .prev-next:hover {
+    background-color: #e2e6ea; 
+}*/
+
 .align {
     display: flex;
     justify-content: space-between;

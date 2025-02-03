@@ -11,10 +11,70 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
     <script>
+
+        function changePage(){
+            let page = document.getElementById('pageInput').value;
+
+            let maxPage = {{ $sales->lastPage() }};
+            
+            if (page < 1) {
+                page = 1;
+            } else if (page > maxPage) {
+                page = maxPage;
+            }
+            
+            window.location.href = "sales?page=" + page;
+        }
+
+        function previousPage(){
+            let page = {{ $sales->currentPage() - 1}}
+            let maxPage = {{ $sales->lastPage() }};
+            
+            if (page < 1) {
+                page = 1;
+            } else if (page > maxPage) {
+                page = maxPage;
+            }
+            
+            window.location.href = "sales?page=" + page;
+        }
+
+        function nextPage(){
+            let page = {{ $sales->currentPage() + 1}}
+            let maxPage = {{ $sales->lastPage() }};
+            
+            if (page < 1) {
+                page = 1;
+            } else if (page > maxPage) {
+                page = maxPage;
+            }
+            
+            window.location.href = "sales?page=" + page;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            flatpickr("#filterDate", {
+                dateFormat: "Y-m-d",
+                onChange: function(selectedDates, dateStr, instance) {
+                    filterByDate(dateStr);
+                }
+            });
+        });
+
+        function filterByDate(selectedDate) {
+            // $filteredSales = Sale::where('created_at', selectedDate)::latest()->paginate(9);
+
+            document.querySelectorAll('.sale-row').forEach(row => {
+                let saleDate = row.getAttribute('data-date');
+                row.style.display = saleDate === selectedDate || selectedDate === '' ? '' : 'none';
+            });
+        }
+
 
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.detailView-btn').forEach(button => {
@@ -121,25 +181,26 @@
                     <header>
                         <h1>Sales</h1>
                     </header>
+                    <input type="date" id="filterDate">
                     {{-- <button class="addNewButton" id='addMember'><i class='fa fa-plus-square-o'></i> Add new member </button> --}}
                 </div>
 
                 <table class="table-sp">
                     <thead>
-                    <tr>
-                        <th class="th-sp">Reciept ID</th>
-                        <th class="th-sp">Date</th>
-                        <th class="th-sp">Total Quantity</th>
-                        <th class="th-sp">Total Price</th>
-                        <th class="th-sp">Payment Method</th>
-                        <th class="th-sp" style="width: 10%"></th>
-                        {{-- <th colspan='2'></th> --}}
-                    </tr>
+                        <tr>
+                            <th class="th-sp">Reciept ID</th>
+                            <th class="th-sp">Date</th>
+                            <th class="th-sp">Total Quantity</th>
+                            <th class="th-sp">Total Price</th>
+                            <th class="th-sp">Payment Method</th>
+                            <th class="th-sp" style="width: 10%"></th>
+                            {{-- <th colspan='2'></th> --}}
+                        </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="salesTableBody">
 
                         @foreach ($sales as $sale)
-                            <tr>
+                            <tr class="sale-row" data-date="{{ $sale->created_at->toDateString() }}">
                                 <td class="td-sp"> {{ sprintf("%010d", $sale->id) }} </td>
                                 <td class="td-sp"> {{ $sale->created_at->toDateString() }} </td>
                                 <td class="td-sp"> {{ $sale->totalQuantity }} </td>
@@ -147,7 +208,6 @@
                                 <td class="td-sp"> {{ $sale->payMethod }} </td>
                                 <td class="td-sp" style="padding: 0px; width: 60px;">
                                     <button class="detailView-btn" data-id="{{ $sale }}">
-                                        {{-- <i style="width: 15px" class='fa fa-eye'></i>  --}}
                                         View
                                     </button>
                                 </td>
@@ -155,6 +215,18 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{-- <div class="pagination-links">
+                    {{ $sales->links() }} 
+                </div> --}}
+                <div class="pagination-container">
+                    <button onclick="previousPage()"> ‹ </button>
+                        <div class="inputChange">
+                            <span>Page</span>
+                            <input type="text" inputmode=”numeric” id="pageInput" onchange="changePage()" min="1" max="{{ $sales->lastPage() }}" value="{{ $sales->currentPage() }}" />
+                            <span>of {{ $sales->lastPage() }}</span>
+                        </div>
+                    <button onclick="nextPage()"> › </button>
+                </div>
             
             </div>
 

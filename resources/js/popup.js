@@ -27,7 +27,7 @@ document.querySelectorAll('.editProduct').forEach(button => {
     button.addEventListener('click', function() {
         const product = JSON.parse(button.getAttribute('data-id'));
 
-        id.value=product['id'];
+        id.value='P_'+String(product['id']).padStart(6,'0');
         pn.value=product['productName'];
         pr.value=product['price'];
         cid.value=product['category_id'];

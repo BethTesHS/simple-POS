@@ -12,6 +12,17 @@ class Sale extends Model
 
     protected $table = "sales";
 
+    protected $guarded = [];
+
+    // Default query ordering (Latest first)
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('latestFirst', function ($query) {
+            $query->latest(); // Orders by `created_at DESC`
+        });
+    }
+
     public function salesDetail()
     {
         return $this->hasMany(SaleDetail::class);
