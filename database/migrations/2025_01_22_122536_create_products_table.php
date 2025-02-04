@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('productName');
             $table->decimal('price', 8, 2);
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            // $table->string('brand_id');
+            $table->integer('stockQuantity')->unsigned()->nullable();
             $table->timestamps();
         });
     }
