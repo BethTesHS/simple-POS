@@ -26,10 +26,11 @@ class PosController extends Controller
     public function sales()
     {
         $products = Product::all();
-        $sales = Sale::paginate(9);
+        $salesPage = Sale::paginate(9);
+        $sales = Sale::all();
         $categories = Category::all();
 
-        return view('sales', compact('products', 'sales', 'categories'),);  // Pass the data to the view
+        return view('sales', compact('products', 'sales', 'salesPage', 'categories'),);  // Pass the data to the view
     }
 
     public function products()

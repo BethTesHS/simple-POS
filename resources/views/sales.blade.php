@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    
 </head>
 <body>
     <script>
@@ -20,7 +22,7 @@
         function changePage(){
             let page = document.getElementById('pageInput').value;
 
-            let maxPage = {{ $sales->lastPage() }};
+            let maxPage = {{ $salesPage->lastPage() }};
             
             if (page < 1) {
                 page = 1;
@@ -30,10 +32,9 @@
             
             window.location.href = "sales?page=" + page;
         }
-
         function previousPage(){
-            let page = {{ $sales->currentPage() - 1}}
-            let maxPage = {{ $sales->lastPage() }};
+            let page = {{ $salesPage->currentPage() - 1}}
+            let maxPage = {{ $salesPage->lastPage() }};
             
             if (page < 1) {
                 page = 1;
@@ -45,8 +46,8 @@
         }
 
         function nextPage(){
-            let page = {{ $sales->currentPage() + 1}}
-            let maxPage = {{ $sales->lastPage() }};
+            let page = {{ $salesPage->currentPage() + 1}}
+            let maxPage = {{ $salesPage->lastPage() }};
             
             if (page < 1) {
                 page = 1;
@@ -216,14 +217,14 @@
                     </tbody>
                 </table>
                 {{-- <div class="pagination-links">
-                    {{ $sales->links() }} 
+                    {{ $salesPage->links() }} 
                 </div> --}}
                 <div class="pagination-container">
                     <button onclick="previousPage()"> ‹ </button>
                         <div class="inputChange">
                             <span>Page</span>
-                            <input type="text" inputmode=”numeric” id="pageInput" onchange="changePage()" min="1" max="{{ $sales->lastPage() }}" value="{{ $sales->currentPage() }}" />
-                            <span>of {{ $sales->lastPage() }}</span>
+                            <input type="text" inputmode=”numeric” id="pageInput" onchange="changePage()" min="1" max="{{ $salesPage->lastPage() }}" value="{{ $salesPage->currentPage() }}" />
+                            <span>of {{ $salesPage->lastPage() }}</span>
                         </div>
                     <button onclick="nextPage()"> › </button>
                 </div>
