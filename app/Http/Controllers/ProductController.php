@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 class ProductController extends Controller
 {
-    
+
     public function showProducts()
     {
         $products = Product::all();
         return response()->json($products); // Pass the data to the view
     }
-    
+
     public function searchTest(Request $request)
     {
         $query = $request->get('search');
@@ -24,10 +24,10 @@ class ProductController extends Controller
 
         return view('search', compact('products', 'query'));
     }
-    
+
     public function showProduct(Request $request) {
         $productId = $request->input('id');
-        
+
         $product = Product::where('id', $productId)->get();
         return response()->json($product);
     }
@@ -36,7 +36,7 @@ class ProductController extends Controller
     {
         $query = $request->input('search_query');
         $categoryId = $request->input('category_id');
-        
+
         if($categoryId == 0){
             $products = Product::where('productName', 'like', '%' . $query . '%')
                                 ->get();
@@ -44,14 +44,14 @@ class ProductController extends Controller
             $products = Product::where('productName', 'like', '%' . $query . '%')
                                 ->where('category_id', $categoryId)->get();
         }
-        
+
         return response()->json($products);
     }
 
     public function filterProduct(Request $request)
     {
         $categoryId = $request->input('category_id');
-        
+
         if($categoryId == 0){
             $products = Product::with('category')->get();
         } else {
@@ -66,6 +66,7 @@ class ProductController extends Controller
         try{
             $validated = $request->validate([
                 'productName' => 'required|string|max:255',
+                'stockQuantity' => 'required|integer',
                 'price' => 'required|decimal:0,2',
                 'category_id' => 'required|integer|max:10',
             ]);
@@ -73,12 +74,13 @@ class ProductController extends Controller
             $product = new Product();
 
             $product->productName = $validated['productName'];
+            $product->stockQuantity = $validated['stockQuantity'];
             $product->price = $validated['price'];
             $product->category_id = $validated['category_id'];
-            
+
             $product->save();
 
-        
+
             return redirect()->route('products')->with('success', 'Product added successfully!');
         } catch (ValidationException $e) {
             return redirect()->back()
@@ -98,8 +100,8 @@ class ProductController extends Controller
                 'category_id' => 'required|integer|max:10',
             ]);
 
-            $product = Product::findOrFail( $validated['id']);
-            
+            $product = Product::findOrFail( str_replace("P_", "", $validated['id']));
+
             $product->productName = $validated['productName'];
             $product->stockQuantity = $validated['stockQuantity'];
             $product->price = $validated['price'];

@@ -69,7 +69,7 @@
             $('.categoryFilter').change(function () {
 
                 var selectedCategory = $(this).val();
-                
+
                 document.querySelectorAll('.product-row').forEach(row => {
                     let productCategory = row.getAttribute('category-category');
 
@@ -114,7 +114,7 @@
                         <h1>Products</h1>
                     </header>
 
-                    
+
                     <div style="padding-bottom: 5px; display:flex; flex-direction: row">
 
                         <button id='popupButton2' class="popupButton2" type="button">
@@ -128,7 +128,7 @@
                                 <option value="{{ $category->name }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
-    
+
                         <button id='popupButton' class="addNewButton">
                             <text class='i'>
                                 <i class='fa fa-plus-square-o'></i>
@@ -175,9 +175,9 @@
             </div>
 
 
-            
+
         </div>
-        
+
     </div>
 
     <div id="popupMessage" class="productPopup">
@@ -252,14 +252,14 @@
                 <input class="textArea" id="pn" name="productName" type="text"> <br>
 
                 <label> Stock </label>
-                <input class="textArea" id="sq" name="stockQuantity" type="text"> <br>
-                {{-- <div class="stock">
+                {{-- <input class="textArea" id="sq" name="stockQuantity" type="text"> <br> --}}
+                <div class="stock">
                     <button type="button" onclick="sub(this.closest('div').querySelector('.stock input'))" class="button"> - </button>
                         <input class="display" id="sq" name="stockQuantity" oninput="change(this.closest('div').querySelector('.stock input'))" type="text">
                     <button type="button" onclick="add(this.closest('div').querySelector('.stock input'))" class="button"> + </button>
-                </div> --}}
-                
-                
+                </div>
+
+
                 <label> Price </label> <br>
                 <input class="textArea" id="pr" name="price" type="number" step="any" maxlength="10"> <br>
 
