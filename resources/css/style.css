@@ -501,3 +501,29 @@ header h1 {
     height: 25px;
     text-align: center;
 }
+
+.stock {
+    padding: 3px;
+    flex-direction: row;
+}
+
+.stock input{
+    display: inline-block;
+    text-align: center;
+    width: 37px;
+    background-color: transparent;
+    border-color: transparent;
+    font-size: 15px;
+}
+
+.stock button {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    justify-content: center;
+    border-color: 1px solid #00000040;
+    transition: 0.2s;
+    cursor: pointer;
+
+}

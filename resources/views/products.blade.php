@@ -16,6 +16,55 @@
 <body>
     <script>
 
+        function adjustWidth(input) {
+            // Create a temporary span element
+            const span = document.createElement("span");
+            span.style.visibility = "hidden"; // Hide the span
+            span.style.position = "absolute"; // Remove from flow
+            span.style.font = getComputedStyle(input).font; // Match input's font
+            span.textContent = input.value || input.placeholder; // Set span text to match input
+
+            document.body.appendChild(span); // Add span to the document to measure
+            input.style.width = span.offsetWidth + "px"; // Set input width to span width
+            document.body.removeChild(span); // Clean up by removing the span
+        }
+
+            const input = document.getElementById("subTot");
+
+            // Adjust the width on page load
+            window.onload = () => adjustWidth(input);
+
+        // ---------------- //
+
+        function add(ids) {
+            let currentValue = parseInt(ids.value);
+            ids.value = currentValue + 1;
+            let subTot = ids.closest('tr').querySelector('.subTotal');
+            subTot.value = (price * (currentValue + 1)).toFixed(2);
+            updateTotals();
+        }
+        function sub(ids) {
+            let currentValue = parseInt(ids.value)
+            if(currentValue > 1) {
+                ids.value = currentValue - 1;
+                let subTot = ids.closest('tr').querySelector('.subTotal');
+                subTot.value = (price * (currentValue - 1)).toFixed(2);
+                updateTotals();
+            }
+        }
+        function change(ids){
+            let currentValue = parseInt(ids.value)
+            if(currentValue < 1 || !currentValue){
+                currentValue = 1;
+            }
+            ids.value = currentValue
+            let subTot = ids.closest('tr').querySelector('.subTotal');
+            subTot.value = (price * currentValue).toFixed(2);
+            updateTotals();
+        }
+
+
+
         $(document).ready(function () {
             $('.categoryFilter').change(function () {
 
@@ -94,6 +143,7 @@
                     <tr>
                         <th class="th-sp">Product ID</th>
                         <th class="th-sp">Product Name</th>
+                        <th class="th-sp">Stock Quantity</th>
                         <th class="th-sp">Price</th>
                         <th class="th-sp">Category</th>
                         <th class="th-sp" colspan='2'></th>
@@ -104,6 +154,7 @@
                             <tr class="product-row" category-category="{{ $product->category->name }}">
                                 <td class="td-sp"> P_{{ sprintf("%006d",$product->id) }} </td>
                                 <td class="td-sp"> {{ $product->productName }} </td>
+                                <td class="td-sp"> {{ $product->stockQuantity }} </td>
                                 <td class="td-sp"> {{ $product->price}} ksh</td>
                                 <td class="td-sp"> {{ $product->category->name }} </td>
                                 <td class="td-sp" style="padding: 0px; width: 60px;">
@@ -200,6 +251,15 @@
                 <label> Product Name</label> <br>
                 <input class="textArea" id="pn" name="productName" type="text"> <br>
 
+                <label> Stock </label>
+                <input class="textArea" id="sq" name="stockQuantity" type="text"> <br>
+                {{-- <div class="stock">
+                    <button type="button" onclick="sub(this.closest('div').querySelector('.stock input'))" class="button"> - </button>
+                        <input class="display" id="sq" name="stockQuantity" oninput="change(this.closest('div').querySelector('.stock input'))" type="text">
+                    <button type="button" onclick="add(this.closest('div').querySelector('.stock input'))" class="button"> + </button>
+                </div> --}}
+                
+                
                 <label> Price </label> <br>
                 <input class="textArea" id="pr" name="price" type="number" step="any" maxlength="10"> <br>
 

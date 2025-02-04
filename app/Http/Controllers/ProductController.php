@@ -91,8 +91,9 @@ class ProductController extends Controller
 
         try{
             $validated = $request->validate([
-                'id' => 'required|string:',
+                'id' => 'required|string',
                 'productName' => 'required|string|max:255',
+                'stockQuantity' => 'required|integer',
                 'price' => 'required|decimal:0,2',
                 'category_id' => 'required|integer|max:10',
             ]);
@@ -100,6 +101,7 @@ class ProductController extends Controller
             $product = Product::findOrFail( $validated['id']);
             
             $product->productName = $validated['productName'];
+            $product->stockQuantity = $validated['stockQuantity'];
             $product->price = $validated['price'];
             $product->category_id = $validated['category_id'];
 

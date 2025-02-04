@@ -29,6 +29,7 @@ document.querySelectorAll('.editProduct').forEach(button => {
 
         id.value='P_'+String(product['id']).padStart(6,'0');
         pn.value=product['productName'];
+        sq.value=product['stockQuantity'];
         pr.value=product['price'];
         cid.value=product['category_id'];
 
