@@ -59,20 +59,45 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
+
+            let filterDateInput = document.getElementById("filterDate");
+            
             flatpickr("#filterDate", {
                 dateFormat: "Y-m-d",
+                allowInput: true,
+                enableTime: false,
+                defaultDate: null,
+                onReady: function(selectedDates, dateStr, instance) {
+                    let clearButton = document.createElement("button");
+                    clearButton.innerHTML = "All Dates";
+                    clearButton.classList.add("flatpickr-clear");
+                    clearButton.addEventListener("click", function() {
+                        instance.clear();
+                    });
+
+                    instance.calendarContainer.appendChild(clearButton);
+                },
                 onChange: function(selectedDates, dateStr, instance) {
-                    filterByDate(dateStr);
+                    if (selectedDates == 0) {
+                        filterByDate("All Dates");
+                        filterDateInput.value = "All Dates";
+                    } else {
+                        filterByDate(dateStr);
+                        filterDateInput.value = dateStr;
+                    }
+                },
+                onClose: function (selectedDates, dateStr, instance) {
+                    if (!filterDateInput.value) {
+                        filterDateInput.value = "All Dates";
+                    }
                 }
             });
         });
 
         function filterByDate(selectedDate) {
-            // $filteredSales = Sale::where('created_at', selectedDate)::latest()->paginate(9);
-
             document.querySelectorAll('.sale-row').forEach(row => {
                 let saleDate = row.getAttribute('data-date');
-                row.style.display = saleDate === selectedDate || selectedDate === '' ? '' : 'none';
+                row.style.display = selectedDate === "All Dates" || selectedDate === "" ? "" : (saleDate === selectedDate ? "" : "none");
             });
         }
 
@@ -178,12 +203,19 @@
         <div class="mainviews" id="mainviews">
 
             <div class="mainpage">
+
                 <div class="align">
                     <header>
                         <h1>Sales</h1>
                     </header>
-                    <input type="date" id="filterDate">
-                    {{-- <button class="addNewButton" id='addMember'><i class='fa fa-plus-square-o'></i> Add new member </button> --}}
+
+                    
+                    <div style="padding-bottom: 5px; display:flex; flex-direction: row">
+                        <text class="i dateButton" >
+                            <i class='fa fa-calendar'></i>
+                            <input readonly type="button" id="filterDate" value="All Dates">
+                        </text>
+                    </div>
                 </div>
 
                 <table class="table-sp">
