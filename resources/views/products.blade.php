@@ -17,46 +17,18 @@
     <script>
 
         $(document).ready(function () {
-            $('.category2').change(function () {
-                var categoryId = $(this).val();
-                var url_query = '';
-                if (categoryId) {
-                    url_query = '{{ route("products.filter") }}';
-                } else if (categoryId == 0){
-                    url_query = '{{ route("products.all") }}';
-                }
-                $.ajax({
-                    url: url_query,
-                    method: 'GET',
-                    data: { category_id: categoryId },
-                    success: function (data) {
-                        var html = '';
-                        if (data.length > 0) {
-                            data.forEach(function (product) {
-                                html += `
-                                    <tr>
-                                        <td class="td-sp"> P_${String(product.id).padStart(6, '0')} </td>
-                                        <td class="td-sp"> ${product.productName} </td>
-                                        <td class="td-sp"> ${product.price} ksh</td>
-                                        <td class="td-sp"> ${product.category.name} </td>
-                                        <td class="td-sp" style="padding: 0px; width: 60px;">
-                                            <button class="editProduct" data-id="${product}">
-                                                <i style="width: 15px" class='fa fa-pencil-square-o'></i> Edit
-                                            </button>
-                                        </td>
-                                        <td class="td-sp" style="padding: 3px; width: 60px;">
-                                            <button class="deleteProduct" data-id="${product}">
-                                                <i style="width: 10px" class='fa fa-trash-o'></i> Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                `;
-                            });
-                        } else {
-                            html = '<p style="margin-left: 10px; padding: 8px">No Items...</p>';
-                        }
-                        $('#productTable').html(html);
-                    },
+            $('.categoryFilter').change(function () {
+
+                var selectedCategory = $(this).val();
+                
+                document.querySelectorAll('.product-row').forEach(row => {
+                    let productCategory = row.getAttribute('category-category');
+
+                    if (productCategory === selectedCategory || selectedCategory === '0') {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
                 });
             });
         });
@@ -101,10 +73,10 @@
                                 <i class='fa fa-plus-square-o'></i>
                             </text>
                         </button>
-                        <select name="category_id" class="dropdown3 category2" >
+                        <select name="category_id" class="dropdown3 categoryFilter">
                             <option value="0">All Categories</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->name }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
     
@@ -129,7 +101,7 @@
                     </thead>
                     <tbody id="productTable">
                         @foreach ($products as $product)
-                            <tr>
+                            <tr class="product-row" category-category="{{ $product->category->name }}">
                                 <td class="td-sp"> P_{{ sprintf("%006d",$product->id) }} </td>
                                 <td class="td-sp"> {{ $product->productName }} </td>
                                 <td class="td-sp"> {{ $product->price}} ksh</td>
