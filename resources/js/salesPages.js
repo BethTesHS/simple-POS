@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let filteredRows = Array.from(document.querySelectorAll(".row"));
     
     let currentPage = 1;
-    const rowsPerPage = 4;
+    const rowsPerPage = 8;
 
     const prevBtnS = document.getElementById("prevPage");
     const nextBtnS = document.getElementById("nextPage");

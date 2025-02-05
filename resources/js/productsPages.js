@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let filteredRows = Array.from(document.querySelectorAll(".row"));
     
     let currentPage = 1;
-    const rowsPerPage = 4;
+    const rowsPerPage = 8;
     
     const prevBtnP = document.getElementById("prevProductPage");
     const nextBtnP = document.getElementById("nextProductPage");
