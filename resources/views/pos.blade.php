@@ -333,6 +333,12 @@
             <span class="close-btn" onclick="closeReceiptPopupBtn()">&times;</span>
             <h3>Payment Complete!</h3>
             <br>
+            @if ($sale == null)
+                <div>
+                    <h4>No Data</h4>
+                    <p>There is nothing to show</p>
+                </div>
+            @else
             <div id="salesTable">
                 <text style="margin-bottom: 50px"><b> Receipt Number: </b> {{sprintf("%010d",$sale->id)}} </text>
                 <br>
@@ -367,6 +373,7 @@
                     </thead>
                 </table>
             </div>
+            @endif
         </div>
     </div>
 

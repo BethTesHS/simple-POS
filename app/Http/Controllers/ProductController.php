@@ -66,7 +66,7 @@ class ProductController extends Controller
         try{
             $validated = $request->validate([
                 'productName' => 'required|string|max:255',
-                'stockQuantity' => 'required|integer',
+                // 'stockQuantity' => 'required|integer',
                 'price' => 'required|decimal:0,2',
                 'category_id' => 'required|integer|max:10',
             ]);
@@ -74,7 +74,7 @@ class ProductController extends Controller
             $product = new Product();
 
             $product->productName = $validated['productName'];
-            $product->stockQuantity = $validated['stockQuantity'];
+            $product->stockQuantity = 0;
             $product->price = $validated['price'];
             $product->category_id = $validated['category_id'];
 

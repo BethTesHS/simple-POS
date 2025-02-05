@@ -18,7 +18,12 @@ class PosController extends Controller
         // $products = Product::all();
         $products = Product::where('stockQuantity', '!=', 0)->get();
         $sale = Sale::orderBy('id', 'desc')->first();
-        $saleDetails = SaleDetail::where('sale_id', $sale->id)->get();
+        if ($sale == null) {
+            $saleDetails = null;
+        } 
+        else {
+            $saleDetails = SaleDetail::where('sale_id', $sale->id)->get();
+        }
         $categories = Category::all();
 
         return view('pos', compact('products', 'sale', 'saleDetails', 'categories'),);  // Pass the data to the view
