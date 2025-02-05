@@ -8,6 +8,7 @@
 
     @vite(['resources/css/all.css'])
     @vite(['resources/js/popup.js'])
+    @vite(['resources/js/sales.js'])
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -18,90 +19,6 @@
 </head>
 <body>
     <script>
-
-        function changePage(){
-            let page = document.getElementById('pageInput').value;
-
-            let maxPage = {{ $salesPage->lastPage() }};
-            
-            if (page < 1) {
-                page = 1;
-            } else if (page > maxPage) {
-                page = maxPage;
-            }
-            
-            window.location.href = "sales?page=" + page;
-        }
-        function previousPage(){
-            let page = {{ $salesPage->currentPage() - 1}}
-            let maxPage = {{ $salesPage->lastPage() }};
-            
-            if (page < 1) {
-                page = 1;
-            } else if (page > maxPage) {
-                page = maxPage;
-            }
-            
-            window.location.href = "sales?page=" + page;
-        }
-
-        function nextPage(){
-            let page = {{ $salesPage->currentPage() + 1}}
-            let maxPage = {{ $salesPage->lastPage() }};
-            
-            if (page < 1) {
-                page = 1;
-            } else if (page > maxPage) {
-                page = maxPage;
-            }
-            
-            window.location.href = "sales?page=" + page;
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-
-            let filterDateInput = document.getElementById("filterDate");
-            
-            flatpickr("#filterDate", {
-                dateFormat: "Y-m-d",
-                allowInput: true,
-                enableTime: false,
-                defaultDate: null,
-                onReady: function(selectedDates, dateStr, instance) {
-                    let clearButton = document.createElement("button");
-                    clearButton.innerHTML = "All Dates";
-                    clearButton.classList.add("flatpickr-clear");
-                    clearButton.addEventListener("click", function() {
-                        instance.clear();
-                    });
-
-                    instance.calendarContainer.appendChild(clearButton);
-                },
-                onChange: function(selectedDates, dateStr, instance) {
-                    if (selectedDates == 0) {
-                        filterByDate("All Dates");
-                        filterDateInput.value = "All Dates";
-                    } else {
-                        filterByDate(dateStr);
-                        filterDateInput.value = dateStr;
-                    }
-                },
-                onClose: function (selectedDates, dateStr, instance) {
-                    if (!filterDateInput.value) {
-                        filterDateInput.value = "All Dates";
-                    }
-                }
-            });
-        });
-
-        function filterByDate(selectedDate) {
-            document.querySelectorAll('.sale-row').forEach(row => {
-                let saleDate = row.getAttribute('data-date');
-                row.style.display = selectedDate === "All Dates" || selectedDate === "" ? "" : (saleDate === selectedDate ? "" : "none");
-            });
-        }
-
-
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.detailView-btn').forEach(button => {
                 button.addEventListener('click', function() {
@@ -176,7 +93,6 @@
             $('#salesTable').html('');
             document.getElementById('salesDetailPopup').style.display = 'none'; // Hide the popup
         }
-
     </script>
 
     <div class="navbar">
@@ -217,48 +133,46 @@
                         </text>
                     </div>
                 </div>
-
-                <table class="table-sp">
-                    <thead>
-                        <tr>
-                            <th class="th-sp">Reciept ID</th>
-                            <th class="th-sp">Date</th>
-                            <th class="th-sp">Total Quantity</th>
-                            <th class="th-sp">Total Price</th>
-                            <th class="th-sp">Payment Method</th>
-                            <th class="th-sp" style="width: 10%"></th>
-                            {{-- <th colspan='2'></th> --}}
-                        </tr>
-                    </thead>
-                    <tbody id="salesTableBody">
-
-                        @foreach ($sales as $sale)
-                            <tr class="sale-row" data-date="{{ $sale->created_at->toDateString() }}">
-                                <td class="td-sp"> {{ sprintf("%010d", $sale->id) }} </td>
-                                <td class="td-sp"> {{ $sale->created_at->toDateString() }} </td>
-                                <td class="td-sp"> {{ $sale->totalQuantity }} </td>
-                                <td class="td-sp"> {{ $sale->totalPrice }} ksh</td>
-                                <td class="td-sp"> {{ $sale->payMethod }} </td>
-                                <td class="td-sp" style="padding: 0px; width: 60px;">
-                                    <button class="detailView-btn" data-id="{{ $sale }}">
-                                        View
-                                    </button>
-                                </td>
+                <div class="salesTableContainer">
+                    <table class="table-sp">
+                        <thead>
+                            <tr>
+                                <th class="th-sp">Reciept ID</th>
+                                <th class="th-sp">Date</th>
+                                <th class="th-sp">Total Quantity</th>
+                                <th class="th-sp">Total Price</th>
+                                <th class="th-sp">Payment Method</th>
+                                <th class="th-sp" style="width: 10%"></th>
+                                {{-- <th colspan='2'></th> --}}
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {{-- <div class="pagination-links">
-                    {{ $salesPage->links() }} 
-                </div> --}}
+                        </thead>
+                        <tbody id="salesTableBody">
+                            @foreach ($sales as $sale)
+                                <tr class="sale-row" data-date="{{ $sale->created_at->toDateString() }}">
+                                    <td class="td-sp"> {{ sprintf("%010d", $sale->id) }} </td>
+                                    <td class="td-sp"> {{ $sale->created_at->toDateString() }} </td>
+                                    <td class="td-sp"> {{ $sale->totalQuantity }} </td>
+                                    <td class="td-sp"> {{ $sale->totalPrice }} ksh</td>
+                                    <td class="td-sp"> {{ $sale->payMethod }} </td>
+                                    <td class="td-sp" style="padding: 0px; width: 60px;">
+                                        <button class="detailView-btn" data-id="{{ $sale }}">
+                                            View
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
                 <div class="pagination-container">
-                    <button onclick="previousPage()"> ‹ </button>
+                    <button id="prevPage"> ‹ </button>
                         <div class="inputChange">
-                            <span>Page</span>
-                            <input type="text" inputmode=”numeric” id="pageInput" onchange="changePage()" min="1" max="{{ $salesPage->lastPage() }}" value="{{ $salesPage->currentPage() }}" />
-                            <span>of {{ $salesPage->lastPage() }}</span>
+                            <span id="pageIndicator">Page</span>
+                            {{-- <input autocomplete="off" type="text" inputmode=”numeric” id="pageInput" value="1" />
+                            <span id="maxPage"> of </span> --}}
                         </div>
-                    <button onclick="nextPage()"> › </button>
+                    <button id="nextPage"> › </button>
                 </div>
             
             </div>
