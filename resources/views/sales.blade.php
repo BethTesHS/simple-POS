@@ -8,7 +8,7 @@
 
     @vite(['resources/css/all.css'])
     @vite(['resources/js/popup.js'])
-    @vite(['resources/js/sales.js'])
+    @vite(['resources/js/salesPages.js'])
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -119,7 +119,6 @@
         <div class="mainviews" id="mainviews">
 
             <div class="mainpage">
-
                 <div class="align">
                     <header>
                         <h1>Sales</h1>
@@ -133,7 +132,8 @@
                         </text>
                     </div>
                 </div>
-                <div class="salesTableContainer">
+
+                <div class="tableContainer">
                     <table class="table-sp">
                         <thead>
                             <tr>
@@ -148,7 +148,7 @@
                         </thead>
                         <tbody id="salesTableBody">
                             @foreach ($sales as $sale)
-                                <tr class="sale-row" data-date="{{ $sale->created_at->toDateString() }}">
+                                <tr class="row" data-date="{{ $sale->created_at->toDateString() }}">
                                     <td class="td-sp"> {{ sprintf("%010d", $sale->id) }} </td>
                                     <td class="td-sp"> {{ $sale->created_at->toDateString() }} </td>
                                     <td class="td-sp"> {{ $sale->totalQuantity }} </td>
@@ -174,29 +174,26 @@
                         </div>
                     <button id="nextPage"> › </button>
                 </div>
-            
             </div>
-
-
-            {{-------------- // EDIT // --------------}}
-
-
-            <div id="salesDetailPopup" class="salesDetail">
-                <div class="salesDetail-content" id="salesDetail-content">
-                    <span class="close-btn" onclick="closeSalesPopupBtn()">&times;</span>
-                    {{-- <div style="padding: 20px 0px">
-                        <h3> Sales Detail </h3>
-                    </div> --}}
-
-                    <div id="salesTable">
-                        {{-- Table is generated here --}}
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 
+
+    {{-------------- // POPUPS // --------------}}
+
+
+    <div id="salesDetailPopup" class="salesDetail">
+        <div class="salesDetail-content" id="salesDetail-content">
+            <span class="close-btn" onclick="closeSalesPopupBtn()">&times;</span>
+            {{-- <div style="padding: 20px 0px">
+                <h3> Sales Detail </h3>
+            </div> --}}
+
+            <div id="salesTable">
+                {{-- Table is generated here --}}
+            </div>
+        </div>
+    </div>
 
     @if(session('error_alert') && $errors->any())
         <script>

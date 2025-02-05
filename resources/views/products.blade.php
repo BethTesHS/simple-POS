@@ -8,6 +8,7 @@
 
     @vite(['resources/css/all.css'])
     @vite(['resources/js/popup.js'])
+    @vite(['resources/js/productsPages.js'])
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -62,27 +63,6 @@
             subTot.value = (price * currentValue).toFixed(2);
             updateTotals();
         }
-
-
-
-        $(document).ready(function () {
-            $('.categoryFilter').change(function () {
-
-                var selectedCategory = $(this).val();
-
-                document.querySelectorAll('.product-row').forEach(row => {
-                    let productCategory = row.getAttribute('category-category');
-
-                    if (productCategory === selectedCategory || selectedCategory === '0') {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-
     </script>
 
     <div class="navbar">
@@ -122,7 +102,7 @@
                                 <i class='fa fa-plus-square-o'></i>
                             </text>
                         </button>
-                        <select name="category_id" class="dropdown3 categoryFilter">
+                        <select name="category_id" class="dropdown3 categoryFilter" id="categoryFilter">
                             <option value="0">All Categories</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->name }}">{{ $category->name }}</option>
@@ -138,47 +118,55 @@
                     </div>
                 </div>
 
-                <table class="table-sp">
-                    <thead>
-                    <tr>
-                        <th class="th-sp">Product ID</th>
-                        <th class="th-sp">Product Name</th>
-                        <th class="th-sp">Stock Quantity</th>
-                        <th class="th-sp">Price</th>
-                        <th class="th-sp">Category</th>
-                        <th class="th-sp" colspan='2'></th>
-                    </tr>
-                    </thead>
-                    <tbody id="productTable">
-                        @foreach ($products as $product)
-                            <tr class="product-row" category-category="{{ $product->category->name }}">
-                                <td class="td-sp"> P_{{ sprintf("%006d",$product->id) }} </td>
-                                <td class="td-sp"> {{ $product->productName }} </td>
-                                <td class="td-sp"> {{ $product->stockQuantity }} </td>
-                                <td class="td-sp"> {{ $product->price}} ksh</td>
-                                <td class="td-sp"> {{ $product->category->name }} </td>
-                                <td class="td-sp" style="padding: 0px; width: 60px;">
-                                    <button class="editProduct" data-id="{{ $product }}">
-                                        <i style="width: 15px" class='fa fa-pencil-square-o'></i> Edit
-                                    </button>
-                                </td>
-                                <td class="td-sp" style="padding: 3px; width: 60px;">
-                                    <button class="deleteProduct" data-id="{{ $product }}">
-                                        <i style="width: 10px" class='fa fa-trash-o'></i> Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="tableContainer">
+                    <table class="table-sp">
+                        <thead>
+                        <tr>
+                            <th class="th-sp">Product ID</th>
+                            <th class="th-sp">Product Name</th>
+                            <th class="th-sp">Stock Quantity</th>
+                            <th class="th-sp">Price</th>
+                            <th class="th-sp">Category</th>
+                            <th class="th-sp" colspan='2'></th>
+                        </tr>
+                        </thead>
+                        <tbody id="productTable">
+                            @foreach ($products as $product)
+                                <tr class="row" category-category="{{ $product->category->name }}">
+                                    <td class="td-sp"> P_{{ sprintf("%006d",$product->id) }} </td>
+                                    <td class="td-sp"> {{ $product->productName }} </td>
+                                    <td class="td-sp"> {{ $product->stockQuantity }} </td>
+                                    <td class="td-sp"> {{ $product->price}} ksh</td>
+                                    <td class="td-sp"> {{ $product->category->name }} </td>
+                                    <td class="td-sp" style="padding: 0px; width: 60px;">
+                                        <button class="editProduct" data-id="{{ $product }}">
+                                            <i style="width: 15px" class='fa fa-pencil-square-o'></i> Edit
+                                        </button>
+                                    </td>
+                                    <td class="td-sp" style="padding: 3px; width: 60px;">
+                                        <button class="deleteProduct" data-id="{{ $product }}">
+                                            <i style="width: 10px" class='fa fa-trash-o'></i> Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
+                <div class="pagination-container">
+                    <button id="prevProductPage"> ‹ </button>
+                        <div class="inputChange">
+                            <span id="productPageIndicator">Page</span>
+                        </div>
+                    <button id="nextProductPage"> › </button>
+                </div>
             </div>
-
-
-
         </div>
-
     </div>
+
+    {{-------------- // POPUPS // --------------}}
+
 
     <div id="popupMessage" class="productPopup">
         <div class="productPopup-content">
