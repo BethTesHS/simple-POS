@@ -36,6 +36,20 @@
             window.onload = () => adjustWidth(input);
 
         // ---------------- //
+        function validateForm() {
+            let totalQuantity = document.getElementById("totalQuantity").value;
+            let totalPrice = document.getElementById("totalPrice").value;
+            let payMethod = document.getElementById("payMethod").value;
+
+            if (parseInt(totalQuantity) <= 0 || parseInt(totalPrice) <= 0) {
+                alert("Please add at least one product before proceeding.");
+                return false; // Prevent form submission
+            }else if (payMethod == "" ) {
+                alert("Please select a payment method before completing payment.");
+                return false; // Prevent form submission
+            }
+            return true;
+        }
 
         function updateTotals() {
             let totalQuantity = 0;
@@ -49,18 +63,21 @@
                 totalAmount += subtotal;
             });
 
-            document.querySelector('.total-items').innerHTML = `<input type="hidden" name="totalQuantity" value="${totalQuantity}"> Items: ${totalQuantity}`;
-            document.querySelector('.total-amount').innerHTML = `<input type="hidden" name="totalPrice" value="${totalAmount.toFixed(2)}"> Total: ${totalAmount.toFixed(2)} ksh`;
+            document.querySelector('.total-items').innerHTML = `<input type="hidden" id="totalQuantity" name="totalQuantity" value="${totalQuantity}"> Items: ${totalQuantity}`;
+            document.querySelector('.total-amount').innerHTML = `<input type="hidden" id="totalPrice" name="totalPrice" value="${totalAmount.toFixed(2)}"> Total: ${totalAmount.toFixed(2)} ksh`;
         }
 
-        function add(price, ids) {
+        function add(price, stock, ids) {
             let currentValue = parseInt(ids.value);
+            if(currentValue > parseInt(stock) || !currentValue){
+                currentValue = parseInt(stock);
+            }
             ids.value = currentValue + 1;
             let subTot = ids.closest('tr').querySelector('.subTotal');
             subTot.value = (price * (currentValue + 1)).toFixed(2);
             updateTotals();
         }
-        function sub(price, ids) {
+        function sub(price, stock, ids) {
             let currentValue = parseInt(ids.value)
             if(currentValue > 1) {
                 ids.value = currentValue - 1;
@@ -69,15 +86,29 @@
                 updateTotals();
             }
         }
-        function change(price, ids){
+        function change(price, stock, ids) {
             let currentValue = parseInt(ids.value)
-            if(currentValue < 1 || !currentValue){
-                currentValue = 1;
+            if(currentValue < 0 || !currentValue){
+                currentValue = 0;
             }
+            else if(currentValue > parseInt(stock) || !currentValue){
+                currentValue = parseInt(stock);
+            }
+
             ids.value = currentValue
             let subTot = ids.closest('tr').querySelector('.subTotal');
             subTot.value = (price * currentValue).toFixed(2);
             updateTotals();
+
+            ids.addEventListener('blur', function() {
+                if (currentValue == 0) {
+                    currentValue = 1;
+                }
+                ids.value = currentValue;
+                let subTot = ids.closest('tr').querySelector('.subTotal');
+                subTot.value = (price * currentValue).toFixed(2);
+                updateTotals();
+            });
         }
 
         function addRow(productDetail) {
@@ -99,9 +130,17 @@
                 </td>
 
                 <td class="thd quantity">
-                    <button type="button" onclick="sub(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> - </button>
-                    <input oninput="change(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" type="text" class="display" value="1" name="products[${productDetail['id']}][quantity]">
-                    <button type="button" onclick="add(${productDetail['price']}, this.closest('tr').querySelector('.quantity input'))" class="button"> + </button>
+                    <button type="button" onclick="sub(${productDetail['price']}, ${productDetail['stockQuantity']}, this.closest('tr').querySelector('.quantity input'))" class="button"> - </button>
+                    <input
+                        autocomplete="off"
+                        oninput="change(
+                            ${productDetail['price']},
+                            ${productDetail['stockQuantity']},
+                            this.closest('tr').querySelector('.quantity input')
+                            )"
+                        type="text" class="display" value="1" name="products[${productDetail['id']}][quantity]"
+                        >
+                    <button type="button" onclick="add(${productDetail['price']}, ${productDetail['stockQuantity']}, this.closest('tr').querySelector('.quantity input'))" class="button"> + </button>
                 </td>
 
                 <td class="thd price">
@@ -145,16 +184,16 @@
                 $.ajax({
                     url: '{{ route("products.search") }}',
                     method: 'GET',
-                    data: { 
-                        search_query: $('.query').val(), 
-                        category_id: $('.category').val() 
+                    data: {
+                        search_query: $('.query').val(),
+                        category_id: $('.category').val()
                     },
                     success: function (data) {
                         var html = '';
                         if (data.length > 0) {
                             data.forEach(function (product) {
                                 html += `
-                                    <button onclick='addRow(${JSON.stringify(product)})' class="items" id="items-button" value="${product.id}">
+                                    <button type="button" onclick='addRow(${JSON.stringify(product)})' class="items" id="items-button" value="${product.id}">
                                         <div class="items-pics"><img class="image" src="{{asset('default.png')}}"></div>
                                         <text class="item-text"> ${product.productName} </text>
                                     </button>
@@ -207,7 +246,7 @@
         <div class="main-pos">
             <div class="right-view">
                 <div class="control2">
-                    <div class="search"> 
+                    <div class="search">
                         <i class='fa fa-search'></i>
                         <input autocomplete="off" class="query" type="text" name="search_query" value="" placeholder="Search for an item...">
                     </div>
@@ -235,11 +274,11 @@
                 </div>
             </div>
 
-            <form action="{{ route('sales.storeSale') }}" method="POST">
+            <form action="{{ route('sales.storeSale') }}" method="POST" onsubmit="return validateForm()">
                 @csrf
                 <div class="left-view">
                 <div class="control">
-                    <div class="date"> 
+                    <div class="date">
                         <?php echo date("F j, Y"); ?>
                     </div>
                 </div>
@@ -263,13 +302,13 @@
                     <div class="total-price">
                         <table>
                             <tr>
-                                <th class="total-items"><input type="hidden" name="totalQuantity" value="0"> Items: 0</th>
-                                <th class="total-amount"><input type="hidden" name="totalPrice" value="0"> Total: 0.00 ksh </th>
+                                <th class="total-items"><input type="hidden" id="totalQuantity" name="totalQuantity" value="0"> Items: 0</th>
+                                <th class="total-amount"><input type="hidden" id="totalPrice" name="totalPrice" value="0"> Total: 0.00 ksh </th>
                             </tr>
                         </table>
                     </div>
                     <div class="payment">
-                        <select name="payMethod" class="pay-method">
+                        <select id="payMethod" name="payMethod" class="pay-method">
                             <option value=""> -- Payment Method -- </option>
                             <option value="Cash"> Cash </option>
                             <option value="Debit or Credit"> Debit or Credit </option>

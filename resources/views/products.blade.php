@@ -45,7 +45,7 @@
         }
         function sub(ids) {
             let currentValue = parseInt(ids.value)
-            if(currentValue > 1) {
+            if(currentValue > 0) {
                 ids.value = currentValue - 1;
                 let subTot = ids.closest('tr').querySelector('.subTotal');
                 subTot.value = (price * (currentValue - 1)).toFixed(2);
@@ -54,8 +54,8 @@
         }
         function change(ids){
             let currentValue = parseInt(ids.value)
-            if(currentValue < 1 || !currentValue){
-                currentValue = 1;
+            if(currentValue < 0 || !currentValue){
+                currentValue = 0;
             }
             ids.value = currentValue
             let subTot = ids.closest('tr').querySelector('.subTotal');

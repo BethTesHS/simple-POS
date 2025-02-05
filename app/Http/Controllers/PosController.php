@@ -10,12 +10,13 @@ use Illuminate\Http\Request;
 
 class PosController extends Controller
 {
-    
+
 
     public function index(Request $request)
     {
 
-        $products = Product::all();
+        // $products = Product::all();
+        $products = Product::where('stockQuantity', '!=', 0)->get();
         $sale = Sale::orderBy('id', 'desc')->first();
         $saleDetails = SaleDetail::where('sale_id', $sale->id)->get();
         $categories = Category::all();
@@ -38,7 +39,7 @@ class PosController extends Controller
         $products = Product::all();
         $sales = Sale::all();
         $categories = Category::all();
-        
+
         return view('products', compact('products', 'sales', 'categories'),);  // Pass the data to the view
     }
 }
