@@ -9,62 +9,15 @@
     @vite(['resources/css/all.css'])
     @vite(['resources/js/popup.js'])
     @vite(['resources/js/productsPages.js'])
+    @vite(['resources/js/products.js'])
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
 </head>
 <body>
-    <script>
 
-        function adjustWidth(input) {
-            // Create a temporary span element
-            const span = document.createElement("span");
-            span.style.visibility = "hidden"; // Hide the span
-            span.style.position = "absolute"; // Remove from flow
-            span.style.font = getComputedStyle(input).font; // Match input's font
-            span.textContent = input.value || input.placeholder; // Set span text to match input
-
-            document.body.appendChild(span); // Add span to the document to measure
-            input.style.width = span.offsetWidth + "px"; // Set input width to span width
-            document.body.removeChild(span); // Clean up by removing the span
-        }
-
-            const input = document.getElementById("subTot");
-
-            // Adjust the width on page load
-            window.onload = () => adjustWidth(input);
-
-        // ---------------- //
-
-        function add(ids) {
-            let currentValue = parseInt(ids.value);
-            ids.value = currentValue + 1;
-            let subTot = ids.closest('tr').querySelector('.subTotal');
-            subTot.value = (price * (currentValue + 1)).toFixed(2);
-            updateTotals();
-        }
-        function sub(ids) {
-            let currentValue = parseInt(ids.value)
-            if(currentValue > 0) {
-                ids.value = currentValue - 1;
-                let subTot = ids.closest('tr').querySelector('.subTotal');
-                subTot.value = (price * (currentValue - 1)).toFixed(2);
-                updateTotals();
-            }
-        }
-        function change(ids){
-            let currentValue = parseInt(ids.value)
-            if(currentValue < 0 || !currentValue){
-                currentValue = 0;
-            }
-            ids.value = currentValue
-            let subTot = ids.closest('tr').querySelector('.subTotal');
-            subTot.value = (price * currentValue).toFixed(2);
-            updateTotals();
-        }
-    </script>
-
+    {{-- -----------  NAVIGATION BAR ----------- --}}
     <div class="navbar">
         <a href="\pos"><h2>Simple POS</h2></a>
         <div style="display: flex; flex-direction: row;">
@@ -77,7 +30,9 @@
         </div>
     </div>
 
+    {{-- ----------- SCREEN ----------- --}}
     <div class="wrapper">
+        {{-- -----------  SIDE BAR ----------- --}}
         <div class="sidebar">
             <ul>
                 <li> <a href="\pos"> <button class= "listButton"> <i class="i fa fa-desktop"></i> POS </button> </a> </li>
@@ -86,6 +41,7 @@
             </ul>
         </div>
 
+        {{-- -----------  MAIN VIEW ----------- --}}    
         <div class="mainviews" id="mainviews">
 
             <div class="mainpage">
@@ -167,7 +123,7 @@
 
     {{-------------- // POPUPS // --------------}}
 
-
+    {{-- Add Product Popup --}}
     <div id="popupMessage" class="productPopup">
         <div class="productPopup-content">
 
@@ -186,8 +142,6 @@
                 <input class="textArea" name="price" type="number" step="any" maxlength="10"> <br>
 
                 <label> Category </label> <br>
-
-                {{-- CATEGORY BUTTON --}}
                 <div class="categoryPopup">
 
                     <select id="category" name="category_id" class="dropdown2" >
@@ -197,11 +151,13 @@
                         @endforeach
                     </select> <br>
                 </div>
+
                 <input class="textButton" name="addProduct" type="submit" value="Add Product"> <br>
             </form>
         </div>
     </div>
 
+    {{-- Add Category Popup --}}
     <div id="popupMessage2" class="productPopup">
         <div class="productPopup-content">
 
@@ -222,6 +178,7 @@
         </div>
     </div>
 
+    {{-- Edit Product Popup --}}
     <div id="editPopupMessage" class="productPopup2">
         <div class="productPopup2-content">
             <span class="close-btn" id="closeEditPopupBtn">&times;</span>
@@ -240,7 +197,6 @@
                 <input class="textArea" id="pn" name="productName" type="text"> <br>
 
                 <label> Stock </label>
-                {{-- <input class="textArea" id="sq" name="stockQuantity" type="text"> <br> --}}
                 <div class="stock">
                     <button type="button" onclick="sub(this.closest('div').querySelector('.stock input'))" class="button"> - </button>
                         <input class="display" id="sq" name="stockQuantity" oninput="change(this.closest('div').querySelector('.stock input'))" type="text">
@@ -252,8 +208,6 @@
                 <input class="textArea" id="pr" name="price" type="number" step="any" maxlength="10"> <br>
 
                 <label> Category </label> <br>
-
-                {{-- CATEGORY BUTTON --}}
                 <select id="cid" name="category_id" class="dropdown2 category" >
                     <option value=""> -- Select Category -- </option>
                     @foreach($categories as $category)
@@ -267,6 +221,7 @@
         </div>
     </div>
 
+    {{-- Delete Product Popup --}}
     <div id="deletePopupMessage" class="productPopup3">
         <div class="productPopup3-content">
             <span class="close-btn" id="closeDeletePopupBtn">&times;</span>
@@ -291,7 +246,7 @@
         </div>
     </div>
 
-
+    {{-- -----------  ALERTS ----------- --}}
     @if(session('error_alert') && $errors->any())
         <script>
             window.onload = function() {
