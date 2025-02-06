@@ -7,178 +7,16 @@
     <title>Simple POS</title>
 
     @vite(['resources/css/all.css'])
-    @vite(['resources/js/popup.js'])
-
-    {{-- @vite(['resources/js/pos.js']) --}}
+    @vite(['resources/js/pos.js'])
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
 </head>
 <body>
+
     <script>
-        function adjustWidth(input) {
-            // Create a temporary span element
-            const span = document.createElement("span");
-            span.style.visibility = "hidden"; // Hide the span
-            span.style.position = "absolute"; // Remove from flow
-            span.style.font = getComputedStyle(input).font; // Match input's font
-            span.textContent = input.value || input.placeholder; // Set span text to match input
-
-            document.body.appendChild(span); // Add span to the document to measure
-            input.style.width = span.offsetWidth + "px"; // Set input width to span width
-            document.body.removeChild(span); // Clean up by removing the span
-        }
-
-            const input = document.getElementById("subTot");
-
-            // Adjust the width on page load
-            window.onload = () => adjustWidth(input);
-
-        // ---------------- //
-        function validateForm() {
-            let totalQuantity = document.getElementById("totalQuantity").value;
-            let totalPrice = document.getElementById("totalPrice").value;
-            let payMethod = document.getElementById("payMethod").value;
-
-            if (parseInt(totalQuantity) <= 0 || parseInt(totalPrice) <= 0) {
-                alert("Please add at least one product before proceeding.");
-                return false; // Prevent form submission
-            }else if (payMethod == "" ) {
-                alert("Please select a payment method before completing payment.");
-                return false; // Prevent form submission
-            }
-            return true;
-        }
-
-        function updateTotals() {
-            let totalQuantity = 0;
-            let totalAmount = 0;
-
-            document.querySelectorAll('#tableBody tr').forEach(row => {
-                const quantity = parseInt(row.querySelector('.quantity input').value);
-                const subtotal = parseFloat(row.querySelector('.subTotal').value);
-
-                totalQuantity += quantity;
-                totalAmount += subtotal;
-            });
-
-            document.querySelector('.total-items').innerHTML = `<input type="hidden" id="totalQuantity" name="totalQuantity" value="${totalQuantity}"> Items: ${totalQuantity}`;
-            document.querySelector('.total-amount').innerHTML = `<input type="hidden" id="totalPrice" name="totalPrice" value="${totalAmount.toFixed(2)}"> Total: ${totalAmount.toFixed(2)} ksh`;
-        }
-
-        function add(price, stock, ids) {
-            let currentValue = parseInt(ids.value);
-            if(currentValue > parseInt(stock) || !currentValue){
-                currentValue = parseInt(stock);
-            }
-            ids.value = currentValue + 1;
-            let subTot = ids.closest('tr').querySelector('.subTotal');
-            subTot.value = (price * (currentValue + 1)).toFixed(2);
-            updateTotals();
-        }
-        function sub(price, stock, ids) {
-            let currentValue = parseInt(ids.value)
-            if(currentValue > 1) {
-                ids.value = currentValue - 1;
-                let subTot = ids.closest('tr').querySelector('.subTotal');
-                subTot.value = (price * (currentValue - 1)).toFixed(2);
-                updateTotals();
-            }
-        }
-        function change(price, stock, ids) {
-            let currentValue = parseInt(ids.value)
-            if(currentValue < 0 || !currentValue){
-                currentValue = 0;
-            }
-            else if(currentValue > parseInt(stock) || !currentValue){
-                currentValue = parseInt(stock);
-            }
-
-            ids.value = currentValue
-            let subTot = ids.closest('tr').querySelector('.subTotal');
-            subTot.value = (price * currentValue).toFixed(2);
-            updateTotals();
-
-            ids.addEventListener('blur', function() {
-                if (currentValue == 0) {
-                    currentValue = 1;
-                }
-                ids.value = currentValue;
-                let subTot = ids.closest('tr').querySelector('.subTotal');
-                subTot.value = (price * currentValue).toFixed(2);
-                updateTotals();
-            });
-        }
-
-        function addRow(productDetail) {
-            const table = document.getElementById('tableBody');
-
-            // Check if the product already exists in the table
-            const existingRow = Array.from(table.children).find(row => row.dataset.productId == productDetail.id);
-            if (!existingRow) {
-                // alert('This product is already in the table.');
-                // return;
-
-            const newRow = document.createElement('tr');
-            newRow.dataset.productId = productDetail.id; // Add a custom attribute to track the product ID
-
-            newRow.innerHTML = `
-                <td class="thd">
-                    ${productDetail['productName']}
-                    <input type="hidden" name="products[${productDetail['id']}][productName]" value="${productDetail['productName']}">
-                </td>
-
-                <td class="thd quantity">
-                    <button type="button" onclick="sub(${productDetail['price']}, ${productDetail['stockQuantity']}, this.closest('tr').querySelector('.quantity input'))" class="button"> - </button>
-                    <input
-                        autocomplete="off"
-                        oninput="change(
-                            ${productDetail['price']},
-                            ${productDetail['stockQuantity']},
-                            this.closest('tr').querySelector('.quantity input')
-                            )"
-                        type="text" class="display" value="1" name="products[${productDetail['id']}][quantity]"
-                        >
-                    <button type="button" onclick="add(${productDetail['price']}, ${productDetail['stockQuantity']}, this.closest('tr').querySelector('.quantity input'))" class="button"> + </button>
-                </td>
-
-                <td class="thd price">
-                    ${productDetail['price']} ksh
-                    <input type="hidden" name="products[${productDetail['id']}][price]" value="${productDetail['price']}">
-                </td>
-                </td>
-
-                <td class="thd price">
-                    <input id="subTot" class="subTotal" value="${productDetail['price']}" readonly name="products[${productDetail['id']}][subtotal]"> ksh
-                </td>
-
-                <td class="thd" style="width:20px">
-                    <button class="removeButton" onclick="removeRow(this)">
-                        <i style="padding: 0 10px" class="fa fa-trash-o"></i> Remove
-                    </button>
-                </td>`;
-                table.appendChild(newRow);
-                updateTotals();
-            }
-        }
-
-        function removeRow(button) {
-            const row = button.closest('tr');
-            row.remove();
-            updateTotals();
-        }
-
-        function cancelPayment() {
-            // Clear all rows in the table
-            const table = document.getElementById('tableBody');
-            table.innerHTML = ''; // Remove all rows
-
-            // Reset totals
-            document.querySelector('.total-items').innerHTML = `<input type="hidden" name="totalQuantity" value="0"> Items: 0`;
-            document.querySelector('.total-amount').innerHTML = `<input type="hidden" name="totalPrice" value="0"> Total: 0.00 ksh`;
-        }
-
+    // The function that lets us filter by category and/or search
         $(document).ready(function () {
             $('.query, .category').change(function () {
                 $.ajax({
@@ -207,14 +45,6 @@
                 });
             });
         });
-
-        function openReceiptPopupBtn() {
-            document.getElementById('popupReceipt').style.display = 'flex'; // Show the popup
-        };
-
-        function closeReceiptPopupBtn() {
-            document.getElementById('popupReceipt').style.display = 'none'; // Hide the popup
-        };
     </script>
 
     {{-- -----------  NAVIGATION BAR ----------- --}}
@@ -230,9 +60,8 @@
         </div>
     </div>
 
-
+    {{-- ----------- SCREEN ----------- --}}
     <div class="wrapper">
-
         {{-- -----------  SIDE BAR ----------- --}}
         <div class="sidebar">
             <ul>
@@ -328,6 +157,7 @@
 
     {{-- -----------  POP UPS ----------- --}}
 
+    {{-- Receipt Popup --}}
     <div id="popupReceipt" class="salesDetail">
         <div class="salesDetail-content" id="salesDetail-content">
             <span class="close-btn" onclick="closeReceiptPopupBtn()">&times;</span>
@@ -377,12 +207,13 @@
         </div>
     </div>
 
+    {{-- -----------  ALERTS ----------- --}}
     @if (session('success'))
         <script>
-            openReceiptPopupBtn();
+            // openReceiptPopupBtn();
+            document.getElementById('popupReceipt').style.display = 'flex';
         </script>
     @endif
-
     @if(session('error_alert') && $errors->any())
         <script>
             window.onload = function() {
