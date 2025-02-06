@@ -7,7 +7,7 @@
     <title>Simple POS</title>
 
     @vite(['resources/css/all.css'])
-    @vite(['resources/js/popup.js'])
+    @vite(['resources/js/productsPopup.js'])
     @vite(['resources/js/productsPages.js'])
     @vite(['resources/js/products.js'])
 

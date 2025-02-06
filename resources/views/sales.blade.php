@@ -7,8 +7,8 @@
     <title>Simple POS</title>
 
     @vite(['resources/css/all.css'])
-    @vite(['resources/js/popup.js'])
     @vite(['resources/js/salesPages.js'])
+    @vite(['resources/js/sales.js'])
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -18,12 +18,14 @@
     
 </head>
 <body>
-    <script>
+    <script>  
+        //  Popup reciept and loads data
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.detailView-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     const sales = JSON.parse(button.getAttribute('data-id'));
 
+                    // Load data via AJAX
                     $.ajax({
                         url: '{{ route("salesDetail") }}',
                         method: 'GET',
@@ -82,19 +84,21 @@
                             $('#salesTable').html(html);
                         },
                     });
-                    // End of AJAX
 
+                    // Show popup
                     document.getElementById('salesDetailPopup').style.display = 'flex';
                 });
             });
         });
 
+        // Close popup and remove loaded data
         function closeSalesPopupBtn() {
             $('#salesTable').html('');
             document.getElementById('salesDetailPopup').style.display = 'none'; // Hide the popup
         }
     </script>
 
+    {{-- -----------  NAVIGATION BAR ----------- --}}
     <div class="navbar">
         <a href="\pos"><h2>Simple POS</h2></a>
         <div style="display: flex; flex-direction: row;">
@@ -107,7 +111,9 @@
         </div>
     </div>
 
+    {{-- ----------- SCREEN ----------- --}}
     <div class="wrapper">
+        {{-- -----------  SIDE BAR ----------- --}}
         <div class="sidebar">
             <ul>
                 <li> <a href="\pos"> <button class= "listButton"> <i class="i fa fa-desktop"></i> POS </button> </a> </li>
@@ -116,8 +122,8 @@
             </ul>
         </div>
 
+        {{-- -----------  MAIN VIEW ----------- --}}    
         <div class="mainviews" id="mainviews">
-
             <div class="mainpage">
                 <div class="align">
                     <header>
@@ -181,20 +187,17 @@
 
     {{-------------- // POPUPS // --------------}}
 
-
+    {{-- Receipt Popup --}}
     <div id="salesDetailPopup" class="salesDetail">
         <div class="salesDetail-content" id="salesDetail-content">
             <span class="close-btn" onclick="closeSalesPopupBtn()">&times;</span>
-            {{-- <div style="padding: 20px 0px">
-                <h3> Sales Detail </h3>
-            </div> --}}
-
             <div id="salesTable">
                 {{-- Table is generated here --}}
             </div>
         </div>
     </div>
 
+    {{-- -----------  ALERTS ----------- --}}
     @if(session('error_alert') && $errors->any())
         <script>
             window.onload = function() {

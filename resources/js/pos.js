@@ -1,4 +1,4 @@
-// ----------- POPUPS ----------- //
+// ----------- CALCULATOR ----------- //
 window.calcOpenPopup = function() {
     calcPopup.style.display = (calcPopup.style.display === 'block') ? 'none' : 'block';
 };
@@ -6,7 +6,7 @@ window.calcOpenPopup = function() {
 window.calcClosePopup = function() {
     calcPopup.style.display = 'none';
 };
-// ------------------------------ //
+// ---------------------------------- //
 
 
 // To check if a product and payment method is selected

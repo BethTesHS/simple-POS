@@ -1,11 +1,4 @@
-window.calcOpenPopup = function() {
-    calcPopup.style.display = (calcPopup.style.display === 'block') ? 'none' : 'block';
-};
-
-window.calcClosePopup = function() {
-    calcPopup.style.display = 'none';
-};
-
+// ------ Product ------ //
 document.getElementById('popupButton').addEventListener('click', function() {
     document.getElementById('popupMessage').style.display = 'flex'; // Show the popup
 });
