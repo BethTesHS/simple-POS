@@ -108,14 +108,14 @@
 
 .sidebar-link:hover {
     transform: scale(1.1);
-    color: var(--LightBlue);
+    color: #66c2ff;
 }
 
 .listButton{
     justify-content: flex-start;
     list-style-type: none;
     text-align: left;
-    color: var(--TranslucentWhite1);
+    color: #ffffffaa;
     width: 90%;
     height: 50px;
     margin-top: 3px;
@@ -134,7 +134,7 @@
 .listButton:hover{
     transition: 0.2s;
     color: white;
-    background-color: var(--TranslucentWhite2);
+    background-color: #ffffff50;
 
 }
 
