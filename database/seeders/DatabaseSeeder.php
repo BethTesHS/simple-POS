@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
         
         // Insert sample data
+        // date('Y-m-d H:i:s', strtotime('-5 days'));
         DB::table('categories')->insert([
             [
                 'name' => 'Drink', 

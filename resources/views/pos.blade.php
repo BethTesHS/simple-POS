@@ -65,9 +65,9 @@
         {{-- -----------  SIDE BAR ----------- --}}
         <div class="sidebar">
             <ul>
-                <li> <a href="\pos"> <button style="color: white" class= "listButton"> <i class="i fa fa-desktop"></i> POS </button> </a> </li>
-                <li> <a href="\products"> <button class= "listButton" > <i class="i fa fa-shopping-basket"></i> Product </button> </a> </li>
-                <li> <a href="\sales"> <button class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
+                <li> <a href="{{ route('pos') }}"> <button style="color: white" class= "listButton"> <i class="i fa fa-desktop"></i> POS </button> </a> </li>
+                <li> <a href="{{ route('products') }}"> <button class= "listButton" > <i class="i fa fa-shopping-basket"></i> Product </button> </a> </li>
+                <li> <a href="{{ route('sales') }}"> <button class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
             </ul>
         </div>
 
