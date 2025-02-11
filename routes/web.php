@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
+
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PosController;
@@ -15,6 +19,17 @@ use App\Http\Controllers\SaleDetailController;
 Route::get('calc', function () {
     return view('calc');
 });
+
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+
+Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
+
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
+
+
+Route::middleware(['auth'])->group(function () {
 
 
 // Route::resource('pos', ProductController::class);
@@ -40,3 +55,6 @@ Route::delete('/products', [ProductController::class, 'delete'])->name('products
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
 
 Route::get('/testSearch', [ProductController::class, 'searchTest'])->name('test.search');
+
+
+});
