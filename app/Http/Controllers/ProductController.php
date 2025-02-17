@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 class ProductController extends Controller
@@ -66,19 +67,29 @@ class ProductController extends Controller
         try{
             $validated = $request->validate([
                 'productName' => 'required|string|max:255',
-                // 'stockQuantity' => 'required|integer',
+                'stockQuantity' => 'required|integer',
                 'price' => 'required|decimal:0,2',
                 'category_id' => 'required|integer|max:10',
             ]);
 
             $product = new Product();
 
-            $product->productName = $validated['productName'];
-            $product->stockQuantity = 0;
+            $product->productName = 
+            $product->stockQuantity = $validated['stockQuantity'];
             $product->price = $validated['price'];
             $product->category_id = $validated['category_id'];
 
             $product->save();
+
+            Stock::insert([
+                'product_id' => $product->id,
+                'productName' => $validated['productName'],
+                'purchaseType' => 'Buy',
+                'quantity' => $validated['stockQuantity'],
+                'created_at' => now(), 
+                'updated_at' => now()
+            ]);
+
 
 
             return redirect()->route('products')->with('success', 'Product added successfully!');
@@ -95,7 +106,7 @@ class ProductController extends Controller
             $validated = $request->validate([
                 'id' => 'required|string',
                 'productName' => 'required|string|max:255',
-                'stockQuantity' => 'required|integer',
+                // 'stockQuantity' => 'required|integer',
                 'price' => 'required|decimal:0,2',
                 'category_id' => 'required|integer|max:10',
             ]);
@@ -103,7 +114,7 @@ class ProductController extends Controller
             $product = Product::findOrFail( str_replace("P_", "", $validated['id']));
 
             $product->productName = $validated['productName'];
-            $product->stockQuantity = $validated['stockQuantity'];
+            // $product->stockQuantity = $validated['stockQuantity'];
             $product->price = $validated['price'];
             $product->category_id = $validated['category_id'];
 

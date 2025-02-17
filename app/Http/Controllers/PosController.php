@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use App\Models\SaleDetail;
+use App\Models\Stock;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -46,5 +47,15 @@ class PosController extends Controller
         $categories = Category::all();
 
         return view('products', compact('products', 'sales', 'categories'),);  // Pass the data to the view
+    }
+
+    public function stocks()
+    {
+        $products = Product::all();
+        $sales = Sale::all();
+        $stocks = Stock::all();
+        $categories = Category::all();
+
+        return view('stocks', compact('products', 'sales', 'categories', 'stocks'),);  // Pass the data to the view
     }
 }

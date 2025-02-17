@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use App\Models\SaleDetail;
+use App\Models\Stock;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -31,13 +32,25 @@ class SaleController extends Controller
 
                 $product = Product::where('id', $productId)->first();
 
-                saleDetail::insert([
+                SaleDetail::insert([
                     'sale_id' => $sale->id,
                     'product_id' => $productId,
                     'productName' => $productSale['productName'],
                     'price' => $productSale['price'],
                     'quantity' => $productSale['quantity'],
                 ]);
+
+
+                Stock::insert([
+                    'product_id' => $productId,
+                    'productName' => $productSale['productName'],
+                    'purchaseType' => 'Sell',
+                    'quantity' => -$productSale['quantity'],
+                    'totalQuantity' => ($product->stockQuantity)-($productSale['quantity']),
+                    'created_at' => now(), 
+                    'updated_at' => now()
+                ]);
+    
 
 
                 $quantity = intval($productSale['quantity']);
