@@ -40,6 +40,7 @@ Route::get('/pos', [PosController::class, 'index'])->name('pos');
 Route::get('/', [PosController::class, 'index'])->name('pos');
 Route::get('/sales', [PosController::class, 'sales'])->name('sales');
 Route::get('/products', [PosController::class, 'products'])->name('products');
+Route::get('/stocks', [PosController::class, 'stocks'])->name('stocks');
 
 Route::post('/storeSale', [SaleController::class, 'storeSale'])->name('sales.storeSale');
 Route::post('/storeSaleDetail', [SaleController::class, 'storeSaleDetail'])->name('sales.storeSaleDetail');

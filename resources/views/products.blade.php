@@ -38,6 +38,7 @@
                 <li> <a href="{{ route('pos') }}"> <button class= "listButton"> <i class="i fa fa-desktop"></i> POS </button> </a> </li>
                 <li> <a href="{{ route('products') }}"> <button style="color: white" class= "listButton" > <i class="i fa fa-shopping-basket"></i> Product </button> </a> </li>
                 <li> <a href="{{ route('sales') }}"> <button class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
+                <li> <a href="{{ route('stocks') }}"> <button class= "listButton"> <i class="i fa fa-line-chart"></i> Stocks </button> </a> </li>
             </ul>
         </div>
 
@@ -141,6 +142,13 @@
                 <label> Price </label> <br>
                 <input class="textArea" name="price" type="number" step="any" maxlength="10"> <br>
 
+                <label> Stock </label>
+                <div class="stock">
+                    <button type="button" onclick="sub(this.closest('div').querySelector('.stock input'))" class="button"> - </button>
+                        <input class="display" id="sq" name="stockQuantity" oninput="change(this.closest('div').querySelector('.stock input'))" type="text" value="0">
+                    <button type="button" onclick="add(this.closest('div').querySelector('.stock input'))" class="button"> + </button>
+                </div>
+
                 <label> Category </label> <br>
                 <div class="categoryPopup">
 
@@ -195,14 +203,6 @@
 
                 <label> Product Name</label> <br>
                 <input class="textArea" id="pn" name="productName" type="text"> <br>
-
-                <label> Stock </label>
-                <div class="stock">
-                    <button type="button" onclick="sub(this.closest('div').querySelector('.stock input'))" class="button"> - </button>
-                        <input class="display" id="sq" name="stockQuantity" oninput="change(this.closest('div').querySelector('.stock input'))" type="text">
-                    <button type="button" onclick="add(this.closest('div').querySelector('.stock input'))" class="button"> + </button>
-                </div>
-
 
                 <label> Price </label> <br>
                 <input class="textArea" id="pr" name="price" type="number" step="any" maxlength="10"> <br>
