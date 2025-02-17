@@ -45,13 +45,15 @@ window.updateTotals = function() {
 // To update subtotal based on the amount in quantity
 window.add = function(price, stock, ids) {
     let currentValue = parseInt(ids.value);
-    if(currentValue > parseInt(stock) || !currentValue){
+    if(currentValue >= parseInt(stock) || !currentValue){
         currentValue = parseInt(stock);
+    } else {
+
+        ids.value = currentValue + 1;
+        let subTot = ids.closest('tr').querySelector('.subTotal');
+        subTot.value = (price * (currentValue + 1)).toFixed(2);
+        updateTotals();
     }
-    ids.value = currentValue + 1;
-    let subTot = ids.closest('tr').querySelector('.subTotal');
-    subTot.value = (price * (currentValue + 1)).toFixed(2);
-    updateTotals();
 }
 window.sub = function(price, stock, ids) {
     let currentValue = parseInt(ids.value)
