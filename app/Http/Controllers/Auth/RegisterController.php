@@ -24,7 +24,7 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), [
             'firstName' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
+            // 'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
         ]);
@@ -37,7 +37,7 @@ class RegisterController extends Controller
         $user = User::create([
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
-            'username' => str_replace('@', '', $request->username),
+            // 'username' => str_replace('@', '', $request->username),
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);

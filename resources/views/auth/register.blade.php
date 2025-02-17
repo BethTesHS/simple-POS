@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- <link rel="stylesheet" href="style.css"/> --}}
-    @vite(['resources/css/styleLogin.css'])
+    @vite(['resources/css/sign.css'])
 
     <title>Document</title>
     <script>
@@ -36,8 +36,8 @@
             <label class="loginText"> Last Name</label> <br>
             <input type="text" placeholder="Please enter your Last Name." class="loginTextArea" id="lastName" name="lastName" value="{{ old('lastName') }}" required> <br>
 
-            <label class="loginText"> Username </label> <br>
-            <input type="text" placeholder="Please enter a Username" class="loginTextArea" id="username" name="username" value="{{ old('username') }}" required> <br>
+            {{-- <label class="loginText"> Username </label> <br>
+            <input type="text" placeholder="Please enter a Username" class="loginTextArea" id="username" name="username" value="{{ old('username') }}" required> <br> --}}
 
             <label class="loginText"> Email</label> <br>
             <input type="email" placeholder="Please enter your Email Address." class="loginTextArea" id="email" name="email" value="{{ old('email') }}" required> <br>

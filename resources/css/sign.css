@@ -1,0 +1,97 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+
+body{
+    font-family: 'Century Gothic', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+.loginBody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 20%; */
+    background: linear-gradient(135deg, #b67122, #bb9413);
+}
+
+.loginBox{
+    background-color: white;
+    width: 450px;
+    height: 40%;
+    border-radius: 10px;
+    border: 1px solid #00000080;
+    padding: 30px;
+}
+
+.loginWelcome{
+    display: flex;
+    justify-content: center;
+}
+
+.loginText{
+    height: auto;
+}
+
+.loginTextArea{
+    background-color: white;
+    width: 100%;
+    height: 40px;
+    outline: none;
+    border-radius: 6px;
+    border: 1px solid #00000080;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 7px;
+}
+
+.loginTextArea:active{
+    transition: 0.2s;
+}
+
+.loginButton{
+    background-color: #aa7502;
+    color: aliceblue;
+    width: 100%;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    /* margin-left: 7%; */
+}
+
+.loginButton:hover{
+    transition: 0.2s;
+    background-color: #bb8613;
+    /* margin-left: 7%; */
+}
+
+.loginLink{
+    color: #6e4c02;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+}
+
+.loginLink:hover{
+    color: #a5740a;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+.logo{
+    height: 40px;
+}

@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite(['resources/css/styleLogin.css'])
+    @vite(['resources/css/sign.css'])
 
     <title>Document</title>
 
@@ -51,13 +51,6 @@
             <a class="loginLink" href="{{ route('register') }}"> Don't have an account? Sign up!</a>
         </div>
     </div>
-    <script>
-        window.onload = function() {
-            const message = "<?php echo $message; ?>";
-            if (message) {
-                alert(message);
-            }
-        }
-    </script>
+    
 </body>
 </html>
