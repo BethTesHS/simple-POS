@@ -2,14 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\Sale;
-use App\Models\SaleDetail;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use DB;
 use Schema;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 // php artisan db:seed --class=DatabaseSeeder
 
@@ -21,6 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Schema::disableForeignKeyConstraints();
+        DB::table('users')->truncate();
         DB::table('categories')->truncate();
         DB::table('products')->truncate();
         DB::table('sales')->truncate();
@@ -30,6 +29,17 @@ class DatabaseSeeder extends Seeder
         
         // Insert sample data
         // date('Y-m-d H:i:s', strtotime('-5 days'));
+        DB::table('users')->insert([
+            [
+                'firstName' => 'Bethelhem',
+                'lastName' => 'Tesfaye',
+                // 'username' => 'JustBeth',
+                'email' => 'BethelhemTesfaye95@gmail.com',
+                'password' => Hash::make('21132113'),
+                'created_at' => now()
+            ],
+        ]);
+
         DB::table('categories')->insert([
             [
                 'name' => 'Drink', 
@@ -218,6 +228,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 1,
                 'productName' => 'Coca Cola',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 50,
                 'quantity' => 200,
                 'totalQuantity' => 200,
                 'created_at' => now()->subDay(),
@@ -227,6 +238,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 2,
                 'productName' => 'Fanta',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 50,
                 'quantity' => 200,
                 'totalQuantity' => 200,
                 'created_at' => now()->subDay(),
@@ -236,6 +248,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 3,
                 'productName' => 'Sprite',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 50,
                 'quantity' => 200,
                 'totalQuantity' => 200,
                 'created_at' => now()->subDay(),
@@ -245,6 +258,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 4,
                 'productName' => 'Pepsi Cola',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 45,
                 'quantity' => 180,
                 'totalQuantity' => 180,
                 'created_at' => now()->subDay(),
@@ -254,6 +268,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 5,
                 'productName' => 'Mirinda',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 45,
                 'quantity' => 280,
                 'totalQuantity' => 280,
                 'created_at' => now()->subDay(),
@@ -263,6 +278,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 6,
                 'productName' => '7 UP',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 45,
                 'quantity' => 180,
                 'totalQuantity' => 180,
                 'created_at' => now()->subDay(),
@@ -272,6 +288,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 7,
                 'productName' => 'Cake',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 90,
                 'quantity' => 20,
                 'totalQuantity' => 20,
                 'created_at' => now()->subDay(),
@@ -281,6 +298,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 8,
                 'productName' => 'Bread',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 90,
                 'quantity' => 60,
                 'totalQuantity' => 60,
                 'created_at' => now()->subDay(),
@@ -290,6 +308,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 9,
                 'productName' => 'Banana',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 145,
                 'quantity' => 60,
                 'totalQuantity' => 60,
                 'created_at' => now()->subDay(),
@@ -301,6 +320,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 10,
                 'productName' => 'Cheese Burger',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 900,
                 'quantity' => 12,
                 'totalQuantity' => 12,
                 'created_at' => now(),
@@ -310,6 +330,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 11,
                 'productName' => 'HP Envy',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 70000,
                 'quantity' => 37,
                 'totalQuantity' => 37,
                 'created_at' => now(),
@@ -319,6 +340,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 12,
                 'productName' => 'Samsung A15',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 10000,
                 'quantity' => 75,
                 'totalQuantity' => 75,
                 'created_at' => now(),
@@ -328,6 +350,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 13,
                 'productName' => 'Sony WH-CH520',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 3000,
                 'quantity' => 168,
                 'totalQuantity' => 168,
                 'created_at' => now(),
@@ -337,6 +360,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 14,
                 'productName' => 'Panadol',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 145,
                 'quantity' => 360,
                 'totalQuantity' => 360,
                 'created_at' => now(),
@@ -346,6 +370,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 15,
                 'productName' => 'Zefcolin',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 345,
                 'quantity' => 6,
                 'totalQuantity' => 6,
                 'created_at' => now(),
@@ -355,6 +380,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 16,
                 'productName' => 'Pencil x6',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 100,
                 'quantity' => 680,
                 'totalQuantity' => 680,
                 'created_at' => now(),
@@ -364,6 +390,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 17,
                 'productName' => 'Pen x6',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 150,
                 'quantity' => 680,
                 'totalQuantity' => 680,
                 'created_at' => now(),
@@ -373,6 +400,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 18,
                 'productName' => 'Notebook A5',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 15,
                 'quantity' => 160,
                 'totalQuantity' => 160,
                 'created_at' => now(),
@@ -382,6 +410,7 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 19,
                 'productName' => 'Eraser',
                 'purchaseType' => 'Buy',
+                'buyingPrice' => 10,
                 'quantity' => 300,
                 'totalQuantity' => 300,
                 'created_at' => now(),

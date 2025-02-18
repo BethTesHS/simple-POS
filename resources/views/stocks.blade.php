@@ -7,6 +7,7 @@
     <title>Simple POS</title>
 
     @vite(['resources/css/all.css'])
+    @vite(['resources/js/productsPopup.js'])
     @vite(['resources/js/salesPages.js'])
     @vite(['resources/js/sales.js'])
 
@@ -14,6 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     
 </head>
 <body>
@@ -51,13 +54,20 @@
                         <h1>Stocks</h1>
                     </header>
 
-                    
                     <div style="padding-bottom: 5px; display:flex; flex-direction: row">
+                        <button id='popupButton' class="addNewButton">
+                            <text class='i'>
+                                <i class='fa fa-plus-square-o'></i>
+                            </text>
+                            Purchase Product
+                        </button>
+                        
                         <text class="i dateButton" >
                             <i class='fa fa-calendar'></i>
                             <input readonly type="button" id="filterDate" value="All Dates">
                         </text>
                     </div>
+
                 </div>
 
                 <div class="tableContainer">
@@ -99,6 +109,55 @@
                     <button id="nextPage"> › </button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    {{-------------- // POPUPS // --------------}}
+
+    {{-- Add Product Popup --}}
+    <div id="popupMessage" class="productPopup">
+        <div class="productPopup-content">
+
+            <span class="close-btn" id="closePopup">&times;</span>
+            <div style="padding: 20px 0px">
+                <h2> Stock Up </h2>
+            </div>
+
+            <form action="{{ route('stocks.update') }}" autocomplete="off" method="POST">
+                @csrf
+
+                <label> Product Name </label> <br>
+                
+                <div class="categoryPopup">
+
+                    <select id="product" name="product" class="dropdown2" >
+                        <option value=""> -- Select Category -- </option>
+                        @foreach($products as $product)
+                            <option value="{{ json_encode([$product->id, $product->productName]) }} ">
+                                {{ $product->productName }}
+                                {{-- <input name="productName" value="{{ $product->productName }}" type="hidden"> --}}
+                            </option>
+                        @endforeach
+                    </select> <br>
+                </div>
+
+                <label> Buying Price per Item</label> <br>
+                {{-- <input class="textArea" name="buyingPrice" type="number" step="any" maxlength="10"> <br> --}}
+                <div class="stock">
+                    <button type="button" onclick="sub(this.closest('div').querySelector('.stock input'))" class="button"> - </button>
+                        <input class="display" id="sq" name="buyingPrice" oninput="change(this.closest('div').querySelector('.stock input'))" type="text" value="0">
+                    <button type="button" onclick="add(this.closest('div').querySelector('.stock input'))" class="button"> + </button>
+                </div>
+
+                <label> Quantity </label>
+                <div class="stock">
+                    <button type="button" onclick="sub(this.closest('div').querySelector('.stock input'))" class="button"> - </button>
+                        <input class="display" id="sq" name="quantity" oninput="change(this.closest('div').querySelector('.stock input'))" type="text" value="0">
+                    <button type="button" onclick="add(this.closest('div').querySelector('.stock input'))" class="button"> + </button>
+                </div>
+
+                <input class="textButton" name="addProduct" type="submit" value="Add Product"> <br>
+            </form>
         </div>
     </div>
 
