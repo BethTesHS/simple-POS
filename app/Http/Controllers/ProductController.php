@@ -74,7 +74,7 @@ class ProductController extends Controller
 
             $product = new Product();
 
-            $product->productName = 
+            $product->productName = $validated['productName'];
             $product->stockQuantity = $validated['stockQuantity'];
             $product->price = $validated['price'];
             $product->category_id = $validated['category_id'];
