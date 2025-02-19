@@ -39,7 +39,7 @@
                 <li> <a href="{{ route('products') }}"> <button style="color: white" class= "listButton" > <i class="i fa fa-shopping-basket"></i> Product </button> </a> </li>
                 <li> <a href="{{ route('sales') }}"> <button class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
                 <li> <a href="{{ route('stocks') }}"> <button class= "listButton"> <i class="i fa fa-line-chart"></i> Stocks </button> </a> </li>
-                <hr style="border: 0.5px solid rgb(167, 124, 67); width: 90%; margin: 10px;">
+                <hr style="border: 0.5px solid #4372a7; width: 90%; margin: 10px;">
                 <li> <form action="{{ route('logout') }}" method="POST"> @csrf <button class= "listButton" type="submit"> <i class="i fa fa-sign-out"></i> Logout </button> </form> </li>
             </ul>
         </div>

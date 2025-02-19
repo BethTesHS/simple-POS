@@ -44,7 +44,7 @@
 
 .calc-button {
     padding: 8px 5px;
-    background: #927824;
+    background: #245492;
     color: white;
     text-align: center;
     font-size: 13px;
@@ -55,7 +55,7 @@
 
 .calc-num {
     padding: 8px 5px;
-    background: #ac8f31;
+    background: #3162ac;
     color: white;
     text-align: center;
     font-size: 13px;
@@ -66,7 +66,7 @@
 }
 .calc-button:hover, .calc-num:hover {
     transition: 0.2s;
-    background: #8b4a00;
+    background: #004c8b;
 }
 
 .calc-result {
@@ -78,7 +78,7 @@
     font-weight: bold;
     text-align: right;
     border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid #00000080;
     overflow-x: auto;
     white-space: nowrap;
     color: black;
@@ -116,7 +116,7 @@
     background-color: transparent;
     border: solid 1px #66c2ff;
     border-color: transparent;
-    color: #e5d18e;
+    color: #d0daf0;
 }
 
 .calc-btn:hover {

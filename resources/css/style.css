@@ -32,7 +32,7 @@ button{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(135deg, #bb9413, #8b4a00);
+    background: linear-gradient(135deg, #136abb, #00488b);
     color: white;
     position: fixed;
     top: 0;
@@ -51,7 +51,7 @@ a{
 }
 a:hover{
     transition: 0.2s;
-    color: rgb(255, 231, 175);
+    color: #afecff;
     text-decoration: none;
 }
 
@@ -75,7 +75,7 @@ a:hover{
 }
 
 .a:hover{
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid #00000080;
     border-radius: 10px;
     padding-right: 10px;
 }
@@ -87,7 +87,7 @@ a:hover{
 }
 /* --------- LEFT SECTION --------- */
 .left-view{
-    background-color: #c0b3a0;
+    background-color: #a0b3c0;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -104,7 +104,7 @@ a:hover{
 }
 
 .control{
-    background-color: #ece9e2;
+    background-color: #e2e7ec;
     border: solid 1px transparent;
     border-radius: 10px;
     display: flex;
@@ -116,8 +116,8 @@ a:hover{
 }
 
 .date{
-    background-color: #d4c9bd;
-    border: solid 1px rgba(0, 0, 0, 0.2);
+    background-color: #bdc3d4;
+    border: solid 1px #00000033;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -126,7 +126,7 @@ a:hover{
 }
 
 .items-price{
-    background-color: #ece9e2;
+    background-color: #e2e7ec;
     border: solid 1px transparent;
     border-radius: 10px 10px 0 0;
     display: flex;
@@ -140,7 +140,7 @@ a:hover{
 }
 
 .total-price{
-    background-color: #ece9e2;
+    background-color: #e2e7ec;
     border: solid 1px transparent;
     border-radius: 0 0 10px 10px;
     height: 60px;
@@ -149,7 +149,7 @@ a:hover{
 }
 
 .payment{
-    background-color: #ece9e2;
+    background-color: #e2e7ec;
     border: solid 1px transparent;
     border-radius: 10px;
     display: flex;
@@ -166,7 +166,7 @@ a:hover{
     border: solid 1.3px transparent;
     border-radius: 0px 15px 15px 0px;
 
-    background-color: #c0b3a0;
+    background-color: #a0b3c0;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -184,7 +184,7 @@ a:hover{
 .control2{
     display: flex;
     flex-direction: row;
-    background-color: #ece9e2;
+    background-color: #e2e7ec;
     justify-content: space-between;
     border: solid 1px transparent;
     border-radius: 10px;
@@ -195,8 +195,8 @@ a:hover{
 }
 
 .search{
-    background-color: #d4c9bd;
-    border: solid 1px rgba(0, 0, 0, 0.2);
+    background-color: #bdc3d4;
+    border: solid 1px #00000033;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -208,7 +208,7 @@ a:hover{
 .search input{
     width: 100%;
     border-radius: 10px;
-    background-color: #ece9e2;
+    background-color: #e2e7ec;
     border: solid 1px #999999;
     outline: none;
     padding: 0 8px;
@@ -229,8 +229,8 @@ a:hover{
     margin: 0px 15px 0 0;
     border-radius: 10px;
     padding: 5px;
-    background-color: #d4c9bd;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: #bdc3d4;
+    border: 1px solid #00000033;
     outline: none;
     /* width: 135px; */
     font-size: 13px;
@@ -239,7 +239,7 @@ a:hover{
 .dropdown:hover{
     transition: 0.2s;
     cursor: pointer;
-    background-color: #d4c9bde0;
+    background-color: #bdc3d4e0;
 }
 
 .payment{
@@ -252,8 +252,8 @@ a:hover{
     margin: 0px 15px 0 0;
     border-radius: 10px;
     padding: 5px;
-    background-color: #d4c9bd;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: #bdc3d4;
+    border: 1px solid #00000033;
     outline: none;
     font-size: 15px;
     /* min-width: 125px; */
@@ -262,7 +262,7 @@ a:hover{
 .pay-method:hover{
     transition: 0.2s;
     cursor: pointer;
-    background-color: #d4c9bde0;
+    background-color: #bdc3d4e0;
 }
 
 .pay{
@@ -272,11 +272,11 @@ a:hover{
 
 .cancel-pay{
     margin-right: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid #00000080;
     border-radius: 10px;
     padding: 5px;
     height: 40px;
-    background-color: #8b4a00;
+    background-color: #004c8b;
     color: #ffffff;
     font-size: 15px;
     /* font-weight: bold; */
@@ -285,17 +285,17 @@ a:hover{
 .cancel-pay:hover{
     transition: 0.2s;
     cursor: pointer;
-    background-color:#a05a09;
+    background-color:#004c8b;
     /* font-weight: bold; */
 }
 
 .complete-pay{
     margin-right: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid #00000080;
     border-radius: 10px;
     padding: 5px;
     height: 40px;
-    background-color: #8b4a00;
+    background-color: #004c8b;
     color: #ffffff;
     font-size: 15px;
     /* font-weight: bold; */
@@ -304,12 +304,12 @@ a:hover{
 .complete-pay:hover{
     transition: 0.2s;
     cursor: pointer;
-    background-color: #a05a09;
+    background-color: #004c8b;
     /* font-weight: bold; */
 }
 
 .items-view{
-    background-color: #ece9e2;
+    background-color: #e2e7ec;
     display: flex;
     flex-wrap: wrap;
     /* justify-content: space-between; */
@@ -322,13 +322,13 @@ a:hover{
     border: solid 1px transparent;
     border-radius: 5px 5px 10px 10px;
 
-    background-color: #ece9e2;
+    background-color: #e2e7ec;
     display: flex;
 }
 
 
 .popupButton{
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid #00000080;
     border-radius: 10px;
     padding-right: 10px;
     min-width: 155px;
@@ -337,7 +337,7 @@ a:hover{
 .popupButton:hover{
     transition: 0.2s;
     cursor: pointer;
-    background-color: #e6dcdc;
+    background-color: #dcdfe6;
 }
 
 
@@ -348,7 +348,7 @@ a:hover{
 
 
 .items{
-    background-color: rgb(219, 219, 219);
+    background-color: #dbdbdb;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -357,14 +357,14 @@ a:hover{
     margin: 0 0 10px 12px;
     /* margin-bottom: 10px; */
     padding: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid #00000080;
     /* box-shadow: 0 10px 10px #0000001a; */
     border-radius: 5px;
 }
 
 .items:hover{
     /* transition: 0.2s; */
-    background: linear-gradient(135deg, #bb941330, #8b4a0030);
+    background: linear-gradient(135deg, #136abb30, #00488b30);
     cursor: pointer;
     /* background-color: #0000001a; */
 }
@@ -379,7 +379,7 @@ a:hover{
 }
 
 .items-pics{
-    background-color: rgba(255, 255, 255, 0.37);
+    background-color: #ffffff5e;
     height: 72%;
     width: 90%;
     margin-top: 0px;
@@ -401,28 +401,28 @@ header h1 {
 
 /* Change calendar background color */
 .flatpickr-calendar {
-    background: #e9d7b6; /* Light gray */
-    border: 1px solid #8d7954;
+    background: #b6cce9; /* Light gray */
+    border: 1px solid #54718d;
     border-top: transparent;
     border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 10px #00000033;
 }
 
 /* Style the month and year title */
 .flatpickr-months {
-    background-color: #d8c299;
+    background-color: #99bcd8;
     color: white;
     border-radius: 8px 8px 0 0;
 }
 
 /* Style the previous/next arrows */
 .flatpickr-prev-month, .flatpickr-next-month {
-    color: rgb(255, 255, 255);
+    color: #ffffff;
 }
 
 /* Style the selected date */
 .flatpickr-day.selected {
-    background: #c2a369 !important;
+    background: #6990c2 !important;
     color: black !important;
     border-color: transparent;
     border-radius: 20%;
@@ -430,7 +430,7 @@ header h1 {
 
 /* Style the hover effect on dates */
 .flatpickr-day:hover {
-    background: #d8c299;
+    background: #99bcd8;
     color: black;
     border-radius: 20%;
 }
@@ -443,7 +443,7 @@ header h1 {
 
 /* Style the today button */
 .flatpickr-day.today {
-    border: 1px solid #8d7954;
+    border: 1px solid #54718d;
     font-weight: bold;
     border-radius: 20%;
 }
@@ -464,10 +464,10 @@ header h1 {
 
 /* Style the "All Dates" button */
 .flatpickr-clear {
-    background-color: #d8c299; /* Red button */
+    background-color: #99bcd8; /* Red button */
     color: black;
     padding: 8px;
-    border: 1px solid #8d7954;
+    border: 1px solid #54718d;
     border-radius: 5px;
     margin-left: 10px;
     cursor: pointer;
@@ -477,11 +477,11 @@ header h1 {
 }
 
 .flatpickr-clear:hover {
-    background-color: #8d795481;
+    background-color: #54718d81;
 }
 
 .dateButton {
-    background-color: #8b4a00;
+    background-color: #004c8b;
     color: white;
     padding: 4px 8px;
     border: none;
@@ -496,7 +496,7 @@ header h1 {
 
 .dateButton input{
     border: none;
-    background-color: #8b4a00;
+    background-color: #004c8b;
     color: white;
     outline: none;
     font-size: 14px;
