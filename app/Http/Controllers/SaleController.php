@@ -47,6 +47,8 @@ class SaleController extends Controller
                     'purchaseType' => 'Sell',
                     'quantity' => -$productSale['quantity'],
                     'totalQuantity' => ($product->stockQuantity)-($productSale['quantity']),
+                    'buyingPrice' => 0,
+                    'date' => now(), 
                     'created_at' => now(), 
                     'updated_at' => now()
                 ]);

@@ -13,13 +13,13 @@ class Stock extends Model
     protected $fillable = ['product_id', 'productName', 'purchaseType', 'quantity'];
     protected $table = "stockHistory";
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope('latestFirst', function ($query) {
-            $query->latest(); // Orders by `created_at DESC`
-        });
-    }
+    // protected static function boot()
+    // {
+    //     parent::boot();
+    //     static::addGlobalScope('latestFirst', function ($query) {
+    //         $query->latest(); // Orders by `created_at DESC`
+    //     });
+    // }
 
 
     public function product()

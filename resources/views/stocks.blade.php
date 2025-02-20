@@ -10,15 +10,27 @@
     @vite(['resources/js/productsPopup.js'])
     @vite(['resources/js/salesPages.js'])
     @vite(['resources/js/sales.js'])
-
+    @vite(['resources/js/chart.js'])
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
+    
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+    <script>
+        
+        const dates = <?php echo json_encode($stockDates) ?>;
+        const totalStock = <?php echo json_encode($stocksPerDate) ?>;
+
+    </script>
+    
 </head>
+
 <body>
 
     {{-- -----------  NAVIGATION BAR ----------- --}}
@@ -110,6 +122,19 @@
                         </div>
                     <button id="nextPage"> › </button>
                 </div>
+
+                @if ($stockDates->isEmpty())
+                    <div>
+                        <h4>No Data</h4>
+                        <p>There is nothing to show</p>
+                    </div>
+                @else
+                    <div class="chart-wrapper">
+                        <div class="chart-container" style="width: 400px; padding-top:70px;">
+                            <canvas id="timeLineChart"></canvas>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

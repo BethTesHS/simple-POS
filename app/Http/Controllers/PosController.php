@@ -53,9 +53,37 @@ class PosController extends Controller
     {
         $products = Product::all();
         $sales = Sale::all();
-        $stocks = Stock::all();
+        $stocks = Stock::latest()->get();
         $categories = Category::all();
 
-        return view('stocks', compact('products', 'sales', 'categories', 'stocks'),);  // Pass the data to the view
+        $stockDates = Stock::select('date')
+            ->distinct()
+            ->orderBy('date', 'asc')
+            ->pluck('date');
+        $stocksPerDate = Stock::selectRaw('date, SUM(quantity) OVER (ORDER BY date ASC) as total_quantity')
+            ->distinct()
+            ->pluck('total_quantity');
+
+
+        return view('stocks', compact('products', 'sales', 'categories', 'stocks', 'stockDates', 'stocksPerDate'),);  // Pass the data to the view
+    }
+
+    public function analysis()
+    {
+        $products = Product::all();
+        $sales = Sale::all();
+        $stocks = Stock::all();
+        $categories = Category::all();
+        
+        $stockDates = Stock::select('date')
+            ->distinct()
+            ->orderBy('date', 'asc')
+            ->pluck('date');
+        $stocksPerDate = Stock::selectRaw('date, SUM(quantity) OVER (ORDER BY date ASC) as total_quantity')
+            ->distinct()
+            ->pluck('total_quantity');
+
+
+        return view('analysis', compact('products', 'sales', 'categories', 'stocks', 'stockDates', 'stocksPerDate'),);  // Pass the data to the view
     }
 }

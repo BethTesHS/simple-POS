@@ -233,7 +233,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 200,
                 'created_at' => now()->subDay()->subDay(),
                 'updated_at' => now()->subDay()->subDay(),
-            ],
+                'date' => now()->subDay()->subDay(),            ],
             [
                 'product_id' => 2,
                 'productName' => 'Fanta',
@@ -243,7 +243,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 200,
                 'created_at' => now()->subDay()->subDay(),
                 'updated_at' => now()->subDay()->subDay(),
-            ],
+                'date' => now()->subDay()->subDay(),            ],
             [
                 'product_id' => 3,
                 'productName' => 'Sprite',
@@ -253,7 +253,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 200,
                 'created_at' => now()->subDay()->subDay(),
                 'updated_at' => now()->subDay()->subDay(),
-            ],
+                'date' => now()->subDay()->subDay(),            ],
             [
                 'product_id' => 4,
                 'productName' => 'Pepsi Cola',
@@ -263,7 +263,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 180,
                 'created_at' => now()->subDay()->subDay(),
                 'updated_at' => now()->subDay()->subDay(),
-            ],
+                'date' => now()->subDay()->subDay(),            ],
             [
                 'product_id' => 5,
                 'productName' => 'Mirinda',
@@ -273,7 +273,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 280,
                 'created_at' => now()->subDay()->subDay(),
                 'updated_at' => now()->subDay()->subDay(),
-            ],
+                'date' => now()->subDay()->subDay(),            ],
             [
                 'product_id' => 6,
                 'productName' => '7 UP',
@@ -283,7 +283,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 180,
                 'created_at' => now()->subDay()->subDay(),
                 'updated_at' => now()->subDay()->subDay(),
-            ],
+                'date' => now()->subDay()->subDay(),            ],
             [
                 'product_id' => 7,
                 'productName' => 'Cake',
@@ -293,7 +293,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 20,
                 'created_at' => now()->subDay()->subDay(),
                 'updated_at' => now()->subDay()->subDay(),
-            ],
+                'date' => now()->subDay()->subDay(),            ],
             [
                 'product_id' => 8,
                 'productName' => 'Bread',
@@ -303,7 +303,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 60,
                 'created_at' => now()->subDay()->subDay(),
                 'updated_at' => now()->subDay()->subDay(),
-            ],
+                'date' => now()->subDay()->subDay(),            ],
             [
                 'product_id' => 9,
                 'productName' => 'Banana',
@@ -313,7 +313,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 60,
                 'created_at' => now()->subDay()->subDay(),
                 'updated_at' => now()->subDay()->subDay(),
-
+                'date' => now()->subDay()->subDay(),
 
             ],
             [
@@ -325,7 +325,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 12,
                 'created_at' => now()->subDay(),
                 'updated_at' => now()->subDay(),
-            ],
+                'date' => now()->subDay(),            ],
             [
                 'product_id' => 11,
                 'productName' => 'HP Envy',
@@ -335,7 +335,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 37,
                 'created_at' => now()->subDay(),
                 'updated_at' => now()->subDay(),
-            ],
+                'date' => now()->subDay(),            ],
             [
                 'product_id' => 12,
                 'productName' => 'Samsung A15',
@@ -345,7 +345,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 75,
                 'created_at' => now()->subDay(),
                 'updated_at' => now()->subDay(),
-            ],
+                'date' => now()->subDay(),            ],
             [
                 'product_id' => 13,
                 'productName' => 'Sony WH-CH520',
@@ -355,7 +355,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 168,
                 'created_at' => now()->subDay(),
                 'updated_at' => now()->subDay(),
-            ],
+                'date' => now()->subDay(),            ],
             [
                 'product_id' => 14,
                 'productName' => 'Panadol',
@@ -365,7 +365,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 360,
                 'created_at' => now()->subDay(),
                 'updated_at' => now()->subDay(),
-            ],
+                'date' => now()->subDay(),            ],
             [
                 'product_id' => 15,
                 'productName' => 'Zefcolin',
@@ -375,7 +375,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 6,
                 'created_at' => now()->subDay(),
                 'updated_at' => now()->subDay(),
-            ],
+                'date' => now()->subDay(),            ],
             [
                 'product_id' => 16,
                 'productName' => 'Pencil x6',
@@ -385,7 +385,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 680,
                 'created_at' => now()->subDay(),
                 'updated_at' => now()->subDay(),
-            ],
+                'date' => now()->subDay(),            ],
             [
                 'product_id' => 17,
                 'productName' => 'Pen x6',
@@ -395,7 +395,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 680,
                 'created_at' => now()->subDay(),
                 'updated_at' => now()->subDay(),
-            ],
+                'date' => now()->subDay(),            ],
             [
                 'product_id' => 18,
                 'productName' => 'Notebook A5',
@@ -405,7 +405,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 160,
                 'created_at' => now()->subDay(),
                 'updated_at' => now()->subDay(),
-            ],
+                'date' => now()->subDay(),            ],
             [
                 'product_id' => 19,
                 'productName' => 'Eraser',
@@ -415,7 +415,7 @@ class DatabaseSeeder extends Seeder
                 'totalQuantity' => 300,
                 'created_at' => now()->subDay(),
                 'updated_at' => now()->subDay(),
-            ],
+                'date' => now()->subDay(),            ],
         ]);
         // DB::table('sales')->create();
         // DB::table('salesDetail')->create();

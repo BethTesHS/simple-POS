@@ -30,7 +30,7 @@ class StockController extends Controller
             $stock->buyingPrice = $validated['buyingPrice'];
             $stock->quantity = $validated['quantity'];
             $stock->totalQuantity = ($product->stockQuantity)+($validated['quantity']);
-
+            $stock->date = now();
             $product->stockQuantity = ($product->stockQuantity)+($validated['quantity']);
 
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('buyingPrice');
             $table->integer('quantity');
             $table->integer('totalQuantity');
+            $table->date('date');
             $table->timestamps();
         });
     }
