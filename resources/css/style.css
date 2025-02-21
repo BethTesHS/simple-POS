@@ -93,7 +93,7 @@ a:hover{
     flex-direction: column;
     justify-content: space-between;
     left: 220px;
-    height: 70%;
+    height: 90%;
     width: 48%;
     min-width: 400px;
     margin-top: 10px;
@@ -115,14 +115,15 @@ a:hover{
     margin-bottom: 10px;
 }
 
-.date{
+.detail{
     background-color: #bdc3d4;
     border: solid 1px #00000033;
     border-radius: 10px;
     display: flex;
     justify-content: center;
-    width: 150px;
-    padding: 5px;
+    min-width: 150px;
+    padding: 7px;
+    margin: 0 12px;
 }
 
 .items-price{
@@ -172,7 +173,7 @@ a:hover{
     flex-direction: column;
     justify-content: space-between;
     right: 15px;
-    height: 70%;
+    height: 90%;
     width: 33.5%;
     min-width: 415px;
     margin-top: 10px;

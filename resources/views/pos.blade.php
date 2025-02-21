@@ -82,7 +82,7 @@
                         <i class='fa fa-search'></i>
                         <input autocomplete="off" class="query" type="text" name="search_query" value="" placeholder="Search for an item...">
                     </div>
-                    <select id="category" name="category_id" class="dropdown category" >
+                    <select id="category" name="category_id" class="dropdown category">
                         <option value="0">All Categories</option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -110,8 +110,13 @@
                 @csrf
                 <div class="left-view">
                 <div class="control">
-                    <div class="date">
-                        <?php echo date("F j, Y"); ?>
+                    <div class="detail">
+                        <i style="padding: 2px 4px 0 0" class="fa fa-calendar"></i>
+                        {{ date("F j, Y") }}
+                    </div>
+                    <div class="detail">
+                        <i style="padding: 2px 4px 0 0" class="fa fa-user-circle-o"></i>
+                        {{ auth()->user()->firstName ." ". auth()->user()->lastName }}
                     </div>
                 </div>
                 <div class="items-price">
