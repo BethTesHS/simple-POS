@@ -36,10 +36,10 @@
         <div class="sidebar">
             <ul>
                 <li> <a href="{{ route('pos') }}"> <button class= "listButton"> <i class="i fa fa-desktop"></i> POS </button> </a> </li>
-                <li> <a href="{{ route('products') }}"> <button style="color: white" class= "listButton" > <i class="i fa fa-shopping-basket"></i> Product </button> </a> </li>
+                <li> <a href="{{ route('products') }}"> <button class= "listButton" > <i class="i fa fa-shopping-basket"></i> Product </button> </a> </li>
                 <li> <a href="{{ route('sales') }}"> <button class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
                 <li> <a href="{{ route('stocks') }}"> <button class= "listButton"> <i class="i fa fa-line-chart"></i> Stocks </button> </a> </li>
-                <li> <a href="{{ route('users') }}"> <button class= "listButton"> <i class="i fa fa-user"></i> Users </button> </a> </li>
+                <li> <a href="{{ route('users') }}"> <button style="color: white" class= "listButton"> <i class="i fa fa-user"></i> Users </button> </a> </li>
                 <hr style="border: 0.5px solid #4372a7; width: 90%; margin: 10px;">
                 <li> <form action="{{ route('logout') }}" method="POST"> @csrf <button class= "listButton" type="submit"> <i class="i fa fa-sign-out"></i> Logout </button> </form> </li>
             </ul>
@@ -82,29 +82,25 @@
                     <table class="table-sp">
                         <thead>
                         <tr>
-                            <th class="th-sp">Product ID</th>
-                            <th class="th-sp">Product Name</th>
-                            <th class="th-sp">Stock Quantity</th>
-                            <th class="th-sp">Price</th>
-                            <th class="th-sp">Category</th>
+                            <th class="th-sp">User ID</th>
+                            <th class="th-sp">First Name</th>
+                            <th class="th-sp">Last Name</th>
                             <th class="th-sp" colspan='2'></th>
                         </tr>
                         </thead>
                         <tbody id="productTable">
-                            @foreach ($products as $product)
-                                <tr class="row" category-category="{{ $product->category->name }}">
-                                    <td class="td-sp"> P_{{ sprintf("%006d",$product->id) }} </td>
-                                    <td class="td-sp"> {{ $product->productName }} </td>
-                                    <td class="td-sp"> {{ $product->stockQuantity }} </td>
-                                    <td class="td-sp"> {{ $product->price}} ksh</td>
-                                    <td class="td-sp"> {{ $product->category->name }} </td>
+                            @foreach ($users as $user)
+                                <tr class="row"">
+                                    <td class="td-sp"> {{ sprintf("%006d",$user->id) }} </td>
+                                    <td class="td-sp"> {{ $user->firstName }} </td>
+                                    <td class="td-sp"> {{ $user->lastName }} </td>
                                     <td class="td-sp" style="padding: 0px; width: 60px;">
-                                        <button class="editProduct" data-id="{{ $product }}">
+                                        <button class="editProduct" data-id="{{ $user }}">
                                             <i style="width: 15px" class='fa fa-pencil-square-o'></i> Edit
                                         </button>
                                     </td>
                                     <td class="td-sp" style="padding: 3px; width: 60px;">
-                                        <button class="deleteProduct" data-id="{{ $product }}">
+                                        <button class="deleteProduct" data-id="{{ $user }}">
                                             <i style="width: 10px" class='fa fa-trash-o'></i> Delete
                                         </button>
                                     </td>
@@ -183,7 +179,7 @@
                 <label> Category Name </label> <br>
                 <input class="textArea" name="name" type="text"> <br>
 
-                <input id="createCategory" class="textButton" name="addCatgory" type="submit" value="Add Category"> <br>
+                <input id="createCategory" class="textButton" name="addCategory" type="submit" value="Add Category"> <br>
             </form>
 
         </div>

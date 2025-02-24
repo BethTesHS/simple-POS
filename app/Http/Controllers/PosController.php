@@ -7,6 +7,7 @@ use App\Models\SaleDetail;
 use App\Models\Stock;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PosController extends Controller
@@ -64,6 +65,16 @@ class PosController extends Controller
 
 
         return view('stocks', compact('products', 'sales', 'categories', 'stocks', 'stockDates', 'stocksPerDate'),);  // Pass the data to the view
+    }
+
+    public function users()
+    {
+        $products = Product::all();
+        $sales = Sale::all();
+        $categories = Category::all();
+        $users = User::all();
+
+        return view('users', compact('products', 'sales', 'categories', 'users'),);  // Pass the data to the view
     }
 
     public function analysis()
