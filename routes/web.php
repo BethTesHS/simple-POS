@@ -32,8 +32,6 @@ Route::post('register', [RegisterController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
 
-
-
     Route::get('/get-sale-details', [SaleDetailController::class, 'showSaleDetail'])->name('salesDetail');
 
     Route::get('/pos', [PosController::class, 'index'])->name('pos');

@@ -191,8 +191,9 @@
     padding-bottom: 30px;
     /* border-radius: 5px; */
     width: 500px;
-    min-height: 500px;
-    max-height: 700px;
+    /* min-height: 500px; */
+    /* max-height: 700px; */
+    height: 550px;
 }
 
 
@@ -232,9 +233,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     font-size: 18px;
-    
+
     border-radius: 6px;
 
     background-color: #98b7c5;
@@ -257,7 +258,7 @@
     padding: 5px 15px;
 }
 
-/* 
+/*
 .pagination-links {
     display: flex;
     justify-content: center;
@@ -322,7 +323,7 @@
 }
 
 .pagination .prev-next:hover {
-    background-color: #e2e6ea; 
+    background-color: #e2e6ea;
 }*/
 
 .align {

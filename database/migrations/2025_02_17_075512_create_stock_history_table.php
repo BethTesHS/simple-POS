@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('stockHistory', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->string('productName');
             $table->string('purchaseType');

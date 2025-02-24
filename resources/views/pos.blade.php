@@ -210,6 +210,8 @@
                         <th class="thd">{{$sale->totalPrice}} ksh</th>
                     </thead>
                 </table>
+                <br>
+                <text style="margin-bottom: 50px"><b>Cashier:</b> {{auth()->user()->firstName ." ". auth()->user()->lastName}} </text>
             </div>
             @endif
         </div>

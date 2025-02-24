@@ -11,8 +11,6 @@ use Illuminate\Http\Request;
 
 class PosController extends Controller
 {
-
-
     public function index(Request $request)
     {
 
@@ -21,7 +19,7 @@ class PosController extends Controller
         $sale = Sale::orderBy('id', 'desc')->first();
         if ($sale == null) {
             $saleDetails = null;
-        } 
+        }
         else {
             $saleDetails = SaleDetail::where('sale_id', $sale->id)->get();
         }
@@ -34,7 +32,7 @@ class PosController extends Controller
     {
         $products = Product::all();
         $salesPage = Sale::paginate(9);
-        $sales = Sale::all();
+        $sales = Sale::with('user')->get();
         $categories = Category::all();
 
         return view('sales', compact('products', 'sales', 'salesPage', 'categories'),);  // Pass the data to the view
@@ -53,7 +51,7 @@ class PosController extends Controller
     {
         $products = Product::all();
         $sales = Sale::all();
-        $stocks = Stock::latest()->get();
+        $stocks = Stock::latest()->with('user')->get();
         $categories = Category::all();
 
         $stockDates = Stock::select('date')
@@ -74,7 +72,7 @@ class PosController extends Controller
         $sales = Sale::all();
         $stocks = Stock::all();
         $categories = Category::all();
-        
+
         $stockDates = Stock::select('date')
             ->distinct()
             ->orderBy('date', 'asc')

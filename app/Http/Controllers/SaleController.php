@@ -25,6 +25,7 @@ class SaleController extends Controller
             $sale->totalQuantity = $validated['totalQuantity'];
             $sale->totalPrice = $validated['totalPrice'];
             $sale->payMethod = $validated['payMethod'];
+            $sale->user_id= auth()->user()->id;
 
             $sale->save();
 
@@ -47,12 +48,13 @@ class SaleController extends Controller
                     'purchaseType' => 'Sell',
                     'quantity' => -$productSale['quantity'],
                     'totalQuantity' => ($product->stockQuantity)-($productSale['quantity']),
+                    'user_id' => auth()->user()->id,
                     'buyingPrice' => 0,
-                    'date' => now(), 
-                    'created_at' => now(), 
+                    'date' => now(),
+                    'created_at' => now(),
                     'updated_at' => now()
                 ]);
-    
+
 
 
                 $quantity = intval($productSale['quantity']);

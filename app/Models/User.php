@@ -42,4 +42,13 @@ class User extends Authenticatable
         ];
     }
 
+    public function stock()
+    {
+        return $this->hasMany(Stock::class);
+    }
+
+    public function sale()
+    {
+        return $this->hasMany(Sale::class);
+    }
 }

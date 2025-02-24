@@ -11,24 +11,24 @@
     @vite(['resources/js/salesPages.js'])
     @vite(['resources/js/sales.js'])
     @vite(['resources/js/chart.js'])
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
     <script>
-        
+
         const dates = <?php echo json_encode($stockDates) ?>;
         const totalStock = <?php echo json_encode($stocksPerDate) ?>;
 
     </script>
-    
+
 </head>
 
 <body>
@@ -60,7 +60,7 @@
             </ul>
         </div>
 
-        {{-- -----------  MAIN VIEW ----------- --}}    
+        {{-- -----------  MAIN VIEW ----------- --}}
         <div class="mainviews" id="mainviews">
             <div class="mainpage">
                 <div class="align">
@@ -75,7 +75,7 @@
                             </text>
                             Purchase Product
                         </button>
-                        
+
                         <text class="i dateButton" >
                             <i class='fa fa-calendar'></i>
                             <input readonly type="button" id="filterDate" value="All Dates">
@@ -93,6 +93,7 @@
                                 <th class="th-sp">Product Name</th>
                                 <th class="th-sp">Stock Change</th>
                                 <th class="th-sp">Total Stock</th>
+                                <th class="th-sp">Buyer/Seller</th>
                                 {{-- <th class="th-sp" style="width: 10%"></th> --}}
                                 {{-- <th colspan='2'></th> --}}
                             </tr>
@@ -105,8 +106,9 @@
                                     <td class="td-sp"> {{ $stock->productName }} </td>
                                     <td class="td-sp"> {{ $stock->quantity }} </td>
                                     <td class="td-sp"> {{ $stock->totalQuantity }}  </td>
+                                    <td class="td-sp"> {{ $stock->user->firstName }}  </td>
                                     {{-- <td class="td-sp"> {{ $products->where('id', $stock->product_id)->first()->stockQuantity }} </td> --}}
-                                
+
                                 </tr>
                             @endforeach
                         </tbody>
@@ -154,7 +156,7 @@
                 @csrf
 
                 <label> Product Name </label> <br>
-                
+
                 <div class="categoryPopup">
 
                     <select id="product" name="product" class="dropdown2" >

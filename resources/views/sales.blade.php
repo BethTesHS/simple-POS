@@ -15,10 +15,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    
+
 </head>
 <body>
-    <script>  
+    <script>
         //  Popup reciept and loads data
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.detailView-btn').forEach(button => {
@@ -125,7 +125,7 @@
             </ul>
         </div>
 
-        {{-- -----------  MAIN VIEW ----------- --}}    
+        {{-- -----------  MAIN VIEW ----------- --}}
         <div class="mainviews" id="mainviews">
             <div class="mainpage">
                 <div class="align">
@@ -133,7 +133,7 @@
                         <h1>Sales</h1>
                     </header>
 
-                    
+
                     <div style="padding-bottom: 5px; display:flex; flex-direction: row">
                         <text class="i dateButton" >
                             <i class='fa fa-calendar'></i>
@@ -151,6 +151,7 @@
                                 <th class="th-sp">Total Quantity</th>
                                 <th class="th-sp">Total Price</th>
                                 <th class="th-sp">Payment Method</th>
+                                <th class="th-sp">Seller</th>
                                 <th class="th-sp" style="width: 10%"></th>
                                 {{-- <th colspan='2'></th> --}}
                             </tr>
@@ -163,6 +164,7 @@
                                     <td class="td-sp"> {{ $sale->totalQuantity }} </td>
                                     <td class="td-sp"> {{ $sale->totalPrice }} ksh</td>
                                     <td class="td-sp"> {{ $sale->payMethod }} </td>
+                                    <td class="td-sp"> {{ $sale->user->firstName }}  </td>
                                     <td class="td-sp" style="padding: 0px; width: 60px;">
                                         <button class="detailView-btn" data-id="{{ $sale }}">
                                             View

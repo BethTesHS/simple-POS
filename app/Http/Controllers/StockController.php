@@ -19,9 +19,9 @@ class StockController extends Controller
             ]);
 
             $stock = new Stock();
-            
+
             $productDetail = json_decode($validated['product']);
-            
+
             $product = Product::where('id', $productDetail[0])->first();
 
             $stock->product_id = $productDetail[0];
@@ -32,6 +32,7 @@ class StockController extends Controller
             $stock->totalQuantity = ($product->stockQuantity)+($validated['quantity']);
             $stock->date = now();
             $product->stockQuantity = ($product->stockQuantity)+($validated['quantity']);
+
 
 
 
