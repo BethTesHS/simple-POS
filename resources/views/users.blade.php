@@ -119,7 +119,7 @@
                 var userId = @json(auth()->user()->id);
             </script>
 
-            <form action="{{ route('products.update') }}" autocomplete="off" method="POST">
+            <form action="{{ route('users.update') }}" autocomplete="off" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -133,14 +133,14 @@
                 <input class="textArea" id="ln" name="lastName" type="text"> <br>
 
                 <label> Role </label> <br>
-                <select style="height: 50px" id="rid" name="role" class="dropdown2" >
+                <select style="height: 50px; padding: 0 5px;" id="rid" name="role" class="dropdown2" >
                     <option value="Seller"> Seller </option>
                     <option value="Buyer"> Buyer </option>
                     <option value="Buyer/Seller"> Buyer/Seller </option>
                 </select> <br>
 
 
-                <input style="margin: 15px 0px 10px 0px;" id="pr" name="price" type="checkbox">
+                <input style="margin: 15px 0px 10px 0px;" id="aid" name="admin" type="checkbox" value="1">
                 <label> Admin </label>
                 <br>
 

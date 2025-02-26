@@ -12,6 +12,7 @@ use App\Http\Controllers\PosController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SaleDetailController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\UserController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -58,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/stockUp', [StockController::class, 'update'])->name('stocks.update');
 
     Route::get('/testSearch', [ProductController::class, 'searchTest'])->name('test.search');
+
+    Route::put('/users', [UserController::class, 'update'])->name('users.update');
 
 
 
