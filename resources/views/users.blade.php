@@ -157,7 +157,7 @@
             <div style="padding: 20px 0px">
                 <h3> Delete Product </h3>
             </div>
-            <form action="{{ route('products.delete') }}" autocomplete="off" method="POST">
+            <form action="{{ route('users.delete') }}" autocomplete="off" method="POST">
                 @csrf
                 @method('DELETE')
 
@@ -165,7 +165,7 @@
 
                 <div>
                     <text> Are you sure you want to remove </text> <br>
-                    <b><output id="d_pn" name="productName" type="text" value=""> </output></b>
+                    <b><output id="d_fn" name="fullName" type="text" value=""> </output></b>
                     <text> from the system?</text>
                 </div>
 

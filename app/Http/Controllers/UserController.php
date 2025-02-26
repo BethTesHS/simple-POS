@@ -35,4 +35,22 @@ class UserController extends Controller
                 ->with('error_alert', true); // Store session flag for alert
         }
     }
+
+    public function delete(Request $request) {
+        try{
+            $validated = $request->validate([
+                'id' => 'required|string|max:10',
+            ]);
+
+            $user = User::findOrFail( $validated['id']);
+
+            $user->delete();
+
+            return redirect()->route('users')->with('success', 'Success!');
+        } catch (ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->validator) // Store validation errors
+                ->with('error_alert', true); // Store session flag for alert
+        }
+    }
 }

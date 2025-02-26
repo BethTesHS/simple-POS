@@ -37,10 +37,10 @@ closeEditPopupBtn.onclick = function() {
 
 document.querySelectorAll('.deleteProduct').forEach(button => {
     button.addEventListener('click', function() {
-        const member = JSON.parse(button.getAttribute('data-id'));
+        const user = JSON.parse(button.getAttribute('data-id'));
 
-        d_id.value=member['id'];
-        d_pn.value=member['productName'];
+        d_id.value=user['id'];
+        d_fn.value=user['firstName'] +" "+ user['lastName'];
 
         document.getElementById('deletePopupMessage').style.display = 'flex';
     });

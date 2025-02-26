@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/testSearch', [ProductController::class, 'searchTest'])->name('test.search');
 
     Route::put('/users', [UserController::class, 'update'])->name('users.update');
-
+    Route::delete('/users', [UserController::class, 'delete'])->name('users.delete');
 
 
 
