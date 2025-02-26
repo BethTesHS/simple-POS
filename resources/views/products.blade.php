@@ -68,13 +68,22 @@
                                 <option value="{{ $category->name }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
+                        @if (auth()->user()->admin)
+                            <button id='popupButton' class="addNewButton">
+                                <text class='i'>
+                                    <i class='fa fa-plus-square-o'></i>
+                                </text>
+                                Add New Product
+                            </button>
+                        @else
+                            <button id='unPopupButton' class="addNewButton" style="background-color: gray;">
+                                <text class='i'>
+                                    <i class='fa fa-plus-square-o'></i>
+                                </text>
+                                Add New Product
+                            </button>
+                        @endif
 
-                        <button id='popupButton' class="addNewButton">
-                            <text class='i'>
-                                <i class='fa fa-plus-square-o'></i>
-                            </text>
-                            Add New Product
-                        </button>
                     </div>
                 </div>
 

@@ -1,4 +1,10 @@
 // ------ Product ------ //
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('unPopupButton').addEventListener('click', function() {
+        alert("This operation has been restricted. Contact your Administrator to grant you access.");
+    });
+});
 document.getElementById('popupButton').addEventListener('click', function() {
     document.getElementById('popupMessage').style.display = 'flex'; // Show the popup
 });

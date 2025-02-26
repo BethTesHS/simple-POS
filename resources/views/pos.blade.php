@@ -155,7 +155,11 @@
                         </select>
                         <div class="pay">
                             <button type="button" class="cancel-pay" onclick="cancelPayment()"> Cancel </button>
-                            <button type="submit" class="complete-pay"> Complete Payment </button>
+                            @if (auth()->user()->role == "Seller" || auth()->user()->role == "Buyer/Seller")
+                                <button type="submit" class="complete-pay"> Complete Payment </button>
+                            @else
+                                <button id="unPopupButton" type="button" class="complete-pay" style="background-color: gray;"> Complete Payment </button>
+                            @endif
                         </div>
                     </div>
                 </div>

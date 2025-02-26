@@ -1,3 +1,9 @@
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('unPopupButton').addEventListener('click', function() {
+        alert("This operation has been restricted. Contact your Administrator to grant you access.");
+    });
+});
+
 // ----------- CALCULATOR ----------- //
 window.calcOpenPopup = function() {
     calcPopup.style.display = (calcPopup.style.display === 'block') ? 'none' : 'block';
@@ -17,7 +23,7 @@ window.validateForm = function() {
 
     if (parseInt(totalQuantity) <= 0 || parseInt(totalPrice) <= 0) {
         alert("Please add at least one product before proceeding.");
-        return false; 
+        return false;
     }else if (payMethod == "" ) {
         alert("Please select a payment method before completing payment.");
         return false;
@@ -93,10 +99,10 @@ window.change = function(price, stock, ids) {
 window.addRow = function(productDetail) {
     const table = document.getElementById('tableBody');
     const existingRow = Array.from(table.children).find(row => row.dataset.productId == productDetail.id);
-    
+
     if (!existingRow) {
         const newRow = document.createElement('tr');
-        newRow.dataset.productId = productDetail.id; 
+        newRow.dataset.productId = productDetail.id;
         newRow.innerHTML = `
             <td class="thd">
                 ${productDetail['productName']}
@@ -156,7 +162,7 @@ window.cancelPayment = function() {
     `;
 }
 
-// Closes popup for Receipt 
+// Closes popup for Receipt
 window.closeReceiptPopupBtn = function() {
     document.getElementById('popupReceipt').style.display = 'none'; // Hide the popup
 }
@@ -175,4 +181,3 @@ window.closeReceiptPopupBtn = function() {
 // }
 //     const input = document.getElementById("subTot");
 //     window.onload = () => adjustWidth(input);
-    

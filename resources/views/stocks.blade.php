@@ -70,12 +70,22 @@
                     </header>
 
                     <div style="padding-bottom: 5px; display:flex; flex-direction: row">
-                        <button id='popupButton' class="addNewButton">
-                            <text class='i'>
-                                <i class='fa fa-plus-square-o'></i>
-                            </text>
-                            Purchase Product
-                        </button>
+                        @if (auth()->user()->role == "Buyer" || auth()->user()->role == "Buyer/Seller")
+                            <button id='popupButton' class="addNewButton">
+                                <text class='i'>
+                                    <i class='fa fa-plus-square-o'></i>
+                                </text>
+                                Purchase Product
+                            </button>
+
+                        @else
+                            <button id='unPopupButton' class="addNewButton" style="background-color: gray;">
+                                <text class='i'>
+                                    <i class='fa fa-plus-square-o'></i>
+                                </text>
+                                Purchase Product
+                            </button>
+                        @endif
 
                         <text class="i dateButton" >
                             <i class='fa fa-calendar'></i>
@@ -94,7 +104,7 @@
                                 <th class="th-sp">Product Name</th>
                                 <th class="th-sp">Stock Change</th>
                                 <th class="th-sp">Total Stock</th>
-                                <th class="th-sp">Buyer/Seller</th>
+                                <th class="th-sp">Done By</th>
                                 {{-- <th class="th-sp" style="width: 10%"></th> --}}
                                 {{-- <th colspan='2'></th> --}}
                             </tr>
@@ -128,8 +138,8 @@
 
                 @if ($stockDates->isEmpty())
                     <div>
-                        <h4>No Data</h4>
-                        <p>There is nothing to show</p>
+                        {{-- <h4>No Data</h4>
+                        <p>There is nothing to show</p> --}}
                     </div>
                 @else
                     <div class="chart-wrapper">
