@@ -40,6 +40,8 @@ class RegisterController extends Controller
             // 'username' => str_replace('@', '', $request->username),
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'Seller',
+            'admin' => false,
         ]);
 
         // $em = new sendEmail();

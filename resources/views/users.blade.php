@@ -7,8 +7,8 @@
     <title>Simple POS</title>
 
     @vite(['resources/css/all.css'])
-    @vite(['resources/js/productsPopup.js'])
-    @vite(['resources/js/productsPages.js'])
+    @vite(['resources/js/usersPopup.js'])
+    @vite(['resources/js/usersPages.js'])
     @vite(['resources/js/products.js'])
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -51,31 +51,8 @@
             <div class="mainpage">
                 <div class="align">
                     <header>
-                        <h1>Products</h1>
+                        <h1>Users</h1>
                     </header>
-
-
-                    <div style="padding-bottom: 5px; display:flex; flex-direction: row">
-
-                        <button id='popupButton2' class="popupButton2" type="button">
-                            <text class='i'>
-                                <i class='fa fa-plus-square-o'></i>
-                            </text>
-                        </button>
-                        <select name="category_id" class="dropdown3 categoryFilter" id="categoryFilter">
-                            <option value="0">All Categories</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->name }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-
-                        <button id='popupButton' class="addNewButton">
-                            <text class='i'>
-                                <i class='fa fa-plus-square-o'></i>
-                            </text>
-                            Add New Product
-                        </button>
-                    </div>
                 </div>
 
                 <div class="tableContainer">
@@ -85,7 +62,11 @@
                             <th class="th-sp">User ID</th>
                             <th class="th-sp">First Name</th>
                             <th class="th-sp">Last Name</th>
-                            <th class="th-sp" colspan='2'></th>
+                            <th class="th-sp">Role</th>
+                            <th class="th-sp">Admin</th>
+                            @if (auth()->user()->admin)
+                                <th class="th-sp" colspan='2'></th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody id="productTable">
@@ -94,16 +75,20 @@
                                     <td class="td-sp"> {{ sprintf("%006d",$user->id) }} </td>
                                     <td class="td-sp"> {{ $user->firstName }} </td>
                                     <td class="td-sp"> {{ $user->lastName }} </td>
-                                    <td class="td-sp" style="padding: 0px; width: 60px;">
-                                        <button class="editProduct" data-id="{{ $user }}">
-                                            <i style="width: 15px" class='fa fa-pencil-square-o'></i> Edit
-                                        </button>
-                                    </td>
-                                    <td class="td-sp" style="padding: 3px; width: 60px;">
-                                        <button class="deleteProduct" data-id="{{ $user }}">
-                                            <i style="width: 10px" class='fa fa-trash-o'></i> Delete
-                                        </button>
-                                    </td>
+                                    <td class="td-sp"> {{ $user->role }} </td>
+                                    <td class="td-sp"> @if($user->admin) Yes @else No @endif </td>
+                                    @if (auth()->user()->admin)
+                                        <td class="td-sp" style="padding: 0px; width: 60px;">
+                                            <button class="editProduct" data-id="{{ $user }}">
+                                                <i style="width: 15px" class='fa fa-pencil-square-o'></i> Edit
+                                            </button>
+                                        </td>
+                                        <td class="td-sp" style="padding: 3px; width: 60px;">
+                                            <button class="deleteProduct" data-id="{{ $user }}">
+                                                <i style="width: 10px" class='fa fa-trash-o'></i> Delete
+                                            </button>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
@@ -111,11 +96,11 @@
                 </div>
 
                 <div class="pagination-container">
-                    <button id="prevProductPage"> ‹ </button>
+                    <button id="prevUserPage"> ‹ </button>
                         <div class="inputChange">
-                            <span id="productPageIndicator">Page</span>
+                            <span id="userPageIndicator">Page</span>
                         </div>
-                    <button id="nextProductPage"> › </button>
+                    <button id="nextUserPage"> › </button>
                 </div>
             </div>
         </div>
@@ -123,75 +108,16 @@
 
     {{-------------- // POPUPS // --------------}}
 
-    {{-- Add Product Popup --}}
-    <div id="popupMessage" class="productPopup">
-        <div class="productPopup-content">
-
-            <span class="close-btn" id="closePopup">&times;</span>
-            <div style="padding: 20px 0px">
-                <h2> Add New Product </h2>
-            </div>
-
-            <form action="{{ route('products.store') }}" autocomplete="off" method="POST">
-                @csrf
-
-                <label> Product Name</label> <br>
-                <input class="textArea" name="productName" type="text"> <br>
-
-                <label> Price </label> <br>
-                <input class="textArea" name="price" type="number" step="any" maxlength="10"> <br>
-
-                <label> Stock </label>
-                <div class="stock">
-                    <button type="button" onclick="sub(this.closest('div').querySelector('.stock input'))" class="button"> - </button>
-                        <input class="display" id="sq" name="stockQuantity" oninput="change(this.closest('div').querySelector('.stock input'))" type="text" value="0">
-                    <button type="button" onclick="add(this.closest('div').querySelector('.stock input'))" class="button"> + </button>
-                </div>
-
-                <label> Category </label> <br>
-                <div class="categoryPopup">
-
-                    <select id="category" name="category_id" class="dropdown2" >
-                        <option value=""> -- Select Category -- </option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select> <br>
-                </div>
-
-                <input class="textButton" name="addProduct" type="submit" value="Add Product"> <br>
-            </form>
-        </div>
-    </div>
-
-    {{-- Add Category Popup --}}
-    <div id="popupMessage2" class="productPopup">
-        <div class="productPopup-content">
-
-            <span class="close-btn" id="closePopup2">&times;</span>
-            <div style="padding: 20px 0px">
-                <h2> Create Category </h2>
-            </div>
-
-            <form action="{{ route('categories.store') }}" autocomplete="off" method="POST">
-                @csrf
-
-                <label> Category Name </label> <br>
-                <input class="textArea" name="name" type="text"> <br>
-
-                <input id="createCategory" class="textButton" name="addCategory" type="submit" value="Add Category"> <br>
-            </form>
-
-        </div>
-    </div>
-
     {{-- Edit Product Popup --}}
     <div id="editPopupMessage" class="productPopup2">
         <div class="productPopup2-content">
             <span class="close-btn" id="closeEditPopupBtn">&times;</span>
             <div style="padding: 20px 0px">
-                <h3> Edit Product </h3>
+                <h3> Edit User </h3>
             </div>
+            <script>
+                var userId = @json(auth()->user()->id);
+            </script>
 
             <form action="{{ route('products.update') }}" autocomplete="off" method="POST">
                 @csrf
@@ -200,19 +126,23 @@
                 <label> ID </label> <br>
                 <input style="color:gray" id="id" class="textArea" name="id" type="text" value="" readonly> <br>
 
-                <label> Product Name</label> <br>
-                <input class="textArea" id="pn" name="productName" type="text"> <br>
+                <label> First Name </label> <br>
+                <input class="textArea" id="fn" name="firstName" type="text"> <br>
 
-                <label> Price </label> <br>
-                <input class="textArea" id="pr" name="price" type="number" step="any" maxlength="10"> <br>
+                <label> Last Name </label> <br>
+                <input class="textArea" id="ln" name="lastName" type="text"> <br>
 
-                <label> Category </label> <br>
-                <select id="cid" name="category_id" class="dropdown2 category" >
-                    <option value=""> -- Select Category -- </option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
+                <label> Role </label> <br>
+                <select style="height: 50px" id="rid" name="role" class="dropdown2" >
+                    <option value="Seller"> Seller </option>
+                    <option value="Buyer"> Buyer </option>
+                    <option value="Buyer/Seller"> Buyer/Seller </option>
                 </select> <br>
+
+
+                <input style="margin: 15px 0px 10px 0px;" id="pr" name="price" type="checkbox">
+                <label> Admin </label>
+                <br>
 
                 <input class="textButton" name="editProduct" type="submit" value="Update Member"> <br>
             </form>
