@@ -146,21 +146,30 @@
                         </table>
                     </div>
                     <div class="payment">
-                        <select id="payMethod" name="payMethod" class="pay-method">
-                            <option value=""> -- Payment Method -- </option>
-                            <option value="Cash"> Cash </option>
-                            <option value="Debit or Credit"> Debit or Credit </option>
-                            <option value="M-PESA"> M-PESA </option>
-                            <option value="Others"> Others </option>
-                        </select>
+                        <div class="pay">
+                            <select id="payMethod" name="payMethod" class="pay-method">
+                                <option value=""> -- Payment Method -- </option>
+                                <option value="Cash"> Cash </option>
+                                <option value="Debit or Credit"> Debit or Credit </option>
+                                <option value="M-PESA"> M-PESA </option>
+                                <option value="Others"> Others </option>
+                            </select>
+                            <select id="payType" name="payType" class="pay-method" onChange="PaymentType()" value="Full">
+                                <option value="Full" selected> Full Payment </option>
+                                <option value="Partial"> Partial Payment </option>
+                            </select>
+                        </div>
                         <div class="pay">
                             <button type="button" class="cancel-pay" onclick="cancelPayment()"> Cancel </button>
                             @if (auth()->user()->role == "Seller" || auth()->user()->role == "Buyer/Seller")
-                                <button type="submit" class="complete-pay"> Complete Payment </button>
+                                <button type="submit" class="complete-pay" id="completePayButton"> Complete Payment </button>
                             @else
                                 <button id="unPopupButton" type="button" class="complete-pay" style="background-color: gray;"> Complete Payment </button>
                             @endif
                         </div>
+                        <script>
+
+                        </script>
                     </div>
                 </div>
             </form>
@@ -219,6 +228,46 @@
                 <text style="margin-bottom: 50px"><b>Cashier:</b> {{auth()->user()->firstName ." ". auth()->user()->lastName}} </text>
             </div>
             @endif
+        </div>
+    </div>
+
+    <div id="popupPayment" class="productPopup">
+        <div class="productPopup-content">
+
+            <span class="close-btn" onClick="closePopup()">&times;</span>
+            <div style="padding: 20px 0px">
+                <h2> Payment Plan </h2>
+            </div>
+
+            {{-- <form action="{{ route('products.store') }}" autocomplete="off" method="POST">
+                @csrf
+
+                <label> Product Name</label> <br>
+                <input class="textArea" name="productName" type="text"> <br>
+
+                <label> Price </label> <br>
+                <input class="textArea" name="price" type="number" step="any" maxlength="10"> <br>
+
+                <label> Stock </label>
+                <div class="stock">
+                    <button type="button" onclick="sub(this.closest('div').querySelector('.stock input'))" class="button"> - </button>
+                        <input class="display" id="sq" name="stockQuantity" oninput="change(this.closest('div').querySelector('.stock input'))" type="text" value="0">
+                    <button type="button" onclick="add(this.closest('div').querySelector('.stock input'))" class="button"> + </button>
+                </div>
+
+                <label> Category </label> <br>
+                <div class="categoryPopup">
+
+                    <select id="category" name="category_id" class="dropdown2" >
+                        <option value=""> -- Select Category -- </option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select> <br>
+                </div>
+
+                <input class="textButton" name="addProduct" type="submit" value="Add Product"> <br>
+            </form> --}}
         </div>
     </div>
 

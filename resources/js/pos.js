@@ -162,22 +162,31 @@ window.cancelPayment = function() {
     `;
 }
 
+// For Partial Payment
+    window.PaymentType = function() {
+        var payType = document.getElementById("payType"); // Access the payMethod select element
+        var completePayButton = document.getElementById("completePayButton"); // Access the button element
+
+
+        if (payType.value == "Partial") {
+            // completePayButton.style.backgroundColor = 'green';
+            completePayButton.innerText = "Continue Payment";
+            completePayButton.type = 'Button';
+            completePayButton.onclick = function() {
+                popupPayment.style.display = 'flex';
+            };
+        } else {
+            completePayButton.innerText = "Complete Payment";
+            completePayButton.type = 'Submit';
+            completePayButton.onclick = function() {};
+        }
+    };
+
+    window.closePopup = function() {
+        popupPayment.style.display = 'none'; // Hide the popup
+    };
+
 // Closes popup for Receipt
 window.closeReceiptPopupBtn = function() {
     document.getElementById('popupReceipt').style.display = 'none'; // Hide the popup
 }
-
-// // To adjust input textarea side based on content
-// function adjustWidth(input) {
-//     const span = document.createElement("span");
-//     span.style.visibility = "hidden";
-//     span.style.position = "absolute"
-//     span.style.font = getComputedStyle(input).font;
-//     span.textContent = input.value || input.placeholder;
-
-//     document.body.appendChild(span);
-//     input.style.width = span.offsetWidth + "px";
-//     document.body.removeChild(span);
-// }
-//     const input = document.getElementById("subTot");
-//     window.onload = () => adjustWidth(input);
