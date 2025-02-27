@@ -1,0 +1,26 @@
+download and add paths
+    composer - C:\ProgramData\ComposerSetup\bin
+    node.js - C:\Program Files\nodejs\
+        if npm command is not working - "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
+    git
+    xampp - C:\xampp\php
+    7-zip - C:\Program Files\7-Zip
+
+xampp was outdated so i uninstalled and installed a new version
+
+composer update
+composer install
+
+cp .env.example .env
+
+php artisan key:generate
+php artisan config:clear
+
+php artisan migrate
+php artisan db:seed --class=DatabaseSeeder
+
+npm update
+npm run build
+
+php artisan serve
+npm run dev

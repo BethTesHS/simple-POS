@@ -1,0 +1,48 @@
+https://www.youtube.com/watch?v=eUNWzJUvkCA
+
+Download:
+    composer
+    node.js
+    git
+    xampp
+
+Open terminal and write command:
+    composer create-project laravel/laravel laravel-test
+        or
+    composer update (for already existing projects)
+
+Open the downloaded folder in vscode
+
+Open terminal and write command:
+    php artisan serve
+
+Open another terminal and write command:
+    npm install
+
+    Note:
+        If there is an Errore C:\..\nodejs\npm.psq connot be loaded"
+        Write the command:
+            Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+        then
+            npm install
+
+
+Once it is done installing, write command:
+    npm run dev
+
+
+Php viewable files are edited 'resources\views\welcome.blade.php'
+Routes are saved in 'routes\web.php'
+
+Create a controller file using the command:
+    php artisan make:controller WelcomeController
+This will create a file 'app\Http\Controllers\WelcomeController.php'
+
+Create a model and migration file using the command:
+    php artisan make:model Note -m
+This will create file:
+    'app\Models\Note.php'
+    'database\migrations\2025_01_15_063828_create_notes_table.php'
+
+to create migrations
+    php artisan make:migration create_flights_table
