@@ -185,7 +185,7 @@
                         </div>
 
                             <label> Total Price </label> <br>
-                            <input class="textArea" name="totalPay" type="text" value="????" readonly> <br>
+                            <input id="totPrice" class="textArea" name="totalPay" type="text" value="????" readonly> <br>
 
                             <label> Amount to pay now </label> <br>
                             <input class="textArea" name="payNow" type="decimal"> <br>

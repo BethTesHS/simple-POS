@@ -174,6 +174,7 @@ window.cancelPayment = function() {
             completePayButton.type = 'button';
             completePayButton.onclick = function() {
                 popupPayment.style.display = 'flex';
+                totPrice.value = totalPrice.value;
             };
             paymentForm.action = window.partialUrl;
             completePartialButton.type='submit'
