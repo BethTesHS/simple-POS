@@ -171,14 +171,18 @@ window.cancelPayment = function() {
         if (payType.value == "Partial") {
             // completePayButton.style.backgroundColor = 'green';
             completePayButton.innerText = "Continue Payment";
-            completePayButton.type = 'Button';
+            completePayButton.type = 'button';
             completePayButton.onclick = function() {
                 popupPayment.style.display = 'flex';
             };
+            paymentForm.action = window.partialUrl;
+            completePartialButton.type='submit'
         } else {
             completePayButton.innerText = "Complete Payment";
-            completePayButton.type = 'Submit';
+            completePayButton.type = 'submit';
             completePayButton.onclick = function() {};
+            paymentForm.action = window.fullUrl;
+            completePartialButton.type='button'
         }
     };
 

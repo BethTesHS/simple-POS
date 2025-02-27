@@ -14,6 +14,12 @@
 
 </head>
 <body>
+    {{-- TODO: route switcheroo --}}
+    <script>
+        window.partialUrl = @json(route('sales.storePartialSale'));
+        window.fullUrl = @json(route('sales.storeSale'));
+    </script>
+    
 
     <script>
     // The function that lets us filter by category and/or search
@@ -107,7 +113,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('sales.storeSale') }}" method="POST" onsubmit="return validateForm()">
+            <form id="paymentForm" action="{{ route('sales.storeSale') }}" method="POST" onsubmit="return validateForm()">
                 @csrf
                 <div class="left-view">
                 <div class="control">
@@ -137,6 +143,7 @@
                     </table>
                 </div>
 
+                {{-- TODO --}}
                     <div class="total-price">
                         <table>
                             <tr>
@@ -167,9 +174,24 @@
                                 <button id="unPopupButton" type="button" class="complete-pay" style="background-color: gray;"> Complete Payment </button>
                             @endif
                         </div>
-                        <script>
+                    </div>
+                    {{-- TODO: Popup for Patial --}}
+                    <div id="popupPayment" class="productPopup">
+                        <div class="productPopup-content">
 
-                        </script>
+                        <span class="close-btn" onClick="closePopup()">&times;</span>
+                        <div style="padding: 20px 0px">
+                            <h2> Payment Plan </h2>
+                        </div>
+
+                            <label> Total Price </label> <br>
+                            <input class="textArea" name="totalPay" type="text" value="????" readonly> <br>
+
+                            <label> Amount to pay now </label> <br>
+                            <input class="textArea" name="payNow" type="decimal"> <br>
+
+                            <button type="button" class="textButton" id="completePartialButton"> Complete Payment </button>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -231,45 +253,7 @@
         </div>
     </div>
 
-    <div id="popupPayment" class="productPopup">
-        <div class="productPopup-content">
-
-            <span class="close-btn" onClick="closePopup()">&times;</span>
-            <div style="padding: 20px 0px">
-                <h2> Payment Plan </h2>
-            </div>
-
-            {{-- <form action="{{ route('products.store') }}" autocomplete="off" method="POST">
-                @csrf
-
-                <label> Product Name</label> <br>
-                <input class="textArea" name="productName" type="text"> <br>
-
-                <label> Price </label> <br>
-                <input class="textArea" name="price" type="number" step="any" maxlength="10"> <br>
-
-                <label> Stock </label>
-                <div class="stock">
-                    <button type="button" onclick="sub(this.closest('div').querySelector('.stock input'))" class="button"> - </button>
-                        <input class="display" id="sq" name="stockQuantity" oninput="change(this.closest('div').querySelector('.stock input'))" type="text" value="0">
-                    <button type="button" onclick="add(this.closest('div').querySelector('.stock input'))" class="button"> + </button>
-                </div>
-
-                <label> Category </label> <br>
-                <div class="categoryPopup">
-
-                    <select id="category" name="category_id" class="dropdown2" >
-                        <option value=""> -- Select Category -- </option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select> <br>
-                </div>
-
-                <input class="textButton" name="addProduct" type="submit" value="Add Product"> <br>
-            </form> --}}
-        </div>
-    </div>
+    
 
     {{-- -----------  ALERTS ----------- --}}
     @if (session('success'))

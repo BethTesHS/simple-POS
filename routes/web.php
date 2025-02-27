@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/analysis', [PosController::class, 'analysis'])->name('analysis');
 
     Route::post('/storeSale', [SaleController::class, 'storeSale'])->name('sales.storeSale');
+    Route::post('/storePartialSale', [SaleController::class, 'storePartialSale'])->name('sales.storePartialSale');
     Route::post('/storeSaleDetail', [SaleController::class, 'storeSaleDetail'])->name('sales.storeSaleDetail');
 
     Route::get('/productSearch', [ProductController::class, 'searchProducts'])->name('products.search');
