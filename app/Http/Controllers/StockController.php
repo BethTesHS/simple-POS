@@ -25,6 +25,7 @@ class StockController extends Controller
             $product = Product::where('id', $productDetail[0])->first();
 
             $stock->product_id = $productDetail[0];
+            $stock->user_id = auth()->user()->id;
             $stock->productName = $productDetail[1];
             $stock->purchaseType = 'Buy';
             $stock->buyingPrice = $validated['buyingPrice'];

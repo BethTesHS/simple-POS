@@ -41,7 +41,7 @@ class PosController extends Controller
 
     public function products()
     {
-        $products = Product::all();
+        $products = Product::orderBy('productName', 'asc')->get();
         $sales = Sale::all();
         $categories = Category::all();
 
@@ -50,7 +50,7 @@ class PosController extends Controller
 
     public function stocks()
     {
-        $products = Product::all();
+        $products = Product::orderBy('productName', 'asc')->get();
         $sales = Sale::all();
         $stocks = Stock::latest()->with('user')->get();
         $categories = Category::all();
