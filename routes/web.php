@@ -13,6 +13,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SaleDetailController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -66,6 +67,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/users', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users', [UserController::class, 'delete'])->name('users.delete');
 
-
+    Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
+    Route::put('/customers', [CustomerController::class, 'update'])->name('customers.update');
+    Route::delete('/customers', [CustomerController::class, 'delete'])->name('customers.delete');
 
 });
