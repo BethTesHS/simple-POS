@@ -100,7 +100,9 @@ class SaleController extends Controller
                 'sale_id' => $sale->id,
                 'paid' => $validated['payNow'],
                 'toPay' => ($validated['totalPrice']) - ($validated['payNow']),
-                'total' => $validated['totalPrice']
+                'total' => $validated['totalPrice'],
+                'created_at' => now(),
+                'updated_at' => now()
             ]);
 
             foreach ($request->products as $productId => $productSale) {

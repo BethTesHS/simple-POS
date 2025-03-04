@@ -118,9 +118,9 @@
             <ul>
                 <li> <a href="{{ route('pos') }}"> <button class= "listButton"> <i class="i fa fa-desktop"></i> POS </button> </a> </li>
                 <li> <a href="{{ route('products') }}"> <button class= "listButton" > <i class="i fa fa-shopping-basket"></i> Product </button> </a> </li>
-                <li> <a href="{{ route('sales') }}"> <button style="color: white" class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
+                <li> <a href="{{ route('sales') }}"> <button class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
                 <li> <a href="{{ route('stocks') }}"> <button class= "listButton"> <i class="i fa fa-line-chart"></i> Stocks </button> </a> </li>
-                <li> <a href="{{ route('partial') }}"> <button class= "listButton"> <i class="i fa fa-money"></i> Partial <br>Payments </button> </a> </li>
+                <li> <a href="{{ route('partial') }}"> <button style="color: white" class= "listButton"> <i class="i fa fa-money"></i> Partial <br>Payments </button> </a> </li>
                 <li> <a href="{{ route('users') }}"> <button class= "listButton"> <i class="i fa fa-user"></i> Users </button> </a> </li>
                 <hr style="border: 0.5px solid #4372a7; width: 90%; margin: 10px;">
                 <li> <form action="{{ route('logout') }}" method="POST"> @csrf <button class= "listButton" type="submit"> <i class="i fa fa-sign-out"></i> Logout </button> </form> </li>
@@ -132,7 +132,7 @@
             <div class="mainpage">
                 <div class="align">
                     <header>
-                        <h1>Sales</h1>
+                        <h1>Partial Payments</h1>
                     </header>
 
 
@@ -148,30 +148,30 @@
                     <table class="table-sp">
                         <thead>
                             <tr>
-                                <th class="th-sp">Reciept ID</th>
+                                <th class="th-sp">Partial ID</th>
+                                <th class="th-sp">Sale ID</th>
                                 <th class="th-sp">Date</th>
-                                <th class="th-sp">Total Quantity</th>
+                                <th class="th-sp">Amount Paid</th>
+                                <th class="th-sp">Amount to pay</th>
                                 <th class="th-sp">Total Price</th>
-                                <th class="th-sp">Payment Method</th>
-                                <th class="th-sp">Seller</th>
-                                <th class="th-sp" style="width: 10%"></th>
+                                {{-- <th class="th-sp" style="width: 10%"></th> --}}
                                 {{-- <th colspan='2'></th> --}}
                             </tr>
                         </thead>
                         <tbody id="salesTableBody">
-                            @foreach ($sales as $sale)
-                                <tr class="row" data-date="{{ $sale->created_at->toDateString() }}">
-                                    <td class="td-sp"> {{ sprintf("%010d", $sale->id) }} </td>
-                                    <td class="td-sp"> {{ $sale->created_at->toDateString() }} </td>
-                                    <td class="td-sp"> {{ $sale->totalQuantity }} </td>
-                                    <td class="td-sp"> {{ $sale->totalPrice }} ksh</td>
-                                    <td class="td-sp"> {{ $sale->payMethod }} </td>
-                                    <td class="td-sp"> {{ $sale->user->firstName }}  </td>
-                                    <td class="td-sp" style="padding: 0px; width: 60px;">
-                                        <button class="detailView-btn" data-id="{{ $sale }}">
+                            @foreach ($partial as $part)
+                                <tr class="row" data-date="{{ $part->created_at->toDateString() }}">
+                                    <td class="td-sp"> {{ sprintf("%06d", $part->id) }} </td>
+                                    <td class="td-sp"> {{ sprintf("%010d", $part->sale->id) }} </td>
+                                    <td class="td-sp"> {{ $part->created_at->toDateString() }} </td>
+                                    <td class="td-sp"> {{ $part->paid }} </td>
+                                    <td class="td-sp"> {{ $part->toPay }} ksh</td>
+                                    <td class="td-sp"> {{ $part->total }} </td>
+                                    {{-- <td class="td-sp" style="padding: 0px; width: 60px;">
+                                        <button class="detailView-btn" data-id="{{ $part }}">
                                             View
                                         </button>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>

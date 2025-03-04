@@ -10,4 +10,9 @@ class PartialPayment extends Model
     use HasFactory;
 
     protected $table = "partialPayments";
+
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class);
+    }
 }

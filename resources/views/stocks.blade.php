@@ -55,6 +55,7 @@
                 <li> <a href="{{ route('products') }}"> <button class= "listButton" > <i class="i fa fa-shopping-basket"></i> Product </button> </a> </li>
                 <li> <a href="{{ route('sales') }}"> <button class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
                 <li> <a href="{{ route('stocks') }}"> <button  style="color: white" class= "listButton"> <i class="i fa fa-line-chart"></i> Stocks </button> </a> </li>
+                <li> <a href="{{ route('partial') }}"> <button class= "listButton"> <i class="i fa fa-money"></i> Partial <br>Payments </button> </a> </li>
                 <li> <a href="{{ route('users') }}"> <button class= "listButton"> <i class="i fa fa-user"></i> Users </button> </a> </li>
                 <hr style="border: 0.5px solid #4372a7; width: 90%; margin: 10px;">
                 <li> <form action="{{ route('logout') }}" method="POST"> @csrf <button class= "listButton" type="submit"> <i class="i fa fa-sign-out"></i> Logout </button> </form> </li>
@@ -104,6 +105,7 @@
                                 <th class="th-sp">Product Name</th>
                                 <th class="th-sp">Stock Change</th>
                                 <th class="th-sp">Total Stock</th>
+                                <th class="th-sp">Sales Type</th>
                                 <th class="th-sp">Done By</th>
                                 {{-- <th class="th-sp" style="width: 10%"></th> --}}
                                 {{-- <th colspan='2'></th> --}}
@@ -117,6 +119,7 @@
                                     <td class="td-sp"> {{ $stock->productName }} </td>
                                     <td class="td-sp"> {{ $stock->quantity }} </td>
                                     <td class="td-sp"> {{ $stock->totalQuantity }}  </td>
+                                    <td class="td-sp"> {{ $stock->purchaseType }}  </td>
                                     <td class="td-sp"> {{ $stock->user->firstName }}  </td>
                                     {{-- <td class="td-sp"> {{ $products->where('id', $stock->product_id)->first()->stockQuantity }} </td> --}}
 

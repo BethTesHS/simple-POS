@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PartialPayment;
 use App\Models\Sale;
 use App\Models\SaleDetail;
 use App\Models\Stock;
@@ -65,6 +66,17 @@ class PosController extends Controller
 
 
         return view('stocks', compact('products', 'sales', 'categories', 'stocks', 'stockDates', 'stocksPerDate'),);  // Pass the data to the view
+    }
+
+    public function partial()
+    {
+        $products = Product::all();
+        $sales = Sale::all();
+        $categories = Category::all();
+        $users = User::all();
+        $partial = PartialPayment::latest()->with('sale')->get();
+
+        return view('partial', compact('products', 'sales', 'categories', 'users', 'partial'),);  // Pass the data to the view
     }
 
     public function users()

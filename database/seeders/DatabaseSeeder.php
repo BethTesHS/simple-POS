@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         DB::table('sales')->truncate();
         DB::table('salesDetail')->truncate();
         DB::table('stockHistory')->truncate();
+        DB::table('partialPayments')->truncate();
         Schema::enableForeignKeyConstraints();
 
         // Insert sample data
