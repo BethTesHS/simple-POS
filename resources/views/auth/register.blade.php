@@ -11,7 +11,7 @@
     {{-- <link rel="stylesheet" href="style.css"/> --}}
     @vite(['resources/css/sign.css'])
 
-    <title>Document</title>
+    <title>Simple POS</title>
     <script>
         window.onload = function() {
             const message = "<?php echo $message; ?>";
