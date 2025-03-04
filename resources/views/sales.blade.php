@@ -118,9 +118,13 @@
             <ul>
                 <li> <a href="{{ route('pos') }}"> <button class= "listButton"> <i class="i fa fa-desktop"></i> POS </button> </a> </li>
                 <li> <a href="{{ route('products') }}"> <button class= "listButton" > <i class="i fa fa-shopping-basket"></i> Product </button> </a> </li>
-                <li> <a href="{{ route('sales') }}"> <button style="color: white" class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
                 <li> <a href="{{ route('stocks') }}"> <button class= "listButton"> <i class="i fa fa-line-chart"></i> Stocks </button> </a> </li>
+                <hr style="border: 0.5px solid #4372a7; width: 90%; margin: 10px;">
+
+                <li> <a href="{{ route('sales') }}"> <button style="color: white" class= "listButton"> <i class="i fa fa-shopping-cart"></i> Sales </button> </a> </li>
                 <li> <a href="{{ route('partial') }}"> <button class= "listButton"> <i class="i fa fa-money"></i> Partial <br>Payments </button> </a> </li>
+                <hr style="border: 0.5px solid #4372a7; width: 90%; margin: 10px;">
+
                 <li> <a href="{{ route('users') }}"> <button class= "listButton"> <i class="i fa fa-user"></i> Users </button> </a> </li>
                 <li> <a href="{{ route('customers') }}"> <button class= "listButton" > <i class="i fa fa-users"></i> Customers </button> </a> </li>
                 <hr style="border: 0.5px solid #4372a7; width: 90%; margin: 10px;">
