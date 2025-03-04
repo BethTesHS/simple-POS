@@ -89,6 +89,16 @@ class PosController extends Controller
         return view('users', compact('products', 'sales', 'categories', 'users'),);  // Pass the data to the view
     }
 
+    public function customers()
+    {
+        $products = Product::all();
+        $sales = Sale::all();
+        $categories = Category::all();
+        $users = User::all();
+
+        return view('customers', compact('products', 'sales', 'categories', 'users'),);  // Pass the data to the view
+    }
+
     public function analysis()
     {
         $products = Product::all();

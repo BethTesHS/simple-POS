@@ -77,6 +77,7 @@
                 <li> <a href="{{ route('stocks') }}"> <button class= "listButton"> <i class="i fa fa-line-chart"></i> Stocks </button> </a> </li>
                 <li> <a href="{{ route('partial') }}"> <button class= "listButton"> <i class="i fa fa-money"></i> Partial <br>Payments </button> </a> </li>
                 <li> <a href="{{ route('users') }}"> <button class= "listButton"> <i class="i fa fa-user"></i> Users </button> </a> </li>
+                <li> <a href="{{ route('customers') }}"> <button class= "listButton" > <i class="i fa fa-users"></i> Customers </button> </a> </li>
                 <hr style="border: 0.5px solid #4372a7; width: 90%; margin: 10px;">
                 <li> <form action="{{ route('logout') }}" method="POST"> @csrf <button class= "listButton" type="submit"> <i class="i fa fa-sign-out"></i> Logout </button> </form> </li>
             </ul>
@@ -162,11 +163,17 @@
                                 <option value="M-PESA"> M-PESA </option>
                                 <option value="Others"> Others </option>
                             </select>
+                            <select id="customer" name="customer" class="pay-method" onChange="">
+                                <option value="" selected> -- Customer -- </option>
+                                <option value="Partial"> Guest Customer </option>
+                            </select>
                             <select id="payType" name="payType" class="pay-method" onChange="PaymentType()" value="Full">
                                 <option value="Full" selected> Full Payment </option>
                                 <option value="Partial"> Partial Payment </option>
                             </select>
                         </div>
+                    </div>
+                    <div class="payment">
                         <div class="pay">
                             <button type="button" class="cancel-pay" onclick="cancelPayment()"> Cancel </button>
                             @if (auth()->user()->role == "Seller" || auth()->user()->role == "Buyer/Seller")

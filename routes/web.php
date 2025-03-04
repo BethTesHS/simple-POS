@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/products', [PosController::class, 'products'])->name('products');
     Route::get('/stocks', [PosController::class, 'stocks'])->name('stocks');
     Route::get('/partialPayments', [PosController::class, 'partial'])->name('partial');
+    Route::get('/customers', [PosController::class, 'customers'])->name('customers');
     Route::get('/users', [PosController::class, 'users'])->name('users');
     Route::get('/analysis', [PosController::class, 'analysis'])->name('analysis');
 

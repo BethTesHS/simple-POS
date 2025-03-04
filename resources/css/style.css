@@ -149,18 +149,6 @@ a:hover{
     margin-bottom: 5px;
 }
 
-.payment{
-    background-color: #e2e7ec;
-    border: solid 1px transparent;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    right: 15px;
-    /* height: 50px; */
-    width: 100%;
-    padding: 10px;
-}
-
 /* --------- RIGHT SECTION --------- */
 
 .right-view{
@@ -247,6 +235,17 @@ a:hover{
     justify-content: space-between;
     display: flex;
     flex-direction: row;
+
+    background-color: #e2e7ec;
+    border: solid 1px transparent;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    right: 15px;
+    /* height: 50px; */
+    width: 100%;
+    padding: 10px;
+    margin: 2px 0;
 }
 
 .pay-method{
@@ -256,6 +255,7 @@ a:hover{
     border: 1px solid #00000033;
     outline: none;
     font-size: 15px;
+    height: 40px;
 }
 
 .pay-method:hover{
@@ -298,7 +298,7 @@ a:hover{
     background-color: #004c8b;
     color: #ffffff;
     font-size: 15px;
-    width: 100px;
+    width: 156px;
     justify-content: center;
 }
 
