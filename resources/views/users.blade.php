@@ -73,7 +73,7 @@
                         </thead>
                         <tbody id="productTable">
                             @foreach ($users as $user)
-                                <tr class="row"">
+                                <tr class="row">
                                     <td class="td-sp"> {{ sprintf("%006d",$user->id) }} </td>
                                     <td class="td-sp"> {{ $user->firstName }} </td>
                                     <td class="td-sp"> {{ $user->lastName }} </td>

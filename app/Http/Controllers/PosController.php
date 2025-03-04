@@ -9,6 +9,7 @@ use App\Models\Stock;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class PosController extends Controller
@@ -95,8 +96,9 @@ class PosController extends Controller
         $sales = Sale::all();
         $categories = Category::all();
         $users = User::all();
+        $customers = Customer::all();
 
-        return view('customers', compact('products', 'sales', 'categories', 'users'),);  // Pass the data to the view
+        return view('customers', compact('products', 'sales', 'categories', 'customers'),);  // Pass the data to the view
     }
 
     public function analysis()
