@@ -95,6 +95,22 @@ window.change = function(price, stock, ids) {
     });
 }
 
+window.check = function() {
+    let price = document.getElementById('totPrice');
+    let toPay = document.getElementById('toPay');
+
+    // toPay.value = parseFloat(toPay.value).toFixed(2);
+    if (toPay.toString().split('.').length === 2) {
+        toPay.value = parseFloat(toPay.value).toFixed(2);
+    // } else {
+    //     toPay.value = parseFloat(toPay.value).toFixed(0);
+    }
+
+    if (parseFloat(price.value) < parseFloat(toPay.value)) {  // Convert to numbers to compare
+        toPay.value = price.value;
+    }
+}
+
 // To add row of selected product
 window.addRow = function(productDetail) {
     const table = document.getElementById('tableBody');
