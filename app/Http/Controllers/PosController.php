@@ -17,7 +17,7 @@ class PosController extends Controller
     public function index(Request $request)
     {
 
-        // $products = Product::all();
+        $customers = Customer::orderBy('firstName', 'asc')->get();;
         $products = Product::where('stockQuantity', '!=', 0)->get();
         $sale = Sale::orderBy('id', 'desc')->first();
         if ($sale == null) {
@@ -28,7 +28,7 @@ class PosController extends Controller
         }
         $categories = Category::all();
 
-        return view('pos', compact('products', 'sale', 'saleDetails', 'categories'),);  // Pass the data to the view
+        return view('pos', compact('products', 'sale', 'saleDetails', 'categories', 'customers'),);  // Pass the data to the view
     }
 
     public function sales()

@@ -155,6 +155,7 @@
                             <tr>
                                 <th class="th-sp">Partial ID</th>
                                 <th class="th-sp">Sale ID</th>
+                                <th class="th-sp">Customer Name</th>
                                 <th class="th-sp">Date</th>
                                 <th class="th-sp">Amount Paid</th>
                                 <th class="th-sp">Amount to pay</th>
@@ -168,6 +169,7 @@
                                 <tr class="row" data-date="{{ $part->created_at->toDateString() }}">
                                     <td class="td-sp"> {{ sprintf("%06d", $part->id) }} </td>
                                     <td class="td-sp"> {{ sprintf("%010d", $part->sale->id) }} </td>
+                                    <td class="td-sp"> {{ $part->customer->firstName ." ". $part->customer->lastName }} </td>
                                     <td class="td-sp"> {{ $part->created_at->toDateString() }} </td>
                                     <td class="td-sp"> {{ $part->paid }} </td>
                                     <td class="td-sp"> {{ $part->toPay }} ksh</td>

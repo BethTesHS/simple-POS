@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
         DB::table('users')->truncate();
+        DB::table('customers')->truncate();
         DB::table('categories')->truncate();
         DB::table('products')->truncate();
         DB::table('sales')->truncate();

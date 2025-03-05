@@ -19,6 +19,7 @@ class SaleController extends Controller
                 'totalQuantity' => 'required|integer',
                 'totalPrice' => 'required|decimal:0,2',
                 'payMethod' => 'required|string',
+                'customer' => 'required|string',
             ]);
 
             $sale = new Sale();
@@ -27,6 +28,11 @@ class SaleController extends Controller
             $sale->totalPrice = $validated['totalPrice'];
             $sale->payMethod = $validated['payMethod'];
             $sale->user_id= auth()->user()->id;
+            if ($validated['customer'] == 0) {
+                $sale->customer_id = null;
+            } else {
+                $sale->customer_id = $validated['customer'];
+            }
 
             $sale->save();
 
@@ -85,6 +91,7 @@ class SaleController extends Controller
                 'totalPrice' => 'required|decimal:0,2',
                 'payMethod' => 'required|string',
                 'payNow' => 'required|decimal:0,2',
+                'customer' => 'required|string|not_in:0',
             ]);
 
             $sale = new Sale();
@@ -98,6 +105,7 @@ class SaleController extends Controller
 
             PartialPayment::insert([
                 'sale_id' => $sale->id,
+                'customer_id' => $validated['customer'],
                 'paid' => $validated['payNow'],
                 'toPay' => ($validated['totalPrice']) - ($validated['payNow']),
                 'total' => $validated['totalPrice'],

@@ -167,9 +167,12 @@
                                 <option value="M-PESA"> M-PESA </option>
                                 <option value="Others"> Others </option>
                             </select>
-                            <select id="customer" name="customer" class="pay-method" onChange="">
+                            <select id="customer" name="customer" class="pay-method">
                                 <option value="" selected> -- Customer -- </option>
-                                <option value="Partial"> Guest Customer </option>
+                                <option value="0"> Guest Customer </option>
+                                @foreach($customers as $customer)
+                                    <option value="{{ $customer->id }}">{{ $customer->firstName . " " . $customer->lastName}}</option>
+                                @endforeach
                             </select>
                             <select id="payType" name="payType" class="pay-method" onChange="PaymentType()" value="Full">
                                 <option value="Full" selected> Full Payment </option>
