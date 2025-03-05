@@ -8,6 +8,7 @@
 
     @vite(['resources/css/all.css'])
     @vite(['resources/js/salesPages.js'])
+    @vite(['resources/js/productsPages.js'])
     @vite(['resources/js/sales.js'])
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -140,13 +141,22 @@
                         <h1>Partial Payments</h1>
                     </header>
 
+                    <select style="margin-bottom: 5px; border-radius: 10px;" name="category_id" class="dropdown3 categoryFilter" id="categoryFilter">
+                        <option value="0">All Customers</option>
+                        @foreach($partial as $part)
+                            <option value="{{ $part->customer->firstName }}">{{ $part->customer->firstName ." ". $part->customer->lastName}}</option>
+                        @endforeach
+                    </select>
 
+                    {{-- 
                     <div style="padding-bottom: 5px; display:flex; flex-direction: row">
                         <text class="i dateButton" >
                             <i class='fa fa-calendar'></i>
                             <input readonly type="button" id="filterDate" value="All Dates">
                         </text>
-                    </div>
+                    </div> 
+                    --}}
+                    
                 </div>
 
                 <div class="tableContainer">
@@ -166,7 +176,7 @@
                         </thead>
                         <tbody id="salesTableBody">
                             @foreach ($partial as $part)
-                                <tr class="row" data-date="{{ $part->created_at->toDateString() }}">
+                                <tr class="row" data-date="{{ $part->created_at->toDateString() }}" category-category="{{$part->customer->firstName }}">
                                     <td class="td-sp"> {{ sprintf("%06d", $part->id) }} </td>
                                     <td class="td-sp"> {{ sprintf("%010d", $part->sale->id) }} </td>
                                     <td class="td-sp"> {{ $part->customer->firstName ." ". $part->customer->lastName }} </td>

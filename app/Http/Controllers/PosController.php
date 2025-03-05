@@ -17,7 +17,7 @@ class PosController extends Controller
     public function index(Request $request)
     {
 
-        $customers = Customer::orderBy('firstName', 'asc')->get();;
+        $customers = Customer::orderBy('firstName', 'asc')->get();
         $products = Product::where('stockQuantity', '!=', 0)->get();
         $sale = Sale::orderBy('id', 'desc')->first();
         if ($sale == null) {
@@ -75,9 +75,10 @@ class PosController extends Controller
         $sales = Sale::all();
         $categories = Category::all();
         $users = User::all();
+        $customers = Customer::orderBy('firstName', 'asc')->get();
         $partial = PartialPayment::latest()->with('sale')->get();
 
-        return view('partial', compact('products', 'sales', 'categories', 'users', 'partial'),);  // Pass the data to the view
+        return view('partial', compact('products', 'sales', 'categories', 'users', 'partial', 'customers'));  // Pass the data to the view
     }
 
     public function users()
