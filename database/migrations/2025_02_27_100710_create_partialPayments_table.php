@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('paid', 8, 2);
             $table->decimal('toPay', 8, 2);
             $table->decimal('total', 8, 2);
+            $table->boolean('latest')->default(true);
             $table->timestamps();
         });
     }

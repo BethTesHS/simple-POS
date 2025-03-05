@@ -203,7 +203,7 @@
                             <input id="totPrice" class="textArea" name="totalPay" type="text" value="????" readonly> <br>
 
                             <label> Amount to pay now </label> <br>
-                            <input id="toPay" class="textArea" name="payNow" type="number"  oninput="check()"> <br>
+                            <input id="payNow" class="textArea" name="payNow" type="number"  oninput="check()"> <br>
 
                             <button type="button" class="textButton" id="completePartialButton"> Complete Payment </button>
                         </div>

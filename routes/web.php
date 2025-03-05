@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PartialController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
@@ -70,5 +71,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
     Route::put('/customers', [CustomerController::class, 'update'])->name('customers.update');
     Route::delete('/customers', [CustomerController::class, 'delete'])->name('customers.delete');
+
+    Route::post('/storePartial', [PartialController::class, 'store'])->name('partial.store');
 
 });
