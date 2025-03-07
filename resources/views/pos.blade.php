@@ -120,7 +120,7 @@
             </div>
 
             <form id="paymentForm" action="{{ route('sales.storeSale') }}" method="POST" onsubmit="return validateForm()">
-                @csrf
+                @csrf 
                 <div class="left-view">
                 <div class="control">
                     <div class="detail">
