@@ -194,13 +194,8 @@
                 
 
                 <label> Quantity </label>
-                <input class="textArea" name="buyingPrice" type="number" value="" placeholder="" step="any" maxlength="10"> <br>
-                <div class="stock">
-                    <button type="button" onclick="sub(this.closest('div').querySelector('.stock input'))" class="button"> - </button>
-                        <input class="display" id="sq" name="quantity" oninput="change(this.closest('div').querySelector('.stock input'))" type="text" value="0">
-                    <button type="button" onclick="add(this.closest('div').querySelector('.stock input'))" class="button"> + </button>
-                </div>
-
+                <input class="textArea" id="sq" name="quantity" type="number" value="" placeholder="" step="any" maxlength="10"> <br>
+                
                 <input class="textButton" name="addProduct" type="submit" value="Add Product"> <br>
             </form>
         </div>
